@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.signup {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  padding: 0px 70px;
+}
