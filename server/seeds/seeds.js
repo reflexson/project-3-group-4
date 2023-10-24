@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Workout = require('./models/Workout');
-
-// MongoDB connection setup (replace with your connection details)
 mongoose.connect('mongodb://localhost:27017/fitness_app', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
