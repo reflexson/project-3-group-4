@@ -9,6 +9,8 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Nav from "./components/Nav";
 import { Routes, Route } from "react-router-dom";
 
 const httpLink = createHttpLink({
@@ -34,9 +36,16 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div>
-        {/*  <Nav />*/}
+        <Nav />
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
+          <Route
+            path="/"
+            element={
+              <h1>
+                <Home />
+              </h1>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
