@@ -77,7 +77,7 @@ const Login = () => {
         </Form>
 
         <Typography.Text>
-          Don't have an Account? <a href="/login">Register</a>
+          Don't have an Account? <a href="/signup">Register</a>
         </Typography.Text>
       </Col>
     </Row>
