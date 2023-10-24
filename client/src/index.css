@@ -71,7 +71,7 @@ p {
 
 a {
   color: var(--tertiary);
-  text-decoration: none;
+  text-decoration: none !important;
   font-weight: bold;
 }
 

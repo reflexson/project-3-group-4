@@ -22,7 +22,7 @@ function Nav() {
       );
     } else {
       return (
-        <ul className="flex-row">
+        <ul className="flex-row mt-3">
           <li className="mx-1">
             <Link to="/signup">
               Signup
@@ -39,7 +39,7 @@ function Nav() {
   }
 
   return (
-    <header className="flex-row px-1">
+    <header className="flex-row ps-2 text-decoration-none">
       <h1>
         <Link to="/">
           {/* <span role="img" aria-label=""></span> */}
