@@ -8,15 +8,17 @@ function Signup(props){
     // state
     const [formState, setFormState] = useState({ username: '', password: '', rePassword: '' });
     const [createUser] = useMutation(CREATE_USER);
-    let notSame = null;
+    //error
+    const [errorMessage, setErrorMessage] = useState('');
     // form handler
     const handleFormSubmit = async (event) => {
         // prevents form sumbitting to itself
         event.preventDefault();
         // check if password and repassword are the same
         if(formState.password !== formState.rePassword){
-            notSame = 'not the same'
+            setErrorMessage('Error: Passwords are NOT matching');
         } else {
+            setErrorMessage('');
             // create user
             const mutationResponse = await CREATE_USER({
                 variables: {
@@ -49,8 +51,8 @@ function Signup(props){
             
             <h2>Signup</h2>
             {/* Form */}
-            <form onSubmit={handleFormSubmit}>
-                <div className='form-item username'>
+            <form onSubmit={handleFormSubmit} className='form'>
+                <div className='form-item username form-group row'>
                     <label htmlFor='username'>Username:</label>
                     <input
                     placeholder='username'
@@ -60,7 +62,8 @@ function Signup(props){
                     onChange={handleChange}
                     />
                 </div>
-                <div className='form-item password'>
+                <br/>
+                <div className='form-item password form-group row'>
                     <label htmlFor='password'>Password:</label>
                     <input
                     placeholder='password'
@@ -70,7 +73,8 @@ function Signup(props){
                     onChange={handleChange}
                     />
                 </div>
-                <div className='form-item password rePassword'>
+                <br/>
+                <div className='form-item password rePassword form-group row'>
                     <label htmlFor='rePassword'>Re-enter Password:</label>
                     <input
                     placeholder='password'
@@ -81,13 +85,14 @@ function Signup(props){
                     />
                 </div>
                 {/* If error, show error message*/}
-                {notSame ? (
+                {errorMessage && (
                     <div>
-                        <p className='error-text'>Error: Passwords must be matching</p>
+                    <p className="error-text">{errorMessage}</p>
                     </div>
-                ) : null}
+                )}
                 {/* submit button */}
-                <button className='btn' type='submit'>Submit</button>
+                <br/>
+                <button className='btn btn-primary' type='submit'>Submit</button>
             </form>
 
         </div>
