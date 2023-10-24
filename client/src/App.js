@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,6 +9,8 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import Home from '../src/pages/Home'
+import Nav from '../src/components/Nav/index'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -32,15 +36,41 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <WorkoutTracker>
+          {/* <WorkoutTracker> */}
             <Nav />
             <Routes>
               <Route 
                 path="/" 
                 element={<Home />} 
               />
+              {/* <Route 
+                path="/login" 
+                element={<Login />} 
+              />
+              <Route 
+                path="/signup" 
+                element={<Signup />} 
+              />
+              <Route 
+                path="/progress" 
+                element={<Progress />} 
+              />
+              <Route 
+                path="/workouts" 
+                element={<Workouts />} 
+              />
+              <Route 
+                path="/selectedworkout" 
+                element={<Selectedworkout />} 
+              />
+              <Route 
+                path="/settings" 
+                element={<Settings />} 
+              /> */}
+
+
             </Routes>
-          </WorkoutTracker>
+          {/* </WorkoutTracker> */}
         </div>
       </Router>
     </ApolloProvider>
