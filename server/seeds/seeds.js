@@ -48,7 +48,6 @@ const seedWorkouts = async () => {
   } catch (error) {
     console.error('Error seeding sample workouts:', error);
   } finally {
-    // Close the database connection after seeding
     db.close();
   }
 };
