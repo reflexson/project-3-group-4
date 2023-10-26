@@ -14,6 +14,9 @@ import Home from '../src/pages/Home'
 import Nav from '../src/components/Nav/index'
 import Login from '../src/pages/Login';
 import Signup from '../src/pages/Signup';
+import Progress from './pages/Progress';
+import Workouts from './pages/Workouts';
+import Settings from './pages/Settings';
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -53,23 +56,20 @@ function App() {
                 path="/signup" 
                 element={<Signup />} 
               />
-              {/* 
+              
               <Route 
                 path="/progress" 
-                element={<Progress />} 
+                element={<Progress/>} 
               />
               <Route 
                 path="/workouts" 
-                element={<Workouts />} 
-              />
-              <Route 
-                path="/selectedworkout" 
-                element={<Selectedworkout />} 
+                element={<Workouts/>} 
               />
               <Route 
                 path="/settings" 
-                element={<Settings />} 
-              /> */}
+                element={<Settings/>} 
+              />
+             
 
 
             </Routes>
