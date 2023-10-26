@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useSettingsContext } from "../utils/GlobalState";
 
 const Settings = () => {
-    let {units, theme} = useSettingsContext();
-
+    // gets context
+    let [ settingsState, setSettingsState] = useSettingsContext();
+    //console.log(state);
     // detect change
     const handleChange = (event) => {
       const { name, checked } = event.target;
       /*
         imperial is false & metric is true
         light is false & dark is true
-      */
-
-      console.log(name, checked);
+      */ 
+      //toggle units
       if(name === 'units' && checked === true){
-        
+        setSettingsState({...settingsState, units: 'metric', unitsBool: true});
+      } else if(name === 'units' && checked === false){
+        setSettingsState({...settingsState, units: 'imperial', unitsBool: false});
+      }
+      //toggle theme
+      if(name === 'theme' && checked === true){
+        setSettingsState({...settingsState, theme: 'dark', themeBool: true});
+      } else if(name === 'theme' && checked === false){
+        setSettingsState({...settingsState, theme: 'light', themeBool: false});
       }
     };
 
@@ -30,7 +38,6 @@ const Settings = () => {
         </aside>
         <br/>
         <main className="dashcont">
-            testing {units}, {theme} 
             {/* Toggle switch for Units */}
             <h4 className="ms-4">Units of Measurement</h4>
             <div className="switch form-check form-switch form-check-inline d-flex">
@@ -42,6 +49,7 @@ const Settings = () => {
                        id='units-switch' 
                        type='checkbox'
                        name='units'
+                       checked={settingsState.unitsBool}
                        onChange={handleChange}>
                 </input>
               </div>
@@ -60,6 +68,7 @@ const Settings = () => {
                   id='theme-switch'
                   type='checkbox'
                   name='theme'
+                  checked={settingsState.themeBool}
                   onChange={handleChange}>
                 </input>
               </div>
@@ -73,20 +82,6 @@ const Settings = () => {
       </div>
     );
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 export default Settings;
