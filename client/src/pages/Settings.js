@@ -3,7 +3,21 @@ import { Link } from 'react-router-dom';
 import { useSettingsContext } from "../utils/GlobalState";
 
 const Settings = () => {
-    const state = useSettingsContext();
+    let {units, theme} = useSettingsContext();
+
+    // detect change
+    const handleChange = (event) => {
+      /*
+        imperial is false & metric is true
+        light is false & dark is true
+      */
+      let isChecked = event.target.checked;
+      let type = event.target.name;
+      console.log(type, isChecked);
+      if(type=='units' && isChecked == true){
+        
+      }
+    };
 
     //html
     return (
@@ -16,7 +30,7 @@ const Settings = () => {
         </aside>
         <br/>
         <main className="dashcont">
-            testing {state.units}, {state.theme} 
+            testing {units}, {theme} 
             {/* Toggle switch for Units */}
             <h4 className="ms-4">Units of Measurement</h4>
             <div className="switch form-check form-switch form-check-inline d-flex">
@@ -24,7 +38,12 @@ const Settings = () => {
                 Imperial
               </label>
               <div className="form-check form-switch form-check-inline">
-                <input className='form-check-input' id='units-switch' type='checkbox'></input>
+                <input className='form-check-input'
+                       id='units-switch' 
+                       type='checkbox'
+                       name='units'
+                       onChange={handleChange}>
+                </input>
               </div>
               <label class="switch-label text-2" for="units-switch">
                 Metric
@@ -37,7 +56,12 @@ const Settings = () => {
                 Light
               </label>
               <div className="form-check form-switch form-check-inline">
-                <input className='form-check-input' id='theme-switch' type='checkbox'></input>
+                <input className='form-check-input'
+                  id='theme-switch'
+                  type='checkbox'
+                  name='theme'
+                  onChange={handleChange}>
+                </input>
               </div>
               <label class="switch-label text-2" for="theme-switch">
                 Dark
