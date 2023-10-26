@@ -17,6 +17,7 @@ import Signup from '../src/pages/Signup';
 import Progress from './pages/Progress';
 import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
+import { WorkoutProvider } from './utils/GlobalState';
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -41,7 +42,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          {/* <WorkoutTracker> */}
+          <WorkoutProvider>
             <Nav />
             <Routes>
               <Route 
@@ -70,10 +71,8 @@ function App() {
                 element={<Settings/>} 
               />
              
-
-
             </Routes>
-          {/* </WorkoutTracker> */}
+          </WorkoutProvider>
         </div>
       </Router>
     </ApolloProvider>
