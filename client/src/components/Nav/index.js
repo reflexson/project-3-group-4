@@ -1,6 +1,6 @@
 import React from "react";
 import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Nav() {
 
@@ -8,12 +8,12 @@ function Nav() {
     if (Auth.loggedIn()) {
       return (
         <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/workouts">
+          <li className="ms-3">
+            <NavLink to="/progress">
               Dashboard
-            </Link>
+            </NavLink>
           </li>
-          <li className="mx-1">
+          <li className="ms-3">
             <a href="/" onClick={() => Auth.logout()}>
               Logout
             </a>
@@ -23,15 +23,20 @@ function Nav() {
     } else {
       return (
         <ul className="flex-row mt-3 ms-5 list-unstyled">
-          <li className="mx-1">
-            <Link to="/signup">
+          <li className="ms-3">
+            <NavLink activeStyle={{color: "#ff3333"}} to="/signup">
               Signup
-            </Link>
+            </NavLink>
           </li>
-          <li className="mx-1">
-            <Link to="/login">
+          <li className="ms-3">
+            <NavLink activeStyle={{color: "#ff3333"}} to="/login">
               Login
-            </Link>
+            </NavLink>
+          </li >
+          <li className="ms-3">
+            <NavLink activeStyle={{color: "#ff3333"}} to='/progress'>
+              Dashboard
+            </NavLink>
           </li>
         </ul>
       );
@@ -41,10 +46,10 @@ function Nav() {
   return (
     <header className="flex-row ps-3 pt-2 text-decoration-none">
       <h1>
-        <Link to="/">
+        <NavLink to="/">
           {/* <span role="img" aria-label=""></span> */}
           Workout Tracker
-        </Link>
+        </NavLink>
       </h1>
 
       <nav>
