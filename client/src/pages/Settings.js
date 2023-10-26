@@ -7,14 +7,14 @@ const Settings = () => {
 
     // detect change
     const handleChange = (event) => {
+      const { name, checked } = event.target;
       /*
         imperial is false & metric is true
         light is false & dark is true
       */
-      let isChecked = event.target.checked;
-      let type = event.target.name;
-      console.log(type, isChecked);
-      if(type=='units' && isChecked == true){
+
+      console.log(name, checked);
+      if(name === 'units' && checked === true){
         
       }
     };
