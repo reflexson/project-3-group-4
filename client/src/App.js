@@ -1,18 +1,22 @@
-import logo from "./logo.svg";
-import "./App.css";
+// import logo from './logo.svg';
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css"
+
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Nav from "./components/Nav";
-import { Routes, Route } from "react-router-dom";
-
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import Home from '../src/pages/Home'
+import Nav from '../src/components/Nav/index'
+import Login from '../src/pages/Login';
+import Signup from '../src/pages/Signup';
+import Progress from './pages/Progress';
+import Workouts from './pages/Workouts';
+import Settings from './pages/Settings';
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -35,21 +39,43 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>
-        <Nav />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <h1>
-                <Home />
-              </h1>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </div>
+      <Router>
+        <div>
+          {/* <WorkoutTracker> */}
+            <Nav />
+            <Routes>
+              <Route 
+                path="/" 
+                element={<Home />} 
+              />
+              <Route 
+                path="/login" 
+                element={<Login />} 
+              />
+              <Route 
+                path="/signup" 
+                element={<Signup />} 
+              />
+              
+              <Route 
+                path="/progress" 
+                element={<Progress/>} 
+              />
+              <Route 
+                path="/workouts" 
+                element={<Workouts/>} 
+              />
+              <Route 
+                path="/settings" 
+                element={<Settings/>} 
+              />
+             
+
+
+            </Routes>
+          {/* </WorkoutTracker> */}
+        </div>
+      </Router>
     </ApolloProvider>
   );
 }

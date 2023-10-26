@@ -1,59 +1,142 @@
 import React from "react";
-import Header from "../components/Header";
-import CardContent from "../components/CardContent";
-import CardImage from "../components/CardImage";
-import communityImage from "../assets/community.jpg";
-import insightsImage from "../assets/insights.jpeg";
-import reccommendationImage from "../assets/reccommendation.jpg";
-import monitor from "../assets/monitor.jpg";
+
+
+
+const styles = {
+
+  heading: {
+    background: '#272f32',
+    minHeight: 50,
+    lineHeight: 3.5,
+    fontSize: '1.2rem',
+    color: 'white',
+    padding: '0 20px',
+  },
+  content: {
+    padding: 20,
+  },
+};
 
 const Home = () => {
-  const data = [
-    {
-      image: monitor,
-      content:
-        "Welcome to Workout Tracker, the ultimate tool to monitor, track, and elevate your fitness routine. Stay motivated and reach your goals faster with our intuitive workout tracker!",
-    },
-    {
-      image: insightsImage,
-      content:
-        "Log your workouts, track your progress, and watch yourself grow stronger every day. Our detailed progress charts and insights help you stay on top of your game and push your limits.",
-    },
-    {
-      image: reccommendationImage,
-      content:
-        "Receive personalized workout recommendations and insights based on your performance and goals. We analyze your data to help you optimize your routine and ensure you’re getting the most out of every workout.",
-    },
-    {
-      image: communityImage,
-      content:
-        "Become part of a thriving community of fitness enthusiasts! Share your progress, celebrate milestones, and connect with others who are just as dedicated to their fitness journey as you are.      ",
-    },
-  ];
   return (
-    <div>
-      <Header />
-      {/* Cards */}
+    <div className="col-12 flex-row justify-content-center">
 
-      <div className="card-container">
-        {data.map((item, index) => {
-          if (index % 2 === 0) {
-            return (
-              <div className="card-wrapper">
-                <CardImage image={item.image} />
-                <CardContent content={item.content} />
-              </div>
-            );
-          } else {
-            return (
-              <div className="card-wrapper">
-                <CardContent content={item.content} />
-                <CardImage image={item.image} />
-              </div>
-            );
-          }
-        })}
+    <div className="col-5 mt-3">
+      <img src="/images/gym-pic-1.png" alt="nfg" /><img/>
+      <div style={styles.heading} className="mt-3">Lorem ipsum dolor</div>
+      <div style={styles.content}>
+        `Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`
       </div>
+    </div>
+    
+    <div className="col-5 ms-4 mt-3">
+    <div style={styles.heading} className="">Lorem ipsum dolor</div>
+      <div style={styles.content}>
+        `Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`
+      </div>
+      <img src="/images/gym-pic-2.png" alt="nfgss" className="w-100" /><img/>
+      
+  
+    </div>
+    <div className="col-5 ">
+      <img src="/images/chart.png" alt="nfg" /><img/>
+      <div style={styles.heading} className="mt-3">Lorem ipsum dolor</div>
+      <div style={styles.content}>
+        `Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`
+      </div>
+    </div>
+    <div className="col-5 ms-4 mt-3">
+    <div style={styles.heading} className="">Lorem ipsum dolor</div>
+      <div style={styles.content}>
+        `Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?`Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit  
+      </div>
+      <img src="/images/gym-pic-3.png" alt="nfgdfdfss" className="w-100" /><img/>
+      
+  
+    </div>
     </div>
   );
 };

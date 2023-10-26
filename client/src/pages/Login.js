@@ -1,87 +1,87 @@
-import React from "react";
-import { Row, Col, Form, Input, Button, Typography } from "antd";
-import image from "../assets/login.jpg";
 
-const Login = () => {
-  return (
-    <Row
-      justify="center"
-      style={{
-        height: "100vh",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <Col
-        span={12}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <img
-          src={image}
-          alt="placeholder"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </Col>
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { Link } from 'react-router-dom';
+import { LOGIN_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
 
-      <Col span={12} className="signup">
-        <h1>Login into your Account</h1>
+function Login(props){
+    // state
+    const [formState, setFormState] = useState({ username: '', password: '' });
+    const [login, { error }] = useMutation(LOGIN_USER);
 
-        <Form layout="vertical">
-          <Form.Item
-            label="User Name"
-            name="name"
-            rules={[
-              {
-                required: true,
-                message: "Please input your first name!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+    // form handler
+    const handleFormSubmit = async (event) => {
+        //prevents form sumbitting to itself
+        event.preventDefault();
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+        try {
+          // finds user based on current formState info
+          const mutationResponse = await login({
+            variables: {username: formState.username, password: formState.password },
+          });
+          // make token for session
+          const token = mutationResponse.data.login.token;
+          // validate token
+          Auth.login(token);
+        } catch (error) {
+          console.log(error);
+        }
+    };
 
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            >
-              Login
-            </Button>
-          </Form.Item>
-        </Form>
+    // detect change in the form
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({
+          ...formState,
+          [name]: value,
+        });
+    };
 
-        <Typography.Text>
-          Don't have an Account? <a href="/login">Register</a>
-        </Typography.Text>
-      </Col>
-    </Row>
-  );
-};
+    // the html
+    return(
+        <div className="container">
+            {/* Redirect to signup */}
+            <Link to="/signup">← Go to Signup</Link>
+            
+            <h2>Login</h2>
+            {/* Form */}
+            <form onSubmit={handleFormSubmit}>
+                <div className='form-item username form-group row'>
+                    <label htmlFor='username'>Username:</label>
+                    <input
+                    placeholder='username'
+                    name='username'
+                    type='text'
+                    id='username'
+                    onChange={handleChange}
+                    />
+                </div>
+                <br/>
+                <div className='form-item password form-group row'>
+                    <label htmlFor='password'>Password:</label>
+                    <input
+                    placeholder='password'
+                    name='password'
+                    type='password'
+                    id='password'
+                    onChange={handleChange}
+                    />
+                </div>
+                {/* If error, show error message*/}
+                {error ? (
+                    <div>
+                        <p className='error-text'>Error, invalid credentials</p>
+                    </div>
+                ) : null}
+                {/* submit button */}
+                <br/>
+                <button className='btn btn-primary' type='submit'>Submit</button>
+            </form>
+
+        </div>
+    );
+}
 
 export default Login;
+
