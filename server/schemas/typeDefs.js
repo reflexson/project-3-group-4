@@ -4,38 +4,40 @@ const typeDefs = gql`
   type User {
     id: ID!
     username: String!
+    firstName: String!
+    lastName: String!
   }
   
   type Set {
     id: ID!
     exercise: String!
-    repetitions: Int!
+    reps: Int!
     weight: Float
-    duration: Int
+    distance: Float
   }
   
   type Workout {
     id: ID!
     userId: ID!
     date: String!
-    sets: [WorkoutSet!]!
+    sets: [Set!]!
   }
   
+  type Auth {
+    token: ID
+    user: User
+  }
+
   type Query {
     getUser(id: ID!): User
     getWorkout(id: ID!): Workout
   }
   
   type Mutation {
-    createUser(username: String!): User
-    createWorkout(userId: ID!, date: String!, sets: [WorkoutSetInput!]!): Workout
-  }
-  
-  input SetInput {
-    exercise: String!
-    repetitions: Int!
-    weight: Float
-    duration: Int
+    addUser(firstName: String!, lastName: String!, password: String!): Auth
+    createSet(exercise: String!, reps: Int!, weight: Float, distance: Float): Set
+    updateSet(id: ID!, exercise: String, reps: Int, weight: Float, distance: Float): Set
+    deleteSet(id: ID!): Set
   }
 `;
 
