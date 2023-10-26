@@ -218,6 +218,21 @@ input:focus {
   color: var(--error);
 }
 
+/*Toggle Switch stuff*/
+.form-switch {
+  /*top left botto right*/
+  margin: 3px 6px 0 15px;
+}
+
+.form-check-input{
+  transform: scale(1.2);
+}
+
+.switch-label{
+  font-size: 1.1rem;
+}
+/*End of Toggle Switch stuff*/
+
 /* W3 CSS */
 .w3-serif{font-family:serif}.w3-sans-serif{font-family:sans-serif}.w3-cursive{font-family:cursive}.w3-monospace{font-family:monospace}
 h1,h2,h3,h4,h5,h6{font-family:"Segoe UI",Arial,sans-serif;font-weight:400;margin:10px 0}.w3-wide{letter-spacing:4px}

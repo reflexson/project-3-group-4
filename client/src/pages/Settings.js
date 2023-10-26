@@ -11,7 +11,30 @@ const Settings = () => {
                 <Link  className="w3-bar-item  alink"  to='/settings'>Settings</Link>
         </div>
         <div className="dashcont">
-            <h4 className="ms-4">units of measure</h4>
+            <h4 className="ms-4">Units of measure</h4>
+            <div className="switch form-check form-switch form-check-inline d-flex">
+              <label class="switch-label text-1" for="units-switch">
+                Imperial
+              </label>
+              <div className="form-check form-switch form-check-inline">
+                <input className='form-check-input' id='units-switch' type='checkbox'></input>
+              </div>
+              <label class="switch-label text-2" for="units-switch">
+                Metric
+              </label>
+            </div>
+            <h4 className="ms-4">Theme</h4>
+            <div className="switch form-check form-switch form-check-inline d-flex">
+              <label class="switch-label text-1" for="theme-switch">
+                Light
+              </label>
+              <div className="form-check form-switch form-check-inline">
+                <input className='form-check-input' id='theme-switch' type='checkbox'></input>
+              </div>
+              <label class="switch-label text-2" for="theme-switch">
+                Dark
+              </label>
+            </div>
             
         </div>
       
