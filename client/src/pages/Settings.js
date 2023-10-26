@@ -10,8 +10,8 @@ const Settings = () => {
                 <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item  alink"  to='/settings'>Settings</Link>
         </div>
-        <div className="pagecont">
-            <h4 className="pagecont">units of measure</h4>
+        <div className="dashcont">
+            <h4 className="ms-4">units of measure</h4>
             
         </div>
       
