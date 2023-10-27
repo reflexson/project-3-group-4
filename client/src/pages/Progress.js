@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
+
 Chart.register(...registerables);
 const Progress = () => {
   const chartData = {
@@ -53,6 +54,9 @@ const Progress = () => {
 
       <div style={{ width: "30%", margin: "0 auto", padding: "2%" }}>
         <Bar data={chartData} options={options} />
+      </div>
+      <div style={{ width: "30%", margin: "0 auto", padding: "2%" }}>
+        <Line data={chartData} options={options} />
       </div>
     </div>
   );
