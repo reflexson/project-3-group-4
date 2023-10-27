@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Workout, Exercise, Set } = require('../models'); // Assuming you have models for Workout, Exercise, and Set.
+const { User, Workout, Exercise, Set } = require('../models'); 
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -23,6 +23,7 @@ const resolvers = {
       }
     },
     loginUser: async (_, { username, password }) => {
+      console.log("loginUser resolver triggered");
       const user = await User.findOne({ username });
 
       if (!user) {
@@ -31,31 +32,31 @@ const resolvers = {
 
       const correctPw = await user.isCorrectPassword(password);
 
+      // Debug logs
+      console.log('Inputted Password:', password);
+      console.log('Stored Hashed Password:', user.password);
+      console.log('Password Match:', correctPw);
+
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Password mismatch');
       }
 
       const token = signToken(user);
       return { token, user };
     },
     addSet: async (parent, args, context) => {
-      // Placeholder logic
       const newSet = await Set.create(args);
       return newSet;
     },
     updateSet: async (parent, { id, reps, weight, distance }, context) => {
-      // Placeholder logic
       const updatedSet = await Set.findByIdAndUpdate(id, { reps, weight, distance }, { new: true });
       return updatedSet;
     },
     deleteSet: async (parent, { id }, context) => {
-      // Placeholder logic
       const deletedSet = await Set.findByIdAndDelete(id);
       return deletedSet;
     },
-    // TODO: Add other mutation resolvers like updateUser, createExercise, etc.
   },
 };
 
 module.exports = resolvers;
-

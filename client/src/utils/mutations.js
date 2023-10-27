@@ -1,21 +1,21 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_USER = gql`
-  mutation CreateUser($username: String!, $password: String!, $firstName: String, $lastName: String) {
-    createUser(username: $username, password: $password, firstName: $firstName, lastName: $lastName) {
-      token
-      user {
-        id
-        username
-      }
+mutation CreateUser($username: String!, $password: String!) {
+  createUser(username: $username, password: $password) {
+    user {
+      _id
+      username
     }
+    token
   }
+}
 `;
 
 export const UPDATE_USER = gql`
   mutation UpdateUser($userId: ID!, $username: String) {
     updateUser(userId: $userId, input: { username: $username }) {
-      id
+      _id
       username
     }
   }
@@ -26,7 +26,7 @@ export const LOGIN_USER = gql`
     loginUser(username: $username, password: $password) {
       token
       user {
-        id
+        _id
         username
       }
     }
@@ -36,11 +36,12 @@ export const LOGIN_USER = gql`
 export const CREATE_EXERCISE = gql`
   mutation CreateExercise($userId: ID!, $name: String!, $sets: [SetInput]!) {
     createExercise(userId: $userId, name: $name, sets: $sets) {
-      id
+      _id
       name
       sets {
-        id
+        _id
         reps
+        weight
         distance
       }
     }
@@ -50,11 +51,12 @@ export const CREATE_EXERCISE = gql`
 export const UPDATE_EXERCISE = gql`
   mutation UpdateExercise($exerciseId: ID!, $name: String!, $sets: [SetInput]!) {
     updateExercise(exerciseId: $exerciseId, name: $name, sets: $sets) {
-      id
+      _id
       name
       sets {
-        id
+        _id
         reps
+        weight
         distance
       }
     }
@@ -64,10 +66,11 @@ export const UPDATE_EXERCISE = gql`
 export const ADD_WORKOUT_DATA = gql`
   mutation AddWorkoutData($exerciseId: ID!, $userId: ID!, $sets: [SetInput]!) {
     addWorkoutData(exerciseId: $exerciseId, userId: $userId, sets: $sets) {
-      id
+      _id
       sets {
-        id
+        _id
         reps
+        weight
         distance
       }
     }
