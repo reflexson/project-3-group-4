@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
@@ -21,7 +20,7 @@ function Login(props){
             variables: {username: formState.username, password: formState.password },
           });
           // make token for session
-          const token = mutationResponse.data.login.token;
+          const token = mutationResponse.data.loginUser.token;
           // validate token
           Auth.login(token);
         } catch (error) {
@@ -84,4 +83,3 @@ function Login(props){
 }
 
 export default Login;
-
