@@ -3,9 +3,9 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type User {
     _id: ID
-    firstName: String
-    lastName: String
-    username: String
+    firstName: String!
+    lastName: String!
+    username: String!
     workouts: [Workout]
     loggedWorkouts: [Workout]
   }
@@ -40,11 +40,11 @@ const typeDefs = gql`
   }
   
   type Mutation {
-    addUser(firstName: String!, lastName: String!, username: String!, password: String!): Auth
+    createUser(firstName: String, lastName: String, username: String!, password: String!): Auth
     addSet(reps: Int!, weight: Float, distance: Float): Set
     updateSet(id: ID!, reps: Int, weight: Float, distance: Float): Set
     deleteSet(id: ID!): Set
-    login(username: String!, password: String!): Auth
+    loginUser(username: String!, password: String!): Auth
   }
 `;
 
