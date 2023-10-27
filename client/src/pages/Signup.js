@@ -5,34 +5,36 @@ import { CREATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 function Signup() {
-  // State
-  const [formState, setFormState] = useState({ username: '', password: '', rePassword: '' });
+  // Updated state initialization
+  const [formState, setFormState] = useState({ 
+    username: '', 
+    password: '', 
+    rePassword: '', 
+    firstName: '', 
+    lastName: '' 
+  });
+  
   const [createUser] = useMutation(CREATE_USER);
-  // Error state
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Form handler
   const handleFormSubmit = async (event) => {
-    // Prevent the form from submitting to itself
     event.preventDefault();
-
-    // Check if password and rePassword are the same
+    
     if (formState.password !== formState.rePassword) {
       setErrorMessage('Error: Passwords do not match');
     } else {
       try {
-        // Create user by calling the createUser mutation function
         const { data } = await createUser({
           variables: {
             username: formState.username,
             password: formState.password,
+            firstName: formState.firstName,
+            lastName: formState.lastName
           },
         });
-
-        // Check if the mutation was successful and a token was received
-        if (data.addUser.token) {
-          // Log in the user using the received token
-          Auth.login(data.addUser.token);
+        
+        if (data.createUser.token) {
+          Auth.login(data.createUser.token);
         }
       } catch (error) {
         console.error(error);
@@ -41,7 +43,6 @@ function Signup() {
     }
   };
 
-  // Handle changes in the form inputs
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -52,12 +53,35 @@ function Signup() {
 
   return (
     <div className="container">
-      {/* Redirect to login */}
       <Link to="/login">← Go to Login</Link>
-
+      
       <h2>Signup</h2>
-      {/* Signup Form */}
+
       <form onSubmit={handleFormSubmit} className="form">
+        <div className="form-item firstName form-group row">
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            placeholder="First Name"
+            name="firstName"
+            type="text"
+            id="firstName"
+            onChange={handleChange}
+          />
+        </div>
+        <br />
+
+        <div className="form-item lastName form-group row">
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            placeholder="Last Name"
+            name="lastName"
+            type="text"
+            id="lastName"
+            onChange={handleChange}
+          />
+        </div>
+        <br />
+
         <div className="form-item username form-group row">
           <label htmlFor="username">Username:</label>
           <input
@@ -69,6 +93,7 @@ function Signup() {
           />
         </div>
         <br />
+
         <div className="form-item password form-group row">
           <label htmlFor="password">Password:</label>
           <input
@@ -80,6 +105,7 @@ function Signup() {
           />
         </div>
         <br />
+
         <div className="form-item password rePassword form-group row">
           <label htmlFor="rePassword">Re-enter Password:</label>
           <input
@@ -90,13 +116,13 @@ function Signup() {
             onChange={handleChange}
           />
         </div>
-        {/* Display error message if there is one */}
+
         {errorMessage && (
           <div>
             <p className="error-text">{errorMessage}</p>
           </div>
         )}
-        {/* Submit button */}
+
         <br />
         <button className="btn btn-primary" type="submit">
           Submit
