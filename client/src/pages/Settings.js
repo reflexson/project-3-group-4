@@ -5,7 +5,7 @@ import { useSettingsContext } from "../utils/GlobalState";
 const Settings = () => {
     // gets context
     let [ settingsState, setSettingsState] = useSettingsContext();
-    //console.log(state);
+    console.log(settingsState);
     // detect change
     const handleChange = (event) => {
       const { name, checked } = event.target;
