@@ -35,6 +35,7 @@ const Settings = () => {
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item  alink"  to='/settings'>Settings</Link>
+                <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
         </aside>
         <br/>
         <main className="dashcont">
