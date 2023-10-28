@@ -24,17 +24,17 @@ function Nav() {
       return (
         <ul className="flex-row mt-3 ms-5 list-unstyled">
           <li className="ms-3">
-            <NavLink activeStyle={{color: "#ff3333"}} to="/signup">
+            <NavLink  to="/signup">
               Signup
             </NavLink>
           </li>
           <li className="ms-3">
-            <NavLink activeStyle={{color: "#ff3333"}} to="/login">
+            <NavLink  to="/login">
               Login
             </NavLink>
           </li >
           <li className="ms-3">
-            <NavLink activeStyle={{color: "#ff3333"}} to='/progress'>
+            <NavLink  to='/progress'>
               Dashboard
             </NavLink>
           </li>

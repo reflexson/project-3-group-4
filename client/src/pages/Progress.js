@@ -7,10 +7,13 @@ const Progress = () => {
         <div className="w3-sidebar w3-light-grey w3-bar-block" >
   <h3 className="w3-bar-item">Menu</h3>
   <Link  className="w3-bar-item alink"  to='/progress'>Progress</Link>
-  <Link  className="w3-bar-item w3-button" activeStyle={{color: "#ff3333"}} to='/workouts'>Workouts</Link>
-  <Link  className="w3-bar-item w3-button" activeStyle={{color: "#ff3333"}} to='/settings'>Settings</Link>
+  <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
+  <Link  className="w3-bar-item w3-button"  to='/settings'>Settings</Link>
 </div>
-  
+<div className="dashcont">
+            <h2>Progress</h2>
+
+        </div>
       
       </div>
     );

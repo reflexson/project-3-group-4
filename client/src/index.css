@@ -7,7 +7,7 @@
   --error: rgb(228, 46, 1);
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(4rem);
-  --sidebar:10%;
+  --sidebar:25%;
 }
 
 * {
@@ -144,9 +144,47 @@ input:focus {
   background-color: #009688 !important;
 } */
 
+/* table {
+  counter-reset: rowNumber;
+}
+
+table tr::before {
+  display: table-cell;
+  counter-increment: rowNumber;
+  content: counter(rowNumber) ".";
+  padding-right: 0.3em;
+  padding-top: .6em;
+  text-align: right;
+} */
+.exButton{
+  background-color: none !important;
+}
+table
+{
+    counter-reset: rowNumber;
+}
+
+table tr > td:first-child
+{
+    counter-increment: rowNumber;
+}
+
+table tr td:first-child::before
+{
+    content: counter(rowNumber) ". ";
+    /* display: table-cell; */
+    /* min-width: 1em; */
+    padding-right: 0.8em;
+    /* text-align: right; */
+}
+
 .dashcont{
   width: 100%;
   margin-left:var(--sidebar);
+}
+
+.hide{
+  display:none;
 }
 
 .container {
