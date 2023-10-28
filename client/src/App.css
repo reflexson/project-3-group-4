@@ -36,3 +36,77 @@
     transform: rotate(360deg);
   }
 }
+
+.signup {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  padding: 0px 70px;
+}
+.links {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.links a {
+  margin: 10px;
+  text-decoration: none;
+  color: #282c34;
+  font-size: 20px;
+  background-color: #61dafb;
+  padding: 10px 20px;
+}
+
+.links a:hover {
+  color: #61dafb;
+  background-color: #282c34;
+}
+.header {
+  background-image: url("./assets/background.jpg");
+  height: 50vh;
+  background-size: cover;
+  background-position: 0px -150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-content {
+  background-color: white;
+  opacity: 0.8;
+  padding: 10px 50px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 70px;
+}
+.card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+.card-wrapper img {
+  width: 35%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card-wrapper p {
+  width: 40%;
+  padding: 10px;
+  font-size: 20px;
+  text-align: justify;
+}

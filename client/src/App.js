@@ -17,16 +17,18 @@ import Signup from '../src/pages/Signup';
 import Progress from './pages/Progress';
 import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
+import Test from './pages/Test';
+import { WorkoutProvider } from './utils/GlobalState';
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -41,7 +43,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          {/* <WorkoutTracker> */}
+          <WorkoutProvider>
             <Nav />
             <Routes>
               <Route 
@@ -69,11 +71,13 @@ function App() {
                 path="/settings" 
                 element={<Settings/>} 
               />
+              <Route 
+                path="/test" 
+                element={<Test/>} 
+              />
              
-
-
             </Routes>
-          {/* </WorkoutTracker> */}
+          </WorkoutProvider>
         </div>
       </Router>
     </ApolloProvider>
