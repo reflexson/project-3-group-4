@@ -8,11 +8,22 @@ export const useSettingsContext = () => useContext(SettingsContext);
 
 // provider keeps track of the state
 export const WorkoutProvider = ( { value = [], ...props } ) => {
+    const storedTheme = localStorage.getItem('theme');
+    const storedUnits = localStorage.getItem('units');
+    let isMetric = false;
+    let isDark = false;
+
+    if(storedTheme === 'dark'){
+        isDark = true;
+    }
+    if(storedUnits === 'metric'){
+        isMetric = true;
+    }
     const [settingState, setSettingsState] = useState({
-        units: 'imperial',
-        isMetric: false,
-        theme: 'light',
-        isDark: false
+        units: storedUnits,
+        isMetric: isMetric,
+        theme: storedTheme,
+        isDark: isDark
     });
 
     return (
@@ -31,7 +42,6 @@ export const setDefaultDark= ()=> {
     {
         document.querySelector('body').setAttribute('dark-theme','dark');
     }
-
 }
 
-
+setDefaultDark();

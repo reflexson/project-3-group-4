@@ -18,9 +18,7 @@ import Progress from './pages/Progress';
 import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
 import Test from './pages/Test';
-import { WorkoutProvider, setDefaultDark } from './utils/GlobalState';
-
-setDefaultDark();
+import { WorkoutProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
   uri: "/graphql",
