@@ -12,20 +12,8 @@ const typeDefs = gql`
 
   type Workout {
     _id: ID
-    name:String
+    date: String
     exercises: [Exercise]
-  }
-
-  input WorkoutInput {
-    _id: ID
-    name: String,
-    exercises:[ExerciseInput]
-  }
-
-  input ExerciseInput {
-    _id: ID
-    exercise: String
-    sets: [SetInput]
   }
 
   type Exercise {
@@ -40,7 +28,7 @@ const typeDefs = gql`
     weight: Float
     distance: Float
   }
-
+  
   input SetInput {
     _id: ID
     reps: Int
@@ -64,8 +52,6 @@ const typeDefs = gql`
     updateSet(id: ID!, reps: Int, weight: Float, distance: Float): Set
     deleteSet(id: ID!): Set
     loginUser(username: String!, password: String!): Auth
-    addWorkout(workoutData: WorkoutInput):User
-    createExercise(exercise:String!, sets:SetInput ): Exercise
   }
 `;
 
