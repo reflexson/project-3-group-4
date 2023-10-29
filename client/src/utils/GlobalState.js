@@ -23,3 +23,15 @@ export const WorkoutProvider = ( { value = [], ...props } ) => {
     );
 };
 
+// on app load change to dark mode if stored in local storage
+export const setDefaultDark= ()=> {
+    //set to stored info for first load
+    const storedTheme = localStorage.getItem('theme');
+    if( storedTheme === 'dark')
+    {
+        document.querySelector('body').setAttribute('dark-theme','dark');
+    }
+
+}
+
+
