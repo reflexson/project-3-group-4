@@ -10,6 +10,14 @@
   --sidebar:25%;
 }
 
+[dark-theme="dark"] {
+  --primary: #0a0c0f;
+  --secondary: #F3A847;
+  --tertiary: #B12704;
+  --light: #682525;
+  --dark: #0f2126;
+}
+
 * {
   box-sizing: border-box;
 }

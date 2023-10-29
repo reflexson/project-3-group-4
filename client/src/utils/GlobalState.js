@@ -10,9 +10,9 @@ export const useSettingsContext = () => useContext(SettingsContext);
 export const WorkoutProvider = ( { value = [], ...props } ) => {
     const [settingState, setSettingsState] = useState({
         units: 'imperial',
-        unitsBool: false,
+        isMetric: false,
         theme: 'light',
-        themeBool: false
+        isDark: false
     });
 
     return (
