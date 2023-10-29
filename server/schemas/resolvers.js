@@ -12,6 +12,15 @@ const resolvers = {
     },
   },
   Mutation: {
+    createExercise: async (parent, args, context) => {
+      try {
+        const exercise = await Exercise.create(args);
+        return { exercise };
+      } catch (error) {
+        console.error('Error creating exercise:', error);
+        throw new Error('Error creating exercise');
+      }
+    },
     createUser: async (parent, args, context) => {
       try {
         const user = await User.create(args);
