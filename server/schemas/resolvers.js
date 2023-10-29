@@ -56,6 +56,8 @@ const resolvers = {
       const deletedSet = await Set.findByIdAndDelete(id);
       return deletedSet;
     },
+
+    
     addWorkout: async (parent, {workoutData}, context) =>{
       if(context.user){
         const updatedUser= await User.findOneAndUpdate(

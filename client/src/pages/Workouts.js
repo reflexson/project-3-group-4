@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import {newWorkout  } from '../utils/wohelpers'
-import { ADD_NEW_WORKOUT } from "../utils/mutations";
+import { ADD_NEW_WORKOUT, CREATE_EXERCISE} from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 
@@ -11,7 +11,7 @@ const Workouts = () => {
  const [newEx, setnewEx] = useState('0');
  const [exercises, setExercise ] = useState([])
  const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
-
+ const [createExercise, {error2}]= useMutation(CREATE_EXERCISE)
 
 console.log(exercises)
 
@@ -20,18 +20,18 @@ console.log(exercises)
 
  async function handleWoSubmit(){
    const newWoName = document.getElementById('newWoName');
-  //  let exercises = [
-  //   {
-  //     exercise: "rows",
-  // },
-  // {
-  //     exercise: "Bench press",
-  // },
-  //  ]
+   let exercisesArray = [];
+for(let i=0; i<exercises.length; i++){
+let exercise = await createExercise(exercises[i]);
+console.log(exercise)
+exercisesArray.push(exercise);
+}
+
+ 
 
    const newWoObject = {
     name: newWoName.value,
-    exercises: exercises
+    exercises: exercisesArray
    }
 
    const {data} = await addNewWorkout({

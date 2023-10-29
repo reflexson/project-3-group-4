@@ -65,6 +65,7 @@ const typeDefs = gql`
     deleteSet(id: ID!): Set
     loginUser(username: String!, password: String!): Auth
     addWorkout(workoutData: WorkoutInput):User
+    createExercise(exercise:String!, sets:SetInput ): Exercise
   }
 `;
 
