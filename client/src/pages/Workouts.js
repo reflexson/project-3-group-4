@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import {newWorkout  } from '../utils/wohelpers'
-// import ExTable from "../components/ExTable";
 import { ADD_NEW_WORKOUT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
@@ -11,11 +10,12 @@ const Workouts = () => {
   
  const [newEx, setnewEx] = useState('0');
  const [exercises, setExercise ] = useState([])
- //const [exerciseForm, setExerciseForm] = ({name: "", exercises: []})
  const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
-//  let exercises = [];
+
 
 console.log(exercises)
+
+//function to submit workouts
 
 
  async function handleWoSubmit(){
@@ -40,8 +40,10 @@ console.log(exercises)
    console.log(data)
 
   }
-  //exercises: [{name: "bench press"}, {name: "bicep curls"}]
+
+
 // show input for new exercise based on option selected
+
   const newExInput = () => {
     if (newEx === '0') {
       return <div  className="mt-3">
@@ -52,6 +54,9 @@ console.log(exercises)
    
     return null;
   };
+
+
+  //function to sumbit selected exercise to exercises array
 
   function handleExSubmit(e){
     e.preventDefault();
