@@ -177,7 +177,10 @@ table tr td:first-child::before
     padding-right: 0.8em;
     /* text-align: right; */
 }
-
+.sticky {
+  position: fixed;
+  top: 0;
+}
 .dashcont{
   width: 100%;
   margin-left:var(--sidebar);

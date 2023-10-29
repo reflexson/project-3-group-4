@@ -76,3 +76,22 @@ export const ADD_WORKOUT_DATA = gql`
     }
   }
 `;
+
+export const ADD_NEW_WORKOUT =  gql`
+mutation addWorkout($workoutData: WorkoutInput){
+  addWorkout(workoutData: $workoutData){
+    username
+    workouts {
+      _id
+      name
+      exercises{
+        exercise
+          sets {
+            reps
+          }
+      }
+      }
+    
+  }
+}
+`

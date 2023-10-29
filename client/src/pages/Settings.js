@@ -35,14 +35,14 @@ const Settings = () => {
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item  alink"  to='/settings'>Settings</Link>
-                <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
+                {/* <Link  className="w3-bar-item  alink"  to='/test'>Test</Link> */}
         </aside>
         <br/>
         <main className="dashcont">
             {/* Toggle switch for Units */}
             <h4 className="ms-4">Units of Measurement</h4>
             <div className="switch form-check form-switch form-check-inline d-flex">
-              <label class="switch-label text-1" for="units-switch">
+              <label className="switch-label text-1" htmlFor="units-switch">
                 Imperial
               </label>
               <div className="form-check form-switch form-check-inline">
@@ -54,14 +54,14 @@ const Settings = () => {
                        onChange={handleChange}>
                 </input>
               </div>
-              <label class="switch-label text-2" for="units-switch">
+              <label className="switch-label text-2" htmlFor="units-switch">
                 Metric
               </label>
             </div>
             {/* Toggle switch for them (dark and light mode) */}
             <h4 className="ms-4">Theme</h4>
             <div className="switch form-check form-switch form-check-inline d-flex">
-              <label class="switch-label text-1" for="theme-switch">
+              <label className="switch-label text-1" htmlFor="theme-switch">
                 Light
               </label>
               <div className="form-check form-switch form-check-inline">
@@ -73,7 +73,7 @@ const Settings = () => {
                   onChange={handleChange}>
                 </input>
               </div>
-              <label class="switch-label text-2" for="theme-switch">
+              <label className="switch-label text-2" htmlFor="theme-switch">
                 Dark
               </label>
             </div>
