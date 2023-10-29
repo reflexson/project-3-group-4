@@ -15,7 +15,8 @@ const resolvers = {
     createExercise: async (parent, args, context) => {
       try {
         const exercise = await Exercise.create(args);
-        return { exercise };
+        const token = signToken(user);
+        return { token, exercise };
       } catch (error) {
         console.error('Error creating exercise:', error);
         throw new Error('Error creating exercise');
