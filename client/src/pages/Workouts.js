@@ -1,21 +1,49 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import {newWorkout,  handleWoSubmit} from '../utils/wohelpers'
-// import ExTable from "../components/ExTable";
+import {newWorkout  } from '../utils/wohelpers'
+import { ADD_NEW_WORKOUT, CREATE_EXERCISE} from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 
 
 const Workouts = () => {
   
-  
-
-
-  const [newEx, setnewEx] = useState('0');
+ const [newEx, setnewEx] = useState('0');
  const [exercises, setExercise ] = useState([])
-//  let exercises = [];
+ const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
+ const [createExercise, {error2}]= useMutation(CREATE_EXERCISE)
+
 console.log(exercises)
 
+//function to submit workouts
+
+
+ async function handleWoSubmit(){
+   const newWoName = document.getElementById('newWoName');
+   let exercisesArray = [];
+for(let i=0; i<exercises.length; i++){
+let exercise = await createExercise(exercises[i]);
+console.log(exercise)
+exercisesArray.push(exercise);
+}
+
+ 
+
+   const newWoObject = {
+    name: newWoName.value,
+    exercises: exercisesArray
+   }
+
+   const {data} = await addNewWorkout({
+    variables: {workoutData : {...newWoObject}}
+   })
+   console.log(data)
+
+  }
+
+
 // show input for new exercise based on option selected
+
   const newExInput = () => {
     if (newEx === '0') {
       return <div  className="mt-3">
@@ -27,11 +55,14 @@ console.log(exercises)
     return null;
   };
 
+
+  //function to sumbit selected exercise to exercises array
+
   function handleExSubmit(e){
     e.preventDefault();
     var select = document.getElementById('select');
     var newExName = document.getElementById('newExName');
-
+  
     if ( select.options[select.selectedIndex].text === "New Exercise"){
         setExercise(exercises => [...exercises, newExName.value])
     }else{
@@ -97,7 +128,7 @@ console.log(exercises)
 
               {/* Workout Table populated with exercises */}
               <div className=" border border-success rounded mt-3 pb-3">
-              <textarea className='mt-3 justify-content-center'name="" id="" cols="30" rows="1" placeholder="              Enter Workout Name"></textarea>
+              <textarea className='mt-3 justify-content-center'name="" id="newWoName" cols="30" rows="1" placeholder="              Enter Workout Name"></textarea>
 
                <div className="table mt-3 text-center">
                  
@@ -124,7 +155,7 @@ console.log(exercises)
                     </ol>
                 </div>
                 <div className="col text-center mt-3">
-                <button className="rounded" onClick={handleWoSubmit}>Save Workout</button>
+                <button className="rounded" id='woSubmit'onClick={handleWoSubmit}>Save Workout</button>
                </div>
            </div>
            </div>  

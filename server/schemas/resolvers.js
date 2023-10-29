@@ -12,11 +12,11 @@ const resolvers = {
     },
   },
   Mutation: {
-    createExercise: async (parent, args, context) => {
+    createExercise: async (parent, {exercise}, context) => {
       try {
         const exercise = await Exercise.create(args);
-        const token = signToken(user);
-        return { token, exercise };
+       
+        return { exercise };
       } catch (error) {
         console.error('Error creating exercise:', error);
         throw new Error('Error creating exercise');
@@ -66,6 +66,18 @@ const resolvers = {
       const deletedSet = await Set.findByIdAndDelete(id);
       return deletedSet;
     },
+
+    
+    addWorkout: async (parent, {workoutData}, context) =>{
+      if(context.user){
+        const updatedUser= await User.findOneAndUpdate(
+          {_id:context.user._id}, 
+          {$push:{workouts: workoutData}},
+          {new: true}
+        );    
+        return updatedUser;
+      }
+    }
   },
 };
 
