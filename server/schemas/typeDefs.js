@@ -2,54 +2,33 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    _id: ID
-    firstName: String!
-    lastName: String!
+    _id: ID!
     username: String!
     workouts: [Workout]
     loggedWorkouts: [Workout]
   }
 
   type Workout {
-    _id: ID
-    name:String
+    _id: ID!
+    date: String
+    name: String!
     exercises: [Exercise]
   }
 
-  input WorkoutInput {
-    _id: ID
-    name: String,
-    exercises:[ExerciseInput]
-  }
-
-  input ExerciseInput {
-    _id: ID
-    exercise: String
-    sets: [SetInput]
-  }
-
   type Exercise {
-    _id: ID
-    exercise: String
+    _id: ID!
+    exercise: String!
     sets: [Set]
   }
-  
+
   type Set {
-    _id: ID
-    reps: Int
-    weight: Float
-    distance: Float
+    _id: ID!
+    onerepmax: Int
+    Date: String
   }
 
-  input SetInput {
-    _id: ID
-    reps: Int
-    weight: Float
-    distance: Float
-  }
-  
   type Auth {
-    token: ID
+    token: ID!
     user: User
   }
 
@@ -57,18 +36,14 @@ const typeDefs = gql`
     user(id: ID!): User
     workout(id: ID!): Workout
   }
-  
+
   type Mutation {
-    createUser(firstName: String, lastName: String, username: String!, password: String!): Auth
-    addSet(reps: Int!, weight: Float, distance: Float): Set
-    updateSet(id: ID!, reps: Int, weight: Float, distance: Float): Set
-    deleteSet(id: ID!): Set
     loginUser(username: String!, password: String!): Auth
-    addWorkout(workoutData: WorkoutInput):User
-    createExercise(exercise:String!, sets:SetInput ): Exercise
+    createUser(username: String!, password: String!): User
+    addWorkout(userId: ID!, name: String!, date: String, exercises: [ID]!): Workout
+    addExercise(workoutId: ID!, exercise: String!): Exercise
+    addSet(exerciseId: ID!, onerepmax: Int!, Date: String): Set
   }
 `;
 
 module.exports = typeDefs;
-
-
