@@ -8,8 +8,8 @@ export const useSettingsContext = () => useContext(SettingsContext);
 
 // provider keeps track of the state
 export const WorkoutProvider = ( { value = [], ...props } ) => {
-    const storedTheme = localStorage.getItem('theme');
-    const storedUnits = localStorage.getItem('units');
+    const storedTheme = localStorage.getItem('theme') || 'light';
+    const storedUnits = localStorage.getItem('units') || 'imperial';
     let isMetric = false;
     let isDark = false;
 
