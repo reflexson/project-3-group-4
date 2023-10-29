@@ -14,8 +14,9 @@ const resolvers = {
   Mutation: {
     createExercise: async (parent, {exercise}, context) => {
       try {
-        const newExercise = await Exercise.create(exercise);
-        return { newExercise };
+        const exercise = await Exercise.create(args);
+        const token = signToken(user);
+        return { token, exercise };
       } catch (error) {
         console.error('Error creating exercise:', error);
         throw new Error('Error creating exercise');
