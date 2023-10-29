@@ -1,15 +1,13 @@
 const { Schema, model } = require('mongoose');
 
 const setSchema = new Schema({
-    reps: {
+    onerepmax: {
         type: Number
     },
-    weight: {
-        type: Number
+    Date: {
+        type: Date
     },
-    distance: {
-        type: Number
-    },
+    
     // time:
 });
 
