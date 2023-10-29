@@ -34,7 +34,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_EXERCISE = gql`
-  mutation CreateExercise($exercise: String!, $sets: SetInput) {
+  mutation createExercise($exercise: String!, $sets: SetInput) {
     createExercise(exercise: $exercise, sets: $sets) {
       _id
       exercise

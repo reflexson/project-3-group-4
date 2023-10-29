@@ -19,12 +19,13 @@ console.log(exercises)
 
 
  async function handleWoSubmit(){
+  console.log(exercises)
    const newWoName = document.getElementById('newWoName');
    let exercisesArray = [];
 for(let i=0; i<exercises.length; i++){
-let exercise = await createExercise(exercises[i]);
-console.log(exercise)
-exercisesArray.push(exercise);
+let newexercise = await createExercise({exercise:exercises[i].value});
+console.log(newexercise)
+exercisesArray.push(newexercise);
 }
 
  
@@ -66,7 +67,7 @@ exercisesArray.push(exercise);
     if ( select.options[select.selectedIndex].text === "New Exercise"){
         setExercise(exercises => [...exercises, newExName.value])
     }else{
-        setExercise( exercises => [...exercises, select.options[select.selectedIndex].text])
+        setExercise( exercises => [...exercises, select.options[select.selectedIndex].textContent])
     }
        
 }
