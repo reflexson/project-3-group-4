@@ -11,6 +11,7 @@ const SingleWorkout = () => {
     if(settingsState.units === 'metric' && weightLabel === 'lbs'){
         setweightLabel('kg');
     }
+    const [date, setDate]= useState(Date());
 
     // get id in url
     // const location = window.location.toString();
@@ -78,6 +79,12 @@ const SingleWorkout = () => {
         setFormState({exercises});
     }
 
+    const onDateChange = (e) =>{
+        const {name, value} = e.target;
+        setDate(value);
+        console.log(date);
+    }
+
     // form handler
     const handleFormSubmit = async (event) => {
         //prevents form sumbitting to itself
@@ -90,10 +97,14 @@ const SingleWorkout = () => {
             {
                 let reps = exercises[i].setInputs[j].reps;
                 let weight = exercises[i].setInputs[j].weight;
+                if(settingsState ==='metric'){
+                    weight = convertMetricToImperial(weight);
+                }
                 maxReps[i] = calcMaxRep(reps, weight);
             }
         }
         console.log(`maxReps: ${maxReps}`);
+        console.log(date);
     };
     //end of form functions------------------------------------------
 
@@ -145,6 +156,15 @@ const SingleWorkout = () => {
                     
                 </div>
           ))}
+            <div>
+                <label for="birthday">Enter Date:</label>
+                &nbsp;
+                <input type="date" 
+                        id="date" 
+                        name="date"
+                        onChange={onDateChange}/>
+            </div>
+            
             <button type='submit'> 
                 Submit
             </button>
