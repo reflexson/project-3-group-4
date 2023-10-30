@@ -18,6 +18,7 @@ import Progress from './pages/Progress';
 import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
 import Test from './pages/Test';
+import SingleWorkout from './pages/SingleWorkout';
 import { WorkoutProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
@@ -71,6 +72,10 @@ function App() {
               <Route 
                 path="/settings" 
                 element={<Settings/>} 
+              />
+              <Route 
+                path="/workout/:id" 
+                element={<SingleWorkout/>} 
               />
               <Route 
                 path="/test" 

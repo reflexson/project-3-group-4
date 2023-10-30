@@ -37,12 +37,7 @@ function Nav() {
             <NavLink  to='/progress'>
               Dashboard
             </NavLink>
-          </li>
-          {/* <li className="ms-3">
-            <NavLink activeStyle={{color: "#ff3333"}} to='/test'>
-              test
-            </NavLink>
-          </li> */}
+          </li> 
         </ul>
       );
     }
