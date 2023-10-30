@@ -9,11 +9,11 @@ export const GET_USER = gql`
   }
 `;
 
-export const GET_WORKOUT_HISTORY = gql`
-  query GetWorkoutHistory($userId: ID!) {
-    getWorkouts(userId: $userId) {
+export const GET_WORKOUTS = gql`
+  query GetWorkouts {
+    workouts{
       _id
-      date
+      name
       exercises {
         _id
         exercise

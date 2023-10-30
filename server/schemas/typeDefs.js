@@ -56,7 +56,10 @@ type Auth {
 type Query {
   user(id: ID!): User
   workout(id: ID!): Workout
+  workouts:[Workout]
 }
+
+
 
 type Mutation {
   createExercise(exercise:String!, set:SetInput): Workout
