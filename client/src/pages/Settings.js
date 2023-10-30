@@ -6,26 +6,56 @@ const Settings = () => {
     // gets context
     let [ settingsState, setSettingsState] = useSettingsContext();
     console.log(settingsState);
+
+    const setDark= () => {
+        setSettingsState({...settingsState, theme: 'dark', isDark: true});
+        localStorage.setItem("theme", "dark");
+        document.querySelector('body').setAttribute('dark-theme','dark');
+    }
+
+    const setLight= () => {
+        setSettingsState({...settingsState, theme: 'light', isDark: false});
+        localStorage.setItem("theme", "light");
+        document.querySelector('body').setAttribute('dark-theme', 'light');
+    }
+
+    const setMetric= () => {
+        setSettingsState({...settingsState, units: 'metric', isMetric: true});
+        localStorage.setItem("units", "metric");
+    }
+
+    const setImperial= () => {
+        setSettingsState({...settingsState, units: 'imperial', isMetric: false});
+        localStorage.setItem("units", "imperial");
+    }
     // detect change
     const handleChange = (event) => {
       const { name, checked } = event.target;
-      /*
-        imperial is false & metric is true
-        light is false & dark is true
-      */ 
       //toggle units
       if(name === 'units' && checked === true){
-        setSettingsState({...settingsState, units: 'metric', unitsBool: true});
+        setMetric();
       } else if(name === 'units' && checked === false){
-        setSettingsState({...settingsState, units: 'imperial', unitsBool: false});
+        setImperial();
       }
       //toggle theme
       if(name === 'theme' && checked === true){
-        setSettingsState({...settingsState, theme: 'dark', themeBool: true});
+        setDark();
       } else if(name === 'theme' && checked === false){
-        setSettingsState({...settingsState, theme: 'light', themeBool: false});
+        setLight();
       }
     };
+    
+    //set to stored info for first load
+    const storedTheme = localStorage.getItem('theme');
+    const storedUnits = localStorage.getItem('units');
+    if( storedTheme === 'dark' && settingsState.isDark == false)
+    {
+      setDark();
+    }
+    if( storedUnits === 'metric' && settingsState.isMetric == false)
+    {
+      setMetric();
+    }
 
     //html
     return (
@@ -35,7 +65,8 @@ const Settings = () => {
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item  alink"  to='/settings'>Settings</Link>
-                {/* <Link  className="w3-bar-item  alink"  to='/test'>Test</Link> */}
+                <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
+                <Link  className="w3-bar-item  alink"  to='/workout/1'>SingleWorkout</Link>
         </aside>
         <br/>
         <main className="dashcont">
@@ -50,7 +81,7 @@ const Settings = () => {
                        id='units-switch' 
                        type='checkbox'
                        name='units'
-                       checked={settingsState.unitsBool}
+                       checked={settingsState.isMetric}
                        onChange={handleChange}>
                 </input>
               </div>
@@ -69,7 +100,7 @@ const Settings = () => {
                   id='theme-switch'
                   type='checkbox'
                   name='theme'
-                  checked={settingsState.themeBool}
+                  checked={settingsState.isDark}
                   onChange={handleChange}>
                 </input>
               </div>
