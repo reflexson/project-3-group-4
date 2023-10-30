@@ -5,16 +5,30 @@ import { useSettingsContext } from "../utils/GlobalState";
 const SingleWorkout = () => {
     // gets global context
     let [ settingsState, setSettingsState] = useSettingsContext();
-    console.log(settingsState);
+    //console.log(settingsState);
     // set set state
-    const [formState, setFormState] = useState({ 
-        name: '', 
-        data: [{reps: 0, weight: 0}]
+    let [formState, setFormState] = useState({ 
+        exercises:[
+            {
+                setInputs: [{reps: 0, weight: 0}]
+            }
+        ]     
     });
-    const handleRepChange = (event) => {
-        //gffdg
-        console.log('test');
+    console.log(formState);
+    const addNewSet = (indE) => {
+        const exercises = [...formState.exercises];
+        exercises[indE].setInputs.push({reps: 0, weight: 0});
+        setFormState({exercises});
+        console.log(formState);
     };
+
+    const addNewExercise = (indE) =>{
+        const exercises = [...formState.exercises];
+        exercises.push({
+            setInputs: [{reps: 0, weight: 0}]
+        });
+        setFormState({exercises});
+    }
 
     const tempWorks = [
         {
@@ -45,22 +59,33 @@ const SingleWorkout = () => {
           <h2>Excercises</h2>
           <form>
           {
-            tempWorks.map((ex, ind) => (
-                <div className="exercise ">
-                    {ex.name}
-                    <div className="set">
-                        {ind}
-                        <input type='number'
-                            className="reps"
-                            //onChange={handleRepChange}
-                        /> reps
-                        x &nbsp;
-                        <input type='number' className="weight"/> lbs
-                    </div>
+            formState.exercises.map((ex, ind) => (
+                <div className="exercise " key={ind}>
+                    {ex.name} {ind}
+                    <button onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 
+                        add set
+                    </button>
+                    {ex.setInputs.map((set, indS) => (
+                        <div className="set" key={indS}>
+                            {indS}
+                            <input type='number'
+                                className="reps"
+                                index={indS}
+                                //onChange={handleRepChange}
+                            /> 
+                            <label> reps</label>
+                            &nbsp; x &nbsp;
+                            <input type='number' className="weight"/> 
+                            <label> lbs</label>
+                        </div>
+                    ))}
+                    <button onClick={(event) => {event.preventDefault(); addNewExercise(ind)}}> 
+                        add exercise
+                    </button>
                 </div>
           ))}
           </form>
-          
+
           form end
         </main>
       
