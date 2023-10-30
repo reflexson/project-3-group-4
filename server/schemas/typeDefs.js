@@ -57,6 +57,7 @@ type Query {
   user(id: ID!): User
   workout(id: ID!): Workout
   workouts:[Workout]
+  workoutExercises:[Exercise]
 }
 
 

@@ -121,10 +121,10 @@ const SingleWorkout = () => {
         <aside className=" w3-sidebar w3-light-grey w3-bar-block" >
             <h3 className="w3-bar-item">Menu</h3>
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
-                <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
-                <Link  className="w3-bar-item  alink"  to='/settings'>Settings</Link>
-                <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
-                <Link  className="w3-bar-item  alink"  to='/workout/1'>SingleWorkout</Link>
+                <Link  className="w3-bar-item w3-button alink"  to='/workouts'>Workouts</Link>
+                <Link  className="w3-bar-item w3-button "  to='/settings'>Settings</Link>
+                {/* <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
+                <Link  className="w3-bar-item  alink"  to='/workout/1'>SingleWorkout</Link> */}
         </aside>
         <br/>
         <main className="dashcont">
@@ -172,7 +172,7 @@ const SingleWorkout = () => {
           ))}
             <br/>
             <div>
-                <label for="birthday">Enter Date:</label>
+                <label htmlFor="birthday">Enter Date:</label>
                 &nbsp;
                 <input type="date" 
                         id="date" 

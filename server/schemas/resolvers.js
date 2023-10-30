@@ -11,10 +11,18 @@ const resolvers = {
     workout: async (_, { id }) => {
       return await Workout.findById(id);
     },
-    workouts: async (parent, { id }, context) => {
+    workouts: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
-      console.log(parent, context, id);
+      // console.log(parent, context, id);
       return user.workouts
+    },
+      workoutExercises: async (parent, args, context) => {
+      const location = window.location.toString();
+      const splitLocation = location.split('/');
+      const woId = splitLocation[splitLocation.length-1];
+      const user = await User.findById(context.user._id);
+      selectecWo = user.workouts[woId]
+      return selectedWo.exercises
     },
   },
   Mutation: {
