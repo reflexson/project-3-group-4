@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Workout, Exercise, Set } = require('../models'); 
 const { signToken } = require('../utils/auth');
 
+
 const resolvers = {
   Query: {
     user: async (_, { id }) => {
@@ -9,6 +10,11 @@ const resolvers = {
     },
     workout: async (_, { id }) => {
       return await Workout.findById(id);
+    },
+    workouts: async (parent, { id }, context) => {
+      const user = await User.findById(context.user._id);
+      console.log(parent, context, id);
+      return user.workouts
     },
   },
   Mutation: {//
