@@ -85,8 +85,15 @@ const SingleWorkout = () => {
         // loop through exercises
         const exercises = [...formState.exercises];
         let maxReps = [];
-
-        
+        for(let i = 0; i < exercises.length; i++){
+            for(let j = 0; j < exercises[i].setInputs.length; j++)
+            {
+                let reps = exercises[i].setInputs[j].reps;
+                let weight = exercises[i].setInputs[j].weight;
+                maxReps[i] = calcMaxRep(reps, weight);
+            }
+        }
+        console.log(`maxReps: ${maxReps}`);
     };
     //end of form functions------------------------------------------
 
