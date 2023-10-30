@@ -78,7 +78,7 @@ exercisesArray.push(newexercise);
         <div>
           {workouts &&
             workouts.map((workout, index) => (
-              <Link key={index} className="w3-bar-item w3-button " to={`/workouts/${index}`}>{workout.name}</Link>
+              <Link key={index} className="w3-bar-item w3-button " to={`/workout/${index}`}>{workout.name}</Link>
             ))}
         </div>
       );
