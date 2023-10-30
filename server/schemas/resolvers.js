@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Workout, Exercise, Set } = require('../models'); 
 const { signToken } = require('../utils/auth');
 
+
 const resolvers = {
   Query: {
     user: async (_, { id }) => {
@@ -10,12 +11,26 @@ const resolvers = {
     workout: async (_, { id }) => {
       return await Workout.findById(id);
     },
+    workouts: async (parent, { id }, context) => {
+      const user = await User.findById(context.user._id);
+      console.log(parent, context, id);
+      return user.workouts
+    },
   },
-  Mutation: {
-    createExercise: async (parent, {exercise}, context) => {
+  Mutation: {//
+    // createExercise: async (parent, {exercise}, context) => {
+    //   try {
+    //     const newexercise = await Exercise.create(exercise);
+       
+    //     return { newexercise };
+    //   } catch (error) {
+    //     console.error('Error creating exercise:', error);
+    //     throw new Error('Error creating exercise');
+    //   }
+    // },
+    createExercise: async (parent, args, context) => {
       try {
         const exercise = await Exercise.create(args);
-       
         return { exercise };
       } catch (error) {
         console.error('Error creating exercise:', error);

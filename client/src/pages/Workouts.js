@@ -1,44 +1,35 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import {newWorkout  } from '../utils/wohelpers'
-import { ADD_NEW_WORKOUT, CREATE_EXERCISE} from "../utils/mutations";
-import { useMutation } from "@apollo/client";
+import { ADD_NEW_WORKOUT} from "../utils/mutations";
+import {GET_WORKOUTS} from "../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
 
 
-
+  
 const Workouts = () => {
   
  const [newEx, setnewEx] = useState('0');
  const [exercises, setExercise ] = useState([])
  const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
- const [createExercise, {error2}]= useMutation(CREATE_EXERCISE)
-
-console.log(exercises)
+ 
 
 //function to submit workouts
 
-
  async function handleWoSubmit(){
    const newWoName = document.getElementById('newWoName');
-   let exercisesArray = [];
+   const exercisesArray = [];
 for(let i=0; i<exercises.length; i++){
-let exercise = await createExercise(exercises[i]);
-console.log(exercise)
-exercisesArray.push(exercise);
+let newexercise =  {exercise:exercises[i]};
+exercisesArray.push(newexercise);
 }
-
- 
-
    const newWoObject = {
     name: newWoName.value,
     exercises: exercisesArray
    }
-
    const {data} = await addNewWorkout({
     variables: {workoutData : {...newWoObject}}
    })
-   console.log(data)
-
   }
 
 
@@ -51,9 +42,11 @@ exercisesArray.push(exercise);
                    <textarea className="form-control" id="newExName" rows="1"></textarea>
               </div>;;
     }
-   
+
     return null;
   };
+
+
 
 
   //function to sumbit selected exercise to exercises array
@@ -66,12 +59,35 @@ exercisesArray.push(exercise);
     if ( select.options[select.selectedIndex].text === "New Exercise"){
         setExercise(exercises => [...exercises, newExName.value])
     }else{
-        setExercise( exercises => [...exercises, select.options[select.selectedIndex].text])
-    }
-       
+        setExercise( exercises => [...exercises, select.options[select.selectedIndex].textContent])
+    }  
 }
 
+   //Show Workouts as options in select existing workout
+
+   const { loading, data } = useQuery(GET_WORKOUTS);
+   const workouts = data?.workouts || [];
+  //  const workoutId = data?.workouts.workout.Id;
+  // to={`/workout/${workout.id}`}
+   const WorkoutList = ({workouts}) => {
+    // console.log({workouts})
+      if (!workouts.length) {
+        return <div><a>No Workouts Yet</a></div>;
+      }
+      return (
+        <div>
+          {workouts &&
+            workouts.map((workout) => (
+              <Link className="w3-bar-item w3-button " to={`/workouts/${workout._id}`}>{workout.name}</Link>
+            ))}
+        </div>
+      );
+    }
+        
+        
+
     return (
+
       // Sidebar
       <div className="col-12 flex-row">
         <div className="w3-sidebar w3-light-grey w3-bar-block" >
@@ -89,9 +105,7 @@ exercisesArray.push(exercise);
             <div className="w3-dropdown-hover">
               <button className="w3-button w3-black ms-4 mt-3">Choose Existing Workout</button>
               <div className="w3-dropdown-content w3-bar-block w3-border ms-4">
-                <a  className="w3-bar-item w3-button ">Leg Day</a>
-                <a  className="w3-bar-item w3-button ">Chest Day</a>
-                <a  className="w3-bar-item w3-button ">Core Day</a>
+                <WorkoutList workouts={workouts}/>
               </div>
             </div>
           </div>  
@@ -115,16 +129,7 @@ exercisesArray.push(exercise);
               </div>
               <div className="col text-center mt-3">
                 <button className="rounded" onClick={handleExSubmit}>Submit Exercise</button>
-               </div>
-              {/* <div className="form-group mt-3">
-                <label >Weight</label>
-                <textarea className="form-control" id="weight" rows="1"></textarea>
-              </div>
-              <div className="form-group mt-3">
-                <label >Reps</label>
-                <textarea className="form-control" id="reps" rows="1"></textarea>
-              </div> */}
-              
+               </div>        
 
               {/* Workout Table populated with exercises */}
               <div className=" border border-success rounded mt-3 pb-3">
