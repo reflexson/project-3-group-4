@@ -5,7 +5,7 @@ import { ADD_NEW_WORKOUT, CREATE_EXERCISE} from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 
-
+  
 const Workouts = () => {
   
  const [newEx, setnewEx] = useState('0');
@@ -13,20 +13,23 @@ const Workouts = () => {
  const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
  const [createExercise, {error2}]= useMutation(CREATE_EXERCISE)
 
-console.log(exercises)
-
+console.log('inside' + exercises)
+window.exercises=exercises;
 //function to submit workouts
 
-
+// var exercisesArray = [];
  async function handleWoSubmit(){
-  console.log(exercises)
+  console.log('handlewo' , exercises)
+  
    const newWoName = document.getElementById('newWoName');
-   let exercisesArray = [];
+   const exercisesArray = [];
 for(let i=0; i<exercises.length; i++){
-let newexercise = await createExercise({exercise:exercises[i].value});
-console.log(newexercise)
+let newexercise =  {exercise:exercises[i]};
+console.log({newexercise})
 exercisesArray.push(newexercise);
 }
+ 
+
 
  
 
@@ -34,7 +37,7 @@ exercisesArray.push(newexercise);
     name: newWoName.value,
     exercises: exercisesArray
    }
-
+   console.log(newWoObject)
    const {data} = await addNewWorkout({
     variables: {workoutData : {...newWoObject}}
    })
@@ -69,6 +72,13 @@ exercisesArray.push(newexercise);
     }else{
         setExercise( exercises => [...exercises, select.options[select.selectedIndex].textContent])
     }
+    // for(let i=0; i<exercises.length; i++){
+    //   let newexercise = {
+    //     exercise:exercises[i].value
+    //   };
+   
+    //  exercisesArray.push(newexercise);
+    //   }
        
 }
 

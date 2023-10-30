@@ -11,12 +11,21 @@ const resolvers = {
       return await Workout.findById(id);
     },
   },
-  Mutation: {
-    createExercise: async (parent, {exercise}, context) => {
-      try {
-        const newexercise = await Exercise.create(exercise);
+  Mutation: {//
+    // createExercise: async (parent, {exercise}, context) => {
+    //   try {
+    //     const newexercise = await Exercise.create(exercise);
        
-        return { newexercise };
+    //     return { newexercise };
+    //   } catch (error) {
+    //     console.error('Error creating exercise:', error);
+    //     throw new Error('Error creating exercise');
+    //   }
+    // },
+    createExercise: async (parent, args, context) => {
+      try {
+        const exercise = await Exercise.create(args);
+        return { exercise };
       } catch (error) {
         console.error('Error creating exercise:', error);
         throw new Error('Error creating exercise');
