@@ -92,7 +92,11 @@ const SingleWorkout = () => {
         // loop through exercises
         const exercises = [...formState.exercises];
         let maxReps = [];
+        let setInfo = [];
         for(let i = 0; i < exercises.length; i++){
+            // reset setInfo
+            setInfo = [];
+            //loop through an excercises sets
             for(let j = 0; j < exercises[i].setInputs.length; j++)
             {
                 let reps = exercises[i].setInputs[j].reps;
@@ -100,11 +104,14 @@ const SingleWorkout = () => {
                 if(settingsState ==='metric'){
                     weight = convertMetricToImperial(weight);
                 }
-                maxReps[i] = calcMaxRep(reps, weight);
+                setInfo[j] = calcMaxRep(reps, weight);   
             }
+            //reps saved as setInfo average
+            maxReps[i] = setInfo.reduce((a,b)=>a+b)/ setInfo.length;
+            // console.log(`setInfo: ${setInfo}`);
         }
-        console.log(`maxReps: ${maxReps}`);
-        console.log(date);
+        // console.log(`maxReps: ${maxReps}`);
+        // console.log(date);
     };
     //end of form functions------------------------------------------
 
