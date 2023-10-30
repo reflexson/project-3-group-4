@@ -14,7 +14,7 @@ const userSchema = new Schema({
     required: true
   },
   workouts: [Workout.schema],
-  loggedWorkouts: [Workout.schema]
+  // loggedWorkouts: [Workout.schema]
 });
 
 // Set up pre-save middleware to create password

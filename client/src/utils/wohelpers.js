@@ -29,4 +29,4 @@ function handleWoSubmit(e){
 
 
 
-export{newWorkout,   handleWoSubmit}
+export{newWorkout}

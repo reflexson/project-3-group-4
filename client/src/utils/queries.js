@@ -27,3 +27,22 @@ export const GET_WORKOUT_HISTORY = gql`
     }
   }
 `;
+
+export const GET_USER_WORKOUTS = gql`
+  query GetUserWorkouts($userId: ID!) {
+    getUserWorkouts(userId: $userId) {
+      _id
+      date
+      exercises {
+        _id
+        exercise
+        sets {
+          _id
+          reps
+          weight
+          distance
+        }
+      }
+    }
+  }
+`;

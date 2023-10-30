@@ -34,10 +34,10 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_EXERCISE = gql`
-  mutation CreateExercise($userId: ID!, $name: String!, $sets: [SetInput]!) {
-    createExercise(userId: $userId, name: $name, sets: $sets) {
+  mutation createExercise($exercise: String!) {
+    createExercise(exercise: $exercise) {
       _id
-      name
+      exercise
       sets {
         _id
         reps
@@ -64,7 +64,7 @@ export const UPDATE_EXERCISE = gql`
 `;
 
 export const ADD_WORKOUT_DATA = gql`
-  mutation AddWorkoutData($exerciseId: ID!, $userId: ID!, $sets: [SetInput]!) {
+  mutation AddWorkoutData($exerciseId: ID!, $userId: ID!, $sets: [SetInput]) {
     addWorkoutData(exerciseId: $exerciseId, userId: $userId, sets: $sets) {
       _id
       sets {
@@ -76,3 +76,22 @@ export const ADD_WORKOUT_DATA = gql`
     }
   }
 `;
+
+export const ADD_NEW_WORKOUT =  gql`
+mutation addWorkout($workoutData: WorkoutInput){
+  addWorkout(workoutData: $workoutData){
+    username
+    workouts {
+      _id
+      name
+      exercises{
+        exercise
+          sets {
+            reps
+          }
+      }
+      }
+    
+  }
+}
+`

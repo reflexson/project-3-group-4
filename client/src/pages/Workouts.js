@@ -1,21 +1,53 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import {newWorkout,  handleWoSubmit} from '../utils/wohelpers'
-// import ExTable from "../components/ExTable";
+import {newWorkout  } from '../utils/wohelpers'
+import { ADD_NEW_WORKOUT, CREATE_EXERCISE} from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 
-
+  
 const Workouts = () => {
   
-  
-
-
-  const [newEx, setnewEx] = useState('0');
+ const [newEx, setnewEx] = useState('0');
  const [exercises, setExercise ] = useState([])
-//  let exercises = [];
-console.log(exercises)
+ const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
+ const [createExercise, {error2}]= useMutation(CREATE_EXERCISE)
+
+console.log('inside' + exercises)
+window.exercises=exercises;
+//function to submit workouts
+
+// var exercisesArray = [];
+ async function handleWoSubmit(){
+  console.log('handlewo' , exercises)
+  
+   const newWoName = document.getElementById('newWoName');
+   const exercisesArray = [];
+for(let i=0; i<exercises.length; i++){
+let newexercise =  {exercise:exercises[i]};
+console.log({newexercise})
+exercisesArray.push(newexercise);
+}
+ 
+
+
+ 
+
+   const newWoObject = {
+    name: newWoName.value,
+    exercises: exercisesArray
+   }
+   console.log(newWoObject)
+   const {data} = await addNewWorkout({
+    variables: {workoutData : {...newWoObject}}
+   })
+   console.log(data)
+
+  }
+
 
 // show input for new exercise based on option selected
+
   const newExInput = () => {
     if (newEx === '0') {
       return <div  className="mt-3">
@@ -27,16 +59,26 @@ console.log(exercises)
     return null;
   };
 
+
+  //function to sumbit selected exercise to exercises array
+
   function handleExSubmit(e){
     e.preventDefault();
     var select = document.getElementById('select');
     var newExName = document.getElementById('newExName');
-
+  
     if ( select.options[select.selectedIndex].text === "New Exercise"){
         setExercise(exercises => [...exercises, newExName.value])
     }else{
-        setExercise( exercises => [...exercises, select.options[select.selectedIndex].text])
+        setExercise( exercises => [...exercises, select.options[select.selectedIndex].textContent])
     }
+    // for(let i=0; i<exercises.length; i++){
+    //   let newexercise = {
+    //     exercise:exercises[i].value
+    //   };
+   
+    //  exercisesArray.push(newexercise);
+    //   }
        
 }
 
@@ -97,7 +139,7 @@ console.log(exercises)
 
               {/* Workout Table populated with exercises */}
               <div className=" border border-success rounded mt-3 pb-3">
-              <textarea className='mt-3 justify-content-center'name="" id="" cols="30" rows="1" placeholder="              Enter Workout Name"></textarea>
+              <textarea className='mt-3 justify-content-center'name="" id="newWoName" cols="30" rows="1" placeholder="              Enter Workout Name"></textarea>
 
                <div className="table mt-3 text-center">
                  
@@ -124,7 +166,7 @@ console.log(exercises)
                     </ol>
                 </div>
                 <div className="col text-center mt-3">
-                <button className="rounded" onClick={handleWoSubmit}>Save Workout</button>
+                <button className="rounded" id='woSubmit'onClick={handleWoSubmit}>Save Workout</button>
                </div>
            </div>
            </div>  
