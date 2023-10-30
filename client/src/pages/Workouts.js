@@ -13,21 +13,21 @@ const Workouts = () => {
  const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
  const [createExercise, {error2}]= useMutation(CREATE_EXERCISE)
 
-console.log(exercises)
+
 
 //function to submit workouts
 
 
  async function handleWoSubmit(){
-   const newWoName = document.getElementById('newWoName');
-   let exercisesArray = [];
-for(let i=0; i<exercises.length; i++){
-let exercise = await createExercise(exercises[i]);
-console.log(exercise)
-exercisesArray.push(exercise);
-}
-
- 
+  const newWoName = document.getElementById('newWoName');
+  let exercisesArray = [];
+  for(let i=0; i<exercises.length; i++){
+    console.log(exercises)
+    console.log('Exercise:', exercises[i]);
+    let newExercise = await createExercise({exercise: exercises[i]});
+    console.log(newExercise)
+    exercisesArray.push(newExercise);
+  }
 
    const newWoObject = {
     name: newWoName.value,
