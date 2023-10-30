@@ -49,7 +49,7 @@ export const GET_USER_WORKOUTS = gql`
 
 
 export const GET_WO_EXERCISES = gql`
-  query GetExercise {
+  query GetWoExercises {
     workoutExercises {
       _id
       date

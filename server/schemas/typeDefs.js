@@ -11,9 +11,9 @@ type User {
 }
 
 type Workout {
-  _id: ID
-  name:String
-  exercises: [Exercise]
+  _id: ID!
+  name:String!
+  exercises: [Exercise!]!
 }
 
 input WorkoutInput {
@@ -29,16 +29,14 @@ input ExerciseInput {
 }
 
 type Exercise {
-  _id: ID
-  exercise: String
-  sets: [Set]
+  _id: ID!
+  exercise: String!
+  sets: [Set!]!
 }
 
 type Set {
-  _id: ID
-  reps: Int
-  weight: Float
-  distance: Float
+  onerepmax: Float
+  Date: String
 }
 
 input SetInput {
@@ -58,9 +56,10 @@ type Query {
   workout(id: ID!): Workout
   workouts:[Workout]
   workoutExercises:[Exercise]
+  exerciseByName(name: String!): [Exercise]
+  exerciseData(exerciseName: String!): [Set!]!
+  getExerciseDataByUsernameAndExercise(username: String!, exercise: String!): [Set!]!
 }
-
-
 
 type Mutation {
   createExercise(exercise:String!, set:SetInput): Workout
@@ -71,6 +70,6 @@ type Mutation {
   loginUser(username: String!, password: String!): Auth
   addWorkout(workoutData: WorkoutInput):User
 }
-`;;;
+`;
 
 module.exports = typeDefs;

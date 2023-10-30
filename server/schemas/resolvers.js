@@ -2,7 +2,6 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Workout, Exercise, Set } = require('../models'); 
 const { signToken } = require('../utils/auth');
 
-
 const resolvers = {
   Query: {
     user: async (_, { id }) => {
@@ -21,9 +20,53 @@ const resolvers = {
       const splitLocation = location.split('/');
       const woId = splitLocation[splitLocation.length-1];
       const user = await User.findById(context.user._id);
-      selectecWo = user.workouts[woId]
+      selectedWo = user.workouts[woId]
       return selectedWo.exercises
     },
+    exerciseByName: async (_, { name }) => {
+      // Find all workouts that contain the exercise by name
+      const workoutsWithExercise = await Workout.find({ "exercises.exercise": name });
+      let exercises = [];
+      
+      // Extract the exercises from the workouts
+      workoutsWithExercise.forEach(workout => {
+        exercises.push(...workout.exercises.filter(exercise => exercise.exercise === name));
+      });
+      
+      return exercises;
+    },
+    exerciseData: async (parent, args, context) => {
+      const { exerciseName } = args;
+      const user = await User.findOne({ username: context.username });
+      let results = [];
+    
+      user.workouts.forEach(workout => {
+        workout.exercises.forEach(exercise => {
+          if (exercise.exercise === exerciseName) {
+            results = results.concat(exercise.sets);
+          }
+        });
+      });
+    
+      return results;
+    },
+    getExerciseDataByUsernameAndExercise: async (_, { username, exercise }) => {
+      const user = await User.findOne({ username });
+
+      if (!user) throw new Error('User not found');
+
+      let exerciseSets = [];
+
+      user.workouts.forEach(workout => {
+          workout.exercises.forEach(ex => {
+              if (ex.exercise === exercise) {
+                  exerciseSets = exerciseSets.concat(ex.sets);
+              }
+          });
+      });
+
+      return exerciseSets;
+  }
   },
   Mutation: {
     // createExercise: async (parent, {exercise}, context) => {
