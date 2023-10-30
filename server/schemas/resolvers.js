@@ -21,7 +21,7 @@ const resolvers = {
       const splitLocation = location.split('/');
       const woId = splitLocation[splitLocation.length-1];
       const user = await User.findById(context.user._id);
-      selectecWo = user.workouts[woId]
+      selectedWo = user.workouts[woId]
       return selectedWo.exercises
     },
   },
