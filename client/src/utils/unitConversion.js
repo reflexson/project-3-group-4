@@ -7,4 +7,12 @@ export const convertMetricToImperial = (metricValue) => {
     // Conversion from imperial to metric units (example: pounds to kilograms)
     return imperialValue / 2.20462; // 1 pound is approx 0.453592 kilograms
   };
+
+  export const calcMaxRep = (reps, weight) =>{
+    return weight*(1 +(reps/30));
+  }
+
+  export const average = (num, length) =>{
+    return num/length;
+  }
   

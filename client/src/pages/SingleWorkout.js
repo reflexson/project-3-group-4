@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useSettingsContext } from "../utils/GlobalState";
+import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
 
 const SingleWorkout = () => {
     // gets global context
     let [ settingsState, setSettingsState] = useSettingsContext();
     //console.log(settingsState);
-    // set set state
+    const [weightLabel, setweightLabel]= useState('lbs');
+    if(settingsState.units === 'metric' && weightLabel === 'lbs'){
+        setweightLabel('kg');
+    }
 
+    // get id in url
     // const location = window.location.toString();
     // const splitLocation = location.split('/');
     // console.log(splitLocation[splitLocation.length-1]);
+
+    //temp query
     const query = [
         {
             name: 'bloop',
@@ -21,7 +28,7 @@ const SingleWorkout = () => {
         },
         {
             name: 'bop'
-        }
+        },        
     ];
 
     const exercises = query.map((ex) => (
@@ -30,16 +37,16 @@ const SingleWorkout = () => {
             setInputs: [{reps: 0, weight: 0}]
         }
     ));
-
+    // set set state
     let [formState, setFormState] = useState({ 
         exercises    
     });
-    console.log(formState);
+
+    // form functions---------------------------------------------------------
     const addNewSet = (indE) => {
         const exercises = [...formState.exercises];
         exercises[indE].setInputs.push({reps: 0, weight: 0});
         setFormState({exercises});
-        console.log(formState);
     };
 
     const addNewExercise = () =>{
@@ -50,26 +57,38 @@ const SingleWorkout = () => {
         setFormState({exercises});
     }
 
-    const onRepChange = (e) =>{
-        const {value} = e.target;
+    const deleteSet = (indE, indS) =>{
+        const exercises = [...formState.exercises];
+        exercises[indE].setInputs.splice(indS,1);
+        setFormState({exercises});
+    }
+
+    const onChange = (e) =>{
+        const {name, value} = e.target;
         const indE = e.target.getAttribute('indexexercise');
         const indS = e.target.getAttribute('indexset');
 
         const exercises = [...formState.exercises];
-        exercises[indE].setInputs[indS] = {...formState.exercises[indE].setInputs[indS], reps: value};
+        exercises[indE].setInputs[indS] = {
+            //keep info to specific set
+            ...formState.exercises[indE].setInputs[indS],
+            // set new info
+            [name]: parseFloat(value)
+        };
         setFormState({exercises});
     }
 
-    const onWeightChange = (e) =>{
-        const {value} = e.target;
-        const indE = e.target.getAttribute('indexexercise');
-        const indS = e.target.getAttribute('indexset');
-
+    // form handler
+    const handleFormSubmit = async (event) => {
+        //prevents form sumbitting to itself
+        event.preventDefault();
+        // loop through exercises
         const exercises = [...formState.exercises];
-        exercises[indE].setInputs[indS] = {...formState.exercises[indE].setInputs[indS], weight: value};
-        setFormState({exercises});
-    }
+        let maxReps = [];
 
+        
+    };
+    //end of form functions------------------------------------------
 
     //html
     return (
@@ -85,7 +104,7 @@ const SingleWorkout = () => {
         <br/>
         <main className="dashcont">
           <h2>Excercises</h2>
-          <form>
+          <form onSubmit={handleFormSubmit}>
           {
             formState.exercises.map((ex, ind) => (
                 <div className="exercise " key={ind}>
@@ -95,29 +114,33 @@ const SingleWorkout = () => {
                     </button>
                     {ex.setInputs.map((set, indS) => (
                         <div className="set" key={indS}>
-                            {indS}
+                            Set {indS}
                             <input type='number'
                                 className="reps"
+                                name='reps'
                                 indexset={indS}
                                 indexexercise={ind}
-                                onChange={onRepChange}
+                                onChange={onChange}
                             /> 
-                            <label> reps</label>
+                            <label>&nbsp; reps</label>
                             &nbsp; x &nbsp;
                             <input type='number'
                                     className="weight"
+                                    name='weight'
                                     indexset={indS}
                                     indexexercise={ind}
-                                    onChange={onWeightChange}/> 
-                            <label> lbs</label>
+                                    onChange={onChange}/> 
+                            <label>&nbsp; {weightLabel}</label>
+                            &nbsp;
+                            <button onClick={(event) => {event.preventDefault(); deleteSet(ind, indS)}}>Delete Set</button>
                         </div>
                     ))}
                     
                 </div>
           ))}
-          <button onClick={(event) => {event.preventDefault(); addNewExercise()}}> 
-                        add exercise
-                    </button>
+            <button type='submit'> 
+                Submit
+            </button>
           </form>
 
           form end
