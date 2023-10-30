@@ -126,13 +126,15 @@ const SingleWorkout = () => {
           {
             formState.exercises.map((ex, ind) => (
                 <div className="exercise " key={ind}>
-                    {ex.name} {ind}
+                    {ex.name}
                     <button onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 
                         add set
                     </button>
+                    <br/>
+                    <br/>
                     {ex.setInputs.map((set, indS) => (
                         <div className="set" key={indS}>
-                            Set {indS}
+                            Set {indS +1 }
                             <input type='number'
                                 className="reps"
                                 name='reps'
@@ -150,21 +152,28 @@ const SingleWorkout = () => {
                                     onChange={onChange}/> 
                             <label>&nbsp; {weightLabel}</label>
                             &nbsp;
-                            <button onClick={(event) => {event.preventDefault(); deleteSet(ind, indS)}}>Delete Set</button>
+                            <button onClick={(event) => {event.preventDefault(); deleteSet(ind, indS)}}>
+                                Delete Set
+                            </button>
+                            <br/>
+                            <br/>
                         </div>
                     ))}
-                    
+
+                    <br/>
                 </div>
           ))}
+            <br/>
             <div>
                 <label for="birthday">Enter Date:</label>
                 &nbsp;
                 <input type="date" 
                         id="date" 
                         name="date"
-                        onChange={onDateChange}/>
+                        onChange={onDateChange}
+                />
             </div>
-            
+            <br/>
             <button type='submit'> 
                 Submit
             </button>
