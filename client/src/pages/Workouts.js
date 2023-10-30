@@ -105,12 +105,7 @@ exercisesArray.push(newexercise);
             <div className="w3-dropdown-hover">
               <button className="w3-button w3-black ms-4 mt-3">Choose Existing Workout</button>
               <div className="w3-dropdown-content w3-bar-block w3-border ms-4">
-                {/* <a  className="w3-bar-item w3-button ">Leg Day</a>
-                <a  className="w3-bar-item w3-button ">Chest Day</a>
-                <a  className="w3-bar-item w3-button ">Core Day</a> */}
-                <WorkoutList workouts={workouts}
-                            //  workoutId={workouts._id}
-                />
+                <WorkoutList workouts={workouts}/>
               </div>
             </div>
           </div>  
