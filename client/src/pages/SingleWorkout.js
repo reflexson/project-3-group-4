@@ -7,12 +7,32 @@ const SingleWorkout = () => {
     let [ settingsState, setSettingsState] = useSettingsContext();
     //console.log(settingsState);
     // set set state
+
+    // const location = window.location.toString();
+    // const splitLocation = location.split('/');
+    // console.log(splitLocation[splitLocation.length-1]);
+    const query = [
+        {
+            name: 'bloop',
+            
+        },
+        {
+            name: 'bleep'
+        },
+        {
+            name: 'bop'
+        }
+    ];
+
+    const exercises = query.map((ex) => (
+        {
+            name: ex.name,
+            setInputs: [{reps: 0, weight: 0}]
+        }
+    ));
+
     let [formState, setFormState] = useState({ 
-        exercises:[
-            {
-                setInputs: [{reps: 0, weight: 0}]
-            }
-        ]     
+        exercises    
     });
     console.log(formState);
     const addNewSet = (indE) => {
@@ -22,7 +42,7 @@ const SingleWorkout = () => {
         console.log(formState);
     };
 
-    const addNewExercise = (indE) =>{
+    const addNewExercise = () =>{
         const exercises = [...formState.exercises];
         exercises.push({
             setInputs: [{reps: 0, weight: 0}]
@@ -30,17 +50,25 @@ const SingleWorkout = () => {
         setFormState({exercises});
     }
 
-    const tempWorks = [
-        {
-            name: 'bloop'
-        },
-        {
-            name: 'bleep'
-        },
-        {
-            name: 'bop'
-        }
-    ];
+    const onRepChange = (e) =>{
+        const {value} = e.target;
+        const indE = e.target.getAttribute('indexexercise');
+        const indS = e.target.getAttribute('indexset');
+
+        const exercises = [...formState.exercises];
+        exercises[indE].setInputs[indS] = {...formState.exercises[indE].setInputs[indS], reps: value};
+        setFormState({exercises});
+    }
+
+    const onWeightChange = (e) =>{
+        const {value} = e.target;
+        const indE = e.target.getAttribute('indexexercise');
+        const indS = e.target.getAttribute('indexset');
+
+        const exercises = [...formState.exercises];
+        exercises[indE].setInputs[indS] = {...formState.exercises[indE].setInputs[indS], weight: value};
+        setFormState({exercises});
+    }
 
 
     //html
@@ -70,20 +98,26 @@ const SingleWorkout = () => {
                             {indS}
                             <input type='number'
                                 className="reps"
-                                index={indS}
-                                //onChange={handleRepChange}
+                                indexset={indS}
+                                indexexercise={ind}
+                                onChange={onRepChange}
                             /> 
                             <label> reps</label>
                             &nbsp; x &nbsp;
-                            <input type='number' className="weight"/> 
+                            <input type='number'
+                                    className="weight"
+                                    indexset={indS}
+                                    indexexercise={ind}
+                                    onChange={onWeightChange}/> 
                             <label> lbs</label>
                         </div>
                     ))}
-                    <button onClick={(event) => {event.preventDefault(); addNewExercise(ind)}}> 
-                        add exercise
-                    </button>
+                    
                 </div>
           ))}
+          <button onClick={(event) => {event.preventDefault(); addNewExercise()}}> 
+                        add exercise
+                    </button>
           </form>
 
           form end
