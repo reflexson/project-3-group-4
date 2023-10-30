@@ -8,6 +8,10 @@ import { useMutation, useQuery } from "@apollo/client";
 
   
 const Workouts = () => {
+
+  const location = window.location.toString();
+      const splitLocation = location.split('/');
+      console.log(splitLocation[splitLocation.length-1])
   
  const [newEx, setnewEx] = useState('0');
  const [exercises, setExercise ] = useState([])
@@ -47,8 +51,6 @@ exercisesArray.push(newexercise);
   };
 
 
-
-
   //function to sumbit selected exercise to exercises array
 
   function handleExSubmit(e){
@@ -63,22 +65,20 @@ exercisesArray.push(newexercise);
     }  
 }
 
-   //Show Workouts as options in select existing workout
+   //Show Workouts as options and select existing workout
 
    const { loading, data } = useQuery(GET_WORKOUTS);
    const workouts = data?.workouts || [];
-  //  const workoutId = data?.workouts.workout.Id;
-  // to={`/workout/${workout.id}`}
    const WorkoutList = ({workouts}) => {
-    // console.log({workouts})
+
       if (!workouts.length) {
         return <div><a>No Workouts Yet</a></div>;
       }
       return (
         <div>
           {workouts &&
-            workouts.map((workout) => (
-              <Link className="w3-bar-item w3-button " to={`/workouts/${workout._id}`}>{workout.name}</Link>
+            workouts.map((workout, index) => (
+              <Link key={index} className="w3-bar-item w3-button " to={`/workouts/${index}`}>{workout.name}</Link>
             ))}
         </div>
       );
@@ -158,6 +158,7 @@ exercisesArray.push(newexercise);
                     } 
                  })}
                     </ol>
+
                 </div>
                 <div className="col text-center mt-3">
                 <button className="rounded" id='woSubmit'onClick={handleWoSubmit}>Save Workout</button>
@@ -165,8 +166,6 @@ exercisesArray.push(newexercise);
            </div>
            </div>  
         </div>
-
-       
 
       </div>
     );
