@@ -8,12 +8,15 @@ const resolvers = {
     user: async (_, { id }) => {
       return await User.findById(id);
     },
+
     workout: async (_, { id }) => {
       return await Workout.findById(id);
     },
     workouts: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
       // console.log(parent, context, id);
+     
+     
       return user.workouts
     },
       workoutExercises: async (parent, args, context) => {
@@ -82,16 +85,16 @@ const resolvers = {
     },
 
     
-    // addWorkout: async (parent, {workoutData}, context) =>{
-    //   if(context.user){
-    //     const updatedUser= await User.findOneAndUpdate(
-    //       {_id:context.user._id}, 
-    //       {$push:{workouts: workoutData}},
-    //       {new: true}
-    //     );    
-    //     return updatedUser;
-    //   }
-    // }
+    addWorkout: async (parent, {workoutData}, context) =>{
+      if(context.user){
+        const updatedUser= await User.findOneAndUpdate(
+          {_id:context.user._id}, 
+          {$push:{workouts: workoutData}},
+          {new: true}
+        );    
+        return updatedUser;
+      }
+    }
   },
 };
 
