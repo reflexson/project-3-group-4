@@ -22,11 +22,11 @@ const SingleWorkout = () => {
     const location = window.location.toString();
     const splitLocation = location.split('/');
     const workInd = splitLocation[splitLocation.length-1];
-    console.log(splitLocation[splitLocation.length-1]);
+    // console.log(splitLocation[splitLocation.length-1]);
 
     const { loading, data } = useQuery(GET_WORKOUTS);
     const workouts = data?.workouts || [];
-    console.log(workouts[0]);
+    // console.log(workouts[0]);
     const chosenWorkout =workouts[workInd];
     const exercises = chosenWorkout.exercises.map((ex) => (
         {
@@ -95,7 +95,7 @@ const SingleWorkout = () => {
             let currentExerciseData = {
                 exerciseName: exercises[i].name,
                 sets: [],
-                progress: []  // Initialize progress array here
+                progress: []  // initialize progress array here
             };
             
             // loop through an exercise's sets
@@ -103,7 +103,7 @@ const SingleWorkout = () => {
                 let reps = exercises[i].setInputs[j].reps;
                 let weight = exercises[i].setInputs[j].weight;
     
-                // Store reps and weight for the current set
+                // store reps and weight for the current set
                 currentExerciseData.sets.push({
                     reps: reps,
                     weight: weight
@@ -124,12 +124,9 @@ const SingleWorkout = () => {
             exerciseDataArray.push(currentExerciseData);
         }
         
-        console.log(exerciseDataArray);  // This will log the data for each exercise including sets details and progress
+        console.log(exerciseDataArray); 
     
-        // TODO: Send the `exerciseDataArray` object to your database or use as required
     };
-    
-    
     //end of form functions------------------------------------------
 
     //html
