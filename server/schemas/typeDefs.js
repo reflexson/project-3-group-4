@@ -59,8 +59,6 @@ type Query {
   workoutExercises:[Exercise]
 }
 
-
-
 type Mutation {
   createExercise(exercise:String!, set:SetInput): Workout
   createUser(firstName: String, lastName: String, username: String!, password: String!): Auth
@@ -73,4 +71,3 @@ type Mutation {
 `;
 
 module.exports = typeDefs;
-
