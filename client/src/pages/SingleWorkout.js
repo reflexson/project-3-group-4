@@ -95,7 +95,7 @@ const SingleWorkout = () => {
             {
                 let reps = exercises[i].setInputs[j].reps;
                 let weight = exercises[i].setInputs[j].weight;
-                if(settingsState ==='metric'){
+                if(settingsState.units ==='metric'){
                     weight = convertMetricToImperial(weight);
                 }
                 setInfo[j] = calcMaxRep(reps, weight);   
