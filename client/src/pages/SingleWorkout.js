@@ -19,11 +19,11 @@ const SingleWorkout = () => {
     const location = window.location.toString();
     const splitLocation = location.split('/');
     const workInd = splitLocation[splitLocation.length-1];
-    console.log(splitLocation[splitLocation.length-1]);
+    // console.log(splitLocation[splitLocation.length-1]);
 
     const { loading, data } = useQuery(GET_WORKOUTS);
     const workouts = data?.workouts || [];
-    console.log(workouts[0]);
+    // console.log(workouts[0]);
     const chosenWorkout =workouts[workInd];
     const exercises = chosenWorkout.exercises.map((ex) => (
         {
@@ -75,7 +75,7 @@ const SingleWorkout = () => {
     const onDateChange = (e) =>{
         const {name, value} = e.target;
         setDate(value);
-        console.log(date);
+        // console.log(date);
     }
 
     // form handler
@@ -103,8 +103,9 @@ const SingleWorkout = () => {
             maxReps[i] = setInfo.reduce((a,b)=>a+b)/ setInfo.length;
             // console.log(`setInfo: ${setInfo}`);
         }
-        // console.log(`maxReps: ${maxReps}`);
-        // console.log(date);
+        console.log(exercises[0].name);
+        console.log(`maxReps: ${maxReps[0]}`);
+        console.log({date});
     };
     //end of form functions------------------------------------------
 
@@ -174,6 +175,7 @@ const SingleWorkout = () => {
                 />
             </div>
             <br/>
+          
             <button type='submit'> 
                 Submit
             </button>

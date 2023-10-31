@@ -75,10 +75,12 @@ const resolvers = {
       const newSet = await Set.create(args);
       return newSet;
     },
+
     updateSet: async (parent, { id, reps, weight, distance }, context) => {
       const updatedSet = await Set.findByIdAndUpdate(id, { reps, weight, distance }, { new: true });
       return updatedSet;
     },
+
     deleteSet: async (parent, { id }, context) => {
       const deletedSet = await Set.findByIdAndDelete(id);
       return deletedSet;
@@ -96,6 +98,8 @@ const resolvers = {
       }
     }
   },
+
+  
 };
 
 module.exports = resolvers;
