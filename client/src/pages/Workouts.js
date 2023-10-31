@@ -10,9 +10,9 @@ const Workouts = () => {
   
 
 
-  const [newEx, setnewEx] = useState('0');
- const [exercises, setExercise ] = useState([])
-//  let exercises = [];
+const [newEx, setnewEx] = useState('0');
+const [exercises, setExercise ] = useState([])
+
 console.log(exercises)
 
 // show input for new exercise based on option selected
