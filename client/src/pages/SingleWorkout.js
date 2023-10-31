@@ -4,6 +4,9 @@ import { useSettingsContext } from "../utils/GlobalState";
 import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
 import { GET_WO_EXERCISES, GET_WORKOUTS } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
+import { calculateOneRepMax } from '../utils/oneRepMax'
+import { formatDate } from '../utils/dateUtils';
+
 
 const SingleWorkout = () => {
     // gets global context
@@ -13,7 +16,7 @@ const SingleWorkout = () => {
     if(settingsState.units === 'metric' && weightLabel === 'lbs'){
         setweightLabel('kg');
     }
-    const [date, setDate]= useState(Date());
+    const [date, setDate] = useState(formatDate(new Date())); 
 
     // get id in url
     const location = window.location.toString();
@@ -73,41 +76,60 @@ const SingleWorkout = () => {
         setFormState({exercises});
     }
 
-    const onDateChange = (e) =>{
+    const onDateChange = (e) => {
         const {name, value} = e.target;
-        setDate(value);
+        setDate(formatDate(new Date(value))); 
         console.log(date);
     }
 
     // form handler
     const handleFormSubmit = async (event) => {
-        //prevents form sumbitting to itself
+        // prevents form submitting to itself
         event.preventDefault();
-        // loop through exercises
+        
         const exercises = [...formState.exercises];
-        let maxReps = [];
-        let setInfo = [];
-        for(let i = 0; i < exercises.length; i++){
-            // reset setInfo
-            setInfo = [];
-            //loop through an excercises sets
-            for(let j = 0; j < exercises[i].setInputs.length; j++)
-            {
+        let exerciseDataArray = [];
+    
+        for (let i = 0; i < exercises.length; i++) {
+            let setInfo = [];
+            let currentExerciseData = {
+                exerciseName: exercises[i].name,
+                sets: [],
+                progress: []  // Initialize progress array here
+            };
+            
+            // loop through an exercise's sets
+            for (let j = 0; j < exercises[i].setInputs.length; j++) {
                 let reps = exercises[i].setInputs[j].reps;
                 let weight = exercises[i].setInputs[j].weight;
-                if(settingsState.units ==='metric'){
+    
+                // Store reps and weight for the current set
+                currentExerciseData.sets.push({
+                    reps: reps,
+                    weight: weight
+                });
+    
+                if (settingsState.units === 'metric') {
                     weight = convertMetricToImperial(weight);
                 }
-                setInfo[j] = calcMaxRep(reps, weight);   
+                setInfo[j] = calculateOneRepMax(weight, reps);
             }
-            let _id = exercises[i]._id;
-            //reps saved as setInfo average
-            maxReps[i] = setInfo.reduce((a,b)=>a+b)/ setInfo.length;
-            // console.log(`setInfo: ${setInfo}`);
+    
+            const averageOneRepMax = setInfo.reduce((a, b) => a + b) / setInfo.length;
+            currentExerciseData.progress.push({
+                date: date,
+                max: averageOneRepMax
+            });
+    
+            exerciseDataArray.push(currentExerciseData);
         }
-        // console.log(`maxReps: ${maxReps}`);
-        console.log(date);
+        
+        console.log(exerciseDataArray);  // This will log the data for each exercise including sets details and progress
+    
+        // TODO: Send the `exerciseDataArray` object to your database or use as required
     };
+    
+    
     //end of form functions------------------------------------------
 
     //html
