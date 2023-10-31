@@ -28,6 +28,7 @@ const SingleWorkout = () => {
     const exercises = chosenWorkout.exercises.map((ex) => (
         {
             name: ex.exercise,
+            _id: ex._id,
             setInputs: [{reps: 0, weight: 0}]
         }
     ));
@@ -93,7 +94,7 @@ const SingleWorkout = () => {
             {
                 let reps = exercises[i].setInputs[j].reps;
                 let weight = exercises[i].setInputs[j].weight;
-                if(settingsState ==='metric'){
+                if(settingsState.units ==='metric'){
                     weight = convertMetricToImperial(weight);
                 }
                 setInfo[j] = calcMaxRep(reps, weight);   
@@ -158,18 +159,19 @@ const SingleWorkout = () => {
                                     onChange={onChange}/> 
                             <label>&nbsp; {weightLabel}</label>
                             &nbsp;
-                            <button onClick={(event) => {event.preventDefault(); deleteSet(ind, indS)}}>
-                                Delete Set
-                            </button>
+                            
                             <br/>
                             <br/>
                         </div>
                     ))}
-
+                    <button onClick={(event) => {event.preventDefault(); deleteSet(ind)}}>
+                                Delete Set
+                            </button>
                     <br/>
                 </div>
           ))}
             <br/>
+            
             <div>
                 <label htmlFor="birthday">Enter Date:</label>
                 &nbsp;
