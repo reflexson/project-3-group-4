@@ -17,11 +17,8 @@ export const GET_WORKOUTS = gql`
       exercises {
         _id
         exercise
-        sets {
-          _id
-          oneRepMax
-          date
-        }
+        
+        
       }
     }
   }

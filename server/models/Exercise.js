@@ -6,9 +6,9 @@ const exerciseSchema = new Schema({
         type: String,
         required: true
     },
-    sets: [Set.schema]
+
 });
 
-const Exercise = model('exercise', exerciseSchema);
+const Exercise = model('Exercise', exerciseSchema);
 
 module.exports = Exercise;

@@ -4,14 +4,14 @@ import { useSettingsContext } from "../utils/GlobalState";
 import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
 import { GET_WO_EXERCISES, GET_WORKOUTS } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { calculateOneRepMax } from '../utils/oneRepMax'
+import { calculateOneRepMax } from '../utils/oneRepMax';
 import { formatDate } from '../utils/dateUtils';
-
+import { ADD_SET } from "../utils/mutations";
 
 const SingleWorkout = () => {
     // gets global context
     let [ settingsState, setSettingsState] = useSettingsContext();
-    //console.log(settingsState);
+
     const [weightLabel, setweightLabel]= useState('lbs');
     if(settingsState.units === 'metric' && weightLabel === 'lbs'){
         setweightLabel('kg');
@@ -22,11 +22,11 @@ const SingleWorkout = () => {
     const location = window.location.toString();
     const splitLocation = location.split('/');
     const workInd = splitLocation[splitLocation.length-1];
-    // console.log(splitLocation[splitLocation.length-1]);
+
 
     const { loading, data } = useQuery(GET_WORKOUTS);
     const workouts = data?.workouts || [];
-    // console.log(workouts[0]);
+
     const chosenWorkout =workouts[workInd];
     const exercises = chosenWorkout.exercises.map((ex) => (
         {
@@ -78,54 +78,60 @@ const SingleWorkout = () => {
 
     const onDateChange = (e) => {
         const {name, value} = e.target;
-        setDate(formatDate(new Date(value))); 
-        console.log(date);
+        setDate(value);
+  
     }
+    //new Logic for submitting sets
+
+    const [addSet, {error}] = useMutation(ADD_SET)
 
     // form handler
     const handleFormSubmit = async (event) => {
-        // prevents form submitting to itself
+        //prevents form sumbitting to itself
+
         event.preventDefault();
-        
+        // loop through exercises
+
         const exercises = [...formState.exercises];
-        let exerciseDataArray = [];
-    
-        for (let i = 0; i < exercises.length; i++) {
+        
+        const setArray=[]
+        for(let i = 0; i < exercises.length; i++){
             let setInfo = [];
-            let currentExerciseData = {
-                exerciseName: exercises[i].name,
-                sets: [],
-                progress: []  // initialize progress array here
-            };
-            
-            // loop through an exercise's sets
-            for (let j = 0; j < exercises[i].setInputs.length; j++) {
+
+            //loop through an excercises sets
+
+            for(let j = 0; j < exercises[i].setInputs.length; j++)
+            {
                 let reps = exercises[i].setInputs[j].reps;
                 let weight = exercises[i].setInputs[j].weight;
-    
-                // store reps and weight for the current set
-                currentExerciseData.sets.push({
-                    reps: reps,
-                    weight: weight
-                });
-    
-                if (settingsState.units === 'metric') {
+                if(settingsState.units ==='metric'){
                     weight = convertMetricToImperial(weight);
                 }
-                setInfo[j] = calculateOneRepMax(weight, reps);
+                setInfo[j] = calcMaxRep(reps, weight);   
             }
-    
-            const averageOneRepMax = setInfo.reduce((a, b) => a + b) / setInfo.length;
-            currentExerciseData.progress.push({
-                date: date,
-                max: averageOneRepMax
-            });
-    
-            exerciseDataArray.push(currentExerciseData);
+           
+            //reps saved as setInfo average
+     
+            setArray.push({
+                exercise: exercises[i].name,
+                onerepmax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                date: date
+            })
+
+
+ 
+
+            const {data} = await addSet({
+                variables: {setData :{
+                    exercise: "poop",
+                oneRepMax: 1980,
+                date: "loops"
+                }}
+               })
         }
-        
-        console.log(exerciseDataArray); 
-    
+
+
+        console.log({setArray});
     };
     //end of form functions------------------------------------------
 
@@ -137,8 +143,7 @@ const SingleWorkout = () => {
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button alink"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item w3-button "  to='/settings'>Settings</Link>
-                {/* <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
-                <Link  className="w3-bar-item  alink"  to='/workout/1'>SingleWorkout</Link> */}
+
         </aside>
         <br/>
         <main className="dashcont">
@@ -196,6 +201,7 @@ const SingleWorkout = () => {
                 />
             </div>
             <br/>
+          
             <button type='submit'> 
                 Submit
             </button>

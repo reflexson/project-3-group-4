@@ -8,17 +8,19 @@ import { useMutation, useQuery } from "@apollo/client";
 
   
 const Workouts = () => {
-
-  const location = window.location.toString();
-      const splitLocation = location.split('/');
-      console.log(splitLocation[splitLocation.length-1])
+ 
+  // const location = window.location.toString();
+  //     const splitLocation = location.split('/');
+      // console.log(splitLocation[splitLocation.length-1])
   
  const [newEx, setnewEx] = useState('0');
  const [exercises, setExercise ] = useState([])
- const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
+
  
 
 //function to submit workouts
+
+ const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
 
  async function handleWoSubmit(){
    const newWoName = document.getElementById('newWoName');
@@ -34,6 +36,8 @@ exercisesArray.push(newexercise);
    const {data} = await addNewWorkout({
     variables: {workoutData : {...newWoObject}}
    })
+   window.location.reload(false);
+
   }
 
 
@@ -161,7 +165,7 @@ exercisesArray.push(newexercise);
 
                 </div>
                 <div className="col text-center mt-3">
-                <button className="rounded" id='woSubmit'onClick={handleWoSubmit}>Save Workout</button>
+                <Link className="btn bg-success rounded" id='woSubmit'onClick={handleWoSubmit}  >Save Workout</Link>
                </div>
            </div>
            </div>  

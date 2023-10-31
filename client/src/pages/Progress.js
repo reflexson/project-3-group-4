@@ -103,9 +103,9 @@ const Progress = () => {
           onChange={handleChange}
         />
       </div>
-      <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+      {/* <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
         <Bar data={chartData} options={options} />
-      </div>
+      </div> */}
       <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
         <Line data={chartData} options={options} />
       </div>
