@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useSettingsContext } from "../utils/GlobalState";
 import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
+import { GET_WO_EXERCISES, GET_WORKOUTS } from "../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
 
 const SingleWorkout = () => {
     // gets global context
@@ -14,27 +16,19 @@ const SingleWorkout = () => {
     const [date, setDate]= useState(Date());
 
     // get id in url
-    // const location = window.location.toString();
-    // const splitLocation = location.split('/');
-    // console.log(splitLocation[splitLocation.length-1]);
+    const location = window.location.toString();
+    const splitLocation = location.split('/');
+    const workInd = splitLocation[splitLocation.length-1];
+    console.log(splitLocation[splitLocation.length-1]);
 
-    //temp query
-    const query = [
+    const { loading, data } = useQuery(GET_WORKOUTS);
+    const workouts = data?.workouts || [];
+    console.log(workouts[0]);
+    const chosenWorkout =workouts[workInd];
+    const exercises = chosenWorkout.exercises.map((ex) => (
         {
-            name: 'bloop',
-            
-        },
-        {
-            name: 'bleep'
-        },
-        {
-            name: 'bop'
-        },        
-    ];
-
-    const exercises = query.map((ex) => (
-        {
-            name: ex.name,
+            name: ex.exercise,
+            _id: ex._id,
             setInputs: [{reps: 0, weight: 0}]
         }
     ));
@@ -106,12 +100,13 @@ const SingleWorkout = () => {
                 }
                 setInfo[j] = calcMaxRep(reps, weight);   
             }
+            let _id = exercises[i]._id;
             //reps saved as setInfo average
             maxReps[i] = setInfo.reduce((a,b)=>a+b)/ setInfo.length;
             // console.log(`setInfo: ${setInfo}`);
         }
         // console.log(`maxReps: ${maxReps}`);
-        // console.log(date);
+        console.log(date);
     };
     //end of form functions------------------------------------------
 
@@ -128,7 +123,7 @@ const SingleWorkout = () => {
         </aside>
         <br/>
         <main className="dashcont">
-          <h2>Excercises</h2>
+          <h2>{chosenWorkout.name}</h2>
           <form onSubmit={handleFormSubmit}>
           {
             formState.exercises.map((ex, ind) => (
@@ -185,8 +180,6 @@ const SingleWorkout = () => {
                 Submit
             </button>
           </form>
-
-          form end
         </main>
       
       </div>

@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const setSchema = new Schema({
-    onerepmax: {
+    oneRepMax: {
         type: Number
     },
     Date: {
-        type: Date,
+        type: String,
         required:true,
     },
     reps: {
