@@ -84,11 +84,10 @@ const SingleWorkout = () => {
         event.preventDefault();
         // loop through exercises
         const exercises = [...formState.exercises];
-        let maxReps = [];
-        let setInfo = [];
+        
+        const setArray=[]
         for(let i = 0; i < exercises.length; i++){
-            // reset setInfo
-            setInfo = [];
+            let setInfo = [];
             //loop through an excercises sets
             for(let j = 0; j < exercises[i].setInputs.length; j++)
             {
@@ -99,13 +98,19 @@ const SingleWorkout = () => {
                 }
                 setInfo[j] = calcMaxRep(reps, weight);   
             }
+           
             //reps saved as setInfo average
-            maxReps[i] = setInfo.reduce((a,b)=>a+b)/ setInfo.length;
+            // maxReps[i] = setInfo.reduce((a,b)=>a+b)/ setInfo.length;
             // console.log(`setInfo: ${setInfo}`);
+            setArray.push({
+                exercise: exercises[i].name,
+                onerepmax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                date: date
+            })
         }
         console.log(exercises[0].name);
-        console.log(`maxReps: ${maxReps[0]}`);
-        console.log({date});
+        // console.log(`maxReps: ${maxReps[0]}`);
+        console.log({setArray});
     };
     //end of form functions------------------------------------------
 

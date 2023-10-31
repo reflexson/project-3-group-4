@@ -34,7 +34,7 @@ exercisesArray.push(newexercise);
     exercises: exercisesArray
    }
    const {data} = await addNewWorkout({
-    variables: {workoutData : {...newWoObject}}
+    variables: {workoutData : newWoObject}
    })
    window.location.reload(false);
 

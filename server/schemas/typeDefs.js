@@ -69,6 +69,7 @@ type Mutation {
   deleteSet(id: ID!): Set
   loginUser(username: String!, password: String!): Auth
   addWorkout(workoutData: WorkoutInput):User
+
 }
 `;
 
