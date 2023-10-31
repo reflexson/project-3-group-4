@@ -1,18 +1,21 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_USER = gql`
-  mutation CreateUser($username: String!, $password: String!) {
-    createUser(username: $username, password: $password) {
-      id
+mutation CreateUser($username: String!, $password: String!) {
+  createUser(username: $username, password: $password) {
+    user {
+      _id
       username
     }
+    token
   }
+}
 `;
 
 export const UPDATE_USER = gql`
   mutation UpdateUser($userId: ID!, $username: String) {
     updateUser(userId: $userId, input: { username: $username }) {
-      id
+      _id
       username
     }
   }
@@ -23,7 +26,7 @@ export const LOGIN_USER = gql`
     loginUser(username: $username, password: $password) {
       token
       user {
-        id
+        _id
         username
       }
     }
@@ -31,14 +34,14 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_EXERCISE = gql`
-  mutation CreateExercise($userId: ID!, $name: String!, $sets: [SetInput]!) {
-    createExercise(userId: $userId, name: $name, sets: $sets) {
-      id
-      name
+  mutation createExercise($exercise: String!) {
+    createExercise(exercise: $exercise) {
+      _id
+      exercise
       sets {
-        id
-        reps
-        distance
+        _id
+          oneRepMax
+          date
       }
     }
   }
@@ -47,26 +50,56 @@ export const CREATE_EXERCISE = gql`
 export const UPDATE_EXERCISE = gql`
   mutation UpdateExercise($exerciseId: ID!, $name: String!, $sets: [SetInput]!) {
     updateExercise(exerciseId: $exerciseId, name: $name, sets: $sets) {
-      id
+      _id
       name
       sets {
-        id
-        reps
-        distance
+        _id
+        oneRepMax
+        date
       }
     }
   }
 `;
 
 export const ADD_WORKOUT_DATA = gql`
-  mutation AddWorkoutData($exerciseId: ID!, $userId: ID!, $sets: [SetInput]!) {
+  mutation AddWorkoutData($exerciseId: ID!, $userId: ID!, $sets: [SetInput]) {
     addWorkoutData(exerciseId: $exerciseId, userId: $userId, sets: $sets) {
-      id
+      _id
       sets {
-        id
-        reps
-        distance
+        _id
+          oneRepMax
+          date
       }
+    }
+  }
+`;
+
+export const ADD_NEW_WORKOUT =  gql`
+mutation addWorkout($workoutData: WorkoutInput){
+  addWorkout(workoutData: $workoutData){
+    username
+    workouts {
+      _id
+      name
+      exercises{
+        exercise
+          sets {
+            _id
+          oneRepMax
+          date
+          }
+      }
+      }
+    
+  }
+}
+`;
+
+export const ADD_SET = gql`
+  mutation addSet($oneRepMax: Float!, $date: String!) {
+    addSet(oneRepMax: $oneRepMax, date: $date) {
+      oneRepMax
+      date
     }
   }
 `;

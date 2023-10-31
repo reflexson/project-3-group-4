@@ -42,30 +42,16 @@ const Progress = () => {
         <Link className="w3-bar-item alink" to="/progress">
           Progress
         </Link>
-        <Link
-          className="w3-bar-item w3-button"
-          activeStyle={{ color: "#ff3333" }}
-          to="/workouts"
-        >
+        <Link className="w3-bar-item w3-button" to="/workouts">
           Workouts
         </Link>
-        <Link
-          className="w3-bar-item w3-button"
-          activeStyle={{ color: "#ff3333" }}
-          to="/settings"
-        >
+        <Link className="w3-bar-item w3-button" to="/settings">
           Settings
         </Link>
       </div>
 
-      <div style={{ width: "30%", margin: "0 auto", padding: "2%" }}>
-        <Bar data={chartData} options={options} />
-      </div>
-      <div style={{ width: "30%", margin: "0 auto", padding: "2%" }}>
+      <div style={{ width: "75%", marginLeft: "25%", padding: "2%" }}>
         <Line data={chartData} options={options} />
-      </div>
-      <div style={{ width: "20%", margin: "0 auto", padding: "2%" }}>
-        <Pie data={chartData} options={options} />
       </div>
     </div>
   );
