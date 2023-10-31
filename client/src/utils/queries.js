@@ -19,9 +19,8 @@ export const GET_WORKOUTS = gql`
         exercise
         sets {
           _id
-          reps
-          weight
-          distance
+          oneRepMax
+          date
         }
       }
     }
@@ -38,9 +37,8 @@ export const GET_USER_WORKOUTS = gql`
         exercise
         sets {
           _id
-          reps
-          weight
-          distance
+          oneRepMax
+          date
         }
       }
     }
@@ -58,9 +56,8 @@ export const GET_WO_EXERCISES = gql`
         exercise
         sets {
           _id
-          reps
-          weight
-          distance
+          oneRepMax
+          date
         }
       }
     }
