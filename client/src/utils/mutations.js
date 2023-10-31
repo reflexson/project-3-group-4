@@ -40,9 +40,8 @@ export const CREATE_EXERCISE = gql`
       exercise
       sets {
         _id
-        reps
-        weight
-        distance
+          oneRepMax
+          date
       }
     }
   }
@@ -55,9 +54,8 @@ export const UPDATE_EXERCISE = gql`
       name
       sets {
         _id
-        reps
-        weight
-        distance
+        oneRepMax
+        date
       }
     }
   }
@@ -69,9 +67,8 @@ export const ADD_WORKOUT_DATA = gql`
       _id
       sets {
         _id
-        reps
-        weight
-        distance
+          oneRepMax
+          date
       }
     }
   }
@@ -87,7 +84,9 @@ mutation addWorkout($workoutData: WorkoutInput){
       exercises{
         exercise
           sets {
-            reps
+            _id
+          oneRepMax
+          date
           }
       }
       }
