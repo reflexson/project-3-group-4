@@ -7,7 +7,8 @@ type User {
   lastName: String!
   username: String!
   workouts: [Workout]
-  loggedWorkouts: [Workout]
+  sets:[Set]
+
 }
 
 type Workout {
@@ -25,26 +26,27 @@ input WorkoutInput {
 input ExerciseInput {
   _id: ID
   exercise: String
-  sets: [SetInput]
+
 }
 
 type Exercise {
   _id: ID
   exercise: String
-  sets: [Set]
+
 }
 
 type Set {
   _id: ID
+  exercise: String
   oneRepMax: Float
   date: String
 }
 
 input SetInput {
   _id: ID
-  reps: Int
-  weight: Float
-  distance: Float
+  exercise: String
+  oneRepMax: Float
+  date: String
 }
 
 type Auth {
@@ -60,13 +62,10 @@ type Query {
 }
 
 
-
 type Mutation {
-  createExercise(exercise:String!, set:SetInput): Workout
+
   createUser(firstName: String, lastName: String, username: String!, password: String!): Auth
-  addSet(oneRepMax: Float!, date: String!): Set
-  updateSet(id: ID!, reps: Int, weight: Float, distance: Float): Set
-  deleteSet(id: ID!): Set
+  addSet(setData: SetInput):User
   loginUser(username: String!, password: String!): Auth
   addWorkout(workoutData: WorkoutInput):User
 

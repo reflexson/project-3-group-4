@@ -33,40 +33,23 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const CREATE_EXERCISE = gql`
-  mutation createExercise($exercise: String!) {
-    createExercise(exercise: $exercise) {
-      _id
-      exercise
-      sets {
-        _id
-          oneRepMax
-          date
-      }
-    }
-  }
-`;
-
-export const UPDATE_EXERCISE = gql`
-  mutation UpdateExercise($exerciseId: ID!, $name: String!, $sets: [SetInput]!) {
-    updateExercise(exerciseId: $exerciseId, name: $name, sets: $sets) {
-      _id
-      name
-      sets {
-        _id
-        oneRepMax
-        date
-      }
-    }
-  }
-`;
 
 export const ADD_WORKOUT_DATA = gql`
-  mutation AddWorkoutData($exerciseId: ID!, $userId: ID!, $sets: [SetInput]) {
-    addWorkoutData(exerciseId: $exerciseId, userId: $userId, sets: $sets) {
+  mutation AddWorkoutData($exerciseId: ID!, $userId: ID!) {
+    addWorkoutData(exerciseId: $exerciseId, userId: $userId) {
+      _id
+      
+    }
+  }
+`;
+
+export const ADD_SET_DATA = gql`
+  mutation AddSetData($setId: ID!, $userId: ID! {
+    addSetData(setId: $setId, userId: $userId) {
       _id
       sets {
         _id
+          exercise
           oneRepMax
           date
       }
@@ -83,11 +66,6 @@ mutation addWorkout($workoutData: WorkoutInput){
       name
       exercises{
         exercise
-          sets {
-            _id
-          oneRepMax
-          date
-          }
       }
       }
     
@@ -96,10 +74,14 @@ mutation addWorkout($workoutData: WorkoutInput){
 `;
 
 export const ADD_SET = gql`
-  mutation addSet($oneRepMax: Float!, $date: String!) {
-    addSet(oneRepMax: $oneRepMax, date: $date) {
-      oneRepMax
-      date
+  mutation addSet($setData: SetInput) {
+    addSet(setData: $setData) {
+      sets {
+        _id
+        exercise
+        oneRepMax
+        date
+      }
     }
   }
 `;

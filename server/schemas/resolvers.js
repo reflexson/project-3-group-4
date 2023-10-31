@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Workout, Exercise, Set } = require('../models'); 
+const { User, Workout, Set } = require('../models'); 
 const { signToken } = require('../utils/auth');
 
 
@@ -60,9 +60,9 @@ const resolvers = {
       const correctPw = await user.isCorrectPassword(password);
 
       // Debug logs
-      console.log('Inputted Password:', password);
-      console.log('Stored Hashed Password:', user.password);
-      console.log('Password Match:', correctPw);
+      // console.log('Inputted Password:', password);
+      // console.log('Stored Hashed Password:', user.password);
+      // console.log('Password Match:', correctPw);
 
       if (!correctPw) {
         throw new AuthenticationError('Password mismatch');
@@ -71,25 +71,15 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addSet: async (parent, args, context) => {
-      const updatedUser= await User.findOneAndUpdate(
+    addSet: async (parent, {setData}, context) => {
+      console.log(setData)
+      const newSet= await User.findOneAndUpdate(
         {_id:context.user._id}, 
-        {$push:{sets:{$each:setData}}},
+        {$push:{sets: setData}},
         {new: true}
       )
       return newSet;
     },
-
-    updateSet: async (parent, { id, reps, weight, distance }, context) => {
-      const updatedSet = await Set.findByIdAndUpdate(id, { reps, weight, distance }, { new: true });
-      return updatedSet;
-    },
-
-    deleteSet: async (parent, { id }, context) => {
-      const deletedSet = await Set.findByIdAndDelete(id);
-      return deletedSet;
-    },
-
     
     addWorkout: async (parent, {workoutData}, context) =>{
       if(context.user){

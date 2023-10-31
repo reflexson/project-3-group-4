@@ -17,49 +17,11 @@ export const GET_WORKOUTS = gql`
       exercises {
         _id
         exercise
-        sets {
-          _id
-          oneRepMax
-          date
-        }
-      }
-    }
-  }
-`;
-
-export const GET_USER_WORKOUTS = gql`
-  query GetUserWorkouts($userId: ID!) {
-    getUserWorkouts(userId: $userId) {
-      _id
-      date
-      exercises {
-        _id
-        exercise
-        sets {
-          _id
-          oneRepMax
-          date
-        }
+        
       }
     }
   }
 `;
 
 
-export const GET_WO_EXERCISES = gql`
-  query GetWoExercises {
-    workouts{
-      _id
-      name
-      exercises {
-        _id
-        exercise
-        sets {
-          _id
-          oneRepMax
-          date
-        }
-      }
-    }
-  }
-`;
+

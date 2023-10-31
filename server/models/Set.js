@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 
 const setSchema = new Schema({
+    exercise:{
+        type: String
+    },
     oneRepMax: {
         type: Number
     },
@@ -9,7 +12,7 @@ const setSchema = new Schema({
         required:true,
     },
     
-    // time:
+
 });
 
 const Set = model('Set', setSchema);
