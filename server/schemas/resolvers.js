@@ -71,11 +71,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addSet: async (parent, {setData}, context) => {
-      console.log(setData)
+    addSet: async (parent, { setData }, context) => {
+      const { exercise, oneRepMax, date } = setData
+      console.log(exercise, oneRepMax, date);
       const newSet= await User.findOneAndUpdate(
         {_id:context.user._id}, 
-        {$push:{sets: setData}},
+        {$push:{sets: {exercise, oneRepMax, date}}},
         {new: true}
       )
       return newSet;
