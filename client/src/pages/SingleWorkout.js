@@ -4,6 +4,8 @@ import { useSettingsContext } from "../utils/GlobalState";
 import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
 import { GET_WO_EXERCISES, GET_WORKOUTS } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
+import { calculateOneRepMax } from '../utils/oneRepMax';
+import { formatDate } from '../utils/dateUtils';
 import { ADD_SET } from "../utils/mutations";
 
 const SingleWorkout = () => {
