@@ -101,9 +101,9 @@ exercisesArray.push(newexercise);
 
         <div className="dashcont flex-row justify-content-center text-center">
           <div id='woButtons'>
-            <button className="w3-button w3-black mt-3" onClick={newWorkout}>Create Workout</button>
+            <button className="overwrite-btn mt-3" onClick={newWorkout}>Create Workout</button>
             <div className="w3-dropdown-hover">
-              <button className="w3-button w3-black ms-4 mt-3">Choose Existing Workout</button>
+              <button className="overwrite-btn ms-4 mt-3">Choose Existing Workout</button>
               <div className="w3-dropdown-content w3-bar-block w3-border ms-4">
                 <WorkoutList workouts={workouts}/>
               </div>

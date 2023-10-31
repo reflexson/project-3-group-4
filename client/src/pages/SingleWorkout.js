@@ -134,10 +134,10 @@ const SingleWorkout = () => {
                 <div className="exercise card " key={ind}>
                     <h3>{ex.name}</h3>
                     <div className="button wrapper">
-                        <button className="overwrite-btn" onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 
+                        <button className="overwrite-btn add input-btn" onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 
                             Add Set
                         </button>
-                        <button  className="overwrite-btn" onClick={(event) => {event.preventDefault(); deleteSet(ind)}}>
+                        <button  className="overwrite-btn delete input-btn" onClick={(event) => {event.preventDefault(); deleteSet(ind)}}>
                             Delete Set
                         </button>
                     </div>
