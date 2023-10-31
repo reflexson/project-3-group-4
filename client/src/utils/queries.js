@@ -49,20 +49,20 @@ export const GET_USER_WORKOUTS = gql`
 
 
 export const GET_WO_EXERCISES = gql`
-query GetWoExercises {
-  exerciseWorkouts{
-    _id
-    name
-    exercises {
+  query GetWoExercises {
+    workouts{
       _id
-      exercise
-      sets {
+      name
+      exercises {
         _id
-        reps
-        weight
-        distance
+        exercise
+        sets {
+          _id
+          reps
+          weight
+          distance
+        }
       }
     }
   }
-}
 `;
