@@ -27,6 +27,8 @@ const Workouts = () => {
    const exercisesArray = [];
 for(let i=0; i<exercises.length; i++){
 let newexercise =  {exercise:exercises[i]};
+
+
 exercisesArray.push(newexercise);
 }
    const newWoObject = {

@@ -112,7 +112,7 @@ const SingleWorkout = () => {
      
             setArray.push({
                 exercise: exercises[i].name,
-                onerepmax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                oneRepMax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
                 date: date
             })
 
@@ -121,9 +121,9 @@ const SingleWorkout = () => {
 
             const {data} = await addSet({
                 variables: {setData :{
-                    exercise: "poop",
-                oneRepMax: 1980,
-                date: "loops"
+                exercise: exercises[i].name,
+                oneRepMax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                date: date
                 }}
                })
         }
