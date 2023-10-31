@@ -71,20 +71,17 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addSet: async (parent, args, context) => {
-      const newSet = await Set.create(args);
+    addSet: async (parent, {setData}, context) => {
+      console.log(setData)
+      const newSet= await User.findOneAndUpdate(
+        {_id:context.user._id}, 
+        {$push:{sets: setData}},
+        {new: true}
+      )
       return newSet;
     },
 
-    updateSet: async (parent, { id, reps, weight, distance }, context) => {
-      const updatedSet = await Set.findByIdAndUpdate(id, { reps, weight, distance }, { new: true });
-      return updatedSet;
-    },
-
-    deleteSet: async (parent, { id }, context) => {
-      const deletedSet = await Set.findByIdAndDelete(id);
-      return deletedSet;
-    },
+    
 
     
     addWorkout: async (parent, {workoutData}, context) =>{
