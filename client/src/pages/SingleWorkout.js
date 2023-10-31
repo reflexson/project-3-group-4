@@ -112,7 +112,7 @@ const SingleWorkout = () => {
 
     //html
     return (
-      <div className=" flex-row">
+      <div className="col-12 flex-row">
         <aside className=" w3-sidebar w3-light-grey w3-bar-block" >
             <h3 className="w3-bar-item">Menu</h3>
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
@@ -121,7 +121,7 @@ const SingleWorkout = () => {
                 {/* <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
                 <Link  className="w3-bar-item  alink"  to='/workout/1'>SingleWorkout</Link> */}
         </aside>
-        <br/>
+
         <main className="dashcont">
           
           <form className='workout-form ' onSubmit={handleFormSubmit}>
@@ -131,7 +131,7 @@ const SingleWorkout = () => {
             
             formState.exercises.map((ex, ind) => (
                 
-                <div className="exercise card " key={ind}>
+                <div className="exercise card overwrite-card" key={ind}>
                     <h3>{ex.name}</h3>
                     <div className="button wrapper">
                         <button className="overwrite-btn add input-btn" onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 

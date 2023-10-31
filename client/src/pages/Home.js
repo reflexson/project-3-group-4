@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <main className="col-12 flex-row justify-content-center">
+    <main className="col-12 flex-row justify-content-center page">
       <div className="col-5 mt-3">
         <img src="/images/gym-pic-1.png" alt="nfg" />
         <img />
@@ -20,7 +20,7 @@ const Home = () => {
         <div className="home-heading">
           Unleash Your Potential: Your Ultimate Workout Companion
         </div>
-        <div >
+        <div className="home-content">
           Revolutionize your fitness journey with our cutting-edge workout app.
           Tailored workouts with results that speak for themselves.
         </div>
@@ -45,7 +45,7 @@ const Home = () => {
         <div  className="home-heading">
           Fit Anywhere, Anytime: Your Portable Personal Trainer
         </div>
-        <div  className="homecontent">
+        <div  className="home-content">
           No gym? Not a problem! Bring your fitness wherever you go. Our app
           puts individualized workouts right in your pocket. Set off on a
           fitness adventure of self-discovery. Our app is your ticket to

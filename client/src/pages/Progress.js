@@ -83,7 +83,7 @@ const Progress = () => {
   };
   return (
     <div className="col-12 flex-row">
-      <div className="w3-sidebar w3-light-grey w3-bar-block">
+      <aside className="w3-sidebar w3-light-grey w3-bar-block">
         <h3 className="w3-bar-item">Menu</h3>
         <Link className="w3-bar-item alink" to="/progress">
           Progress
@@ -94,21 +94,24 @@ const Progress = () => {
         <Link className="w3-bar-item w3-button" to="/settings">
           Settings
         </Link>
-      </div>
+      </aside>
 
-      <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
-        <Select
-          options={dropdownOptions}
-          default={selectedOption}
-          onChange={handleChange}
-        />
-      </div>
-      <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
-        <Bar data={chartData} options={options} />
-      </div>
-      <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
-        <Line data={chartData} options={options} />
-      </div>
+      <main className="dashcont">
+        <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+          <Select
+            options={dropdownOptions}
+            default={selectedOption}
+            onChange={handleChange}
+          />
+        </div>
+        <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+          <Bar data={chartData} options={options} />
+        </div>
+        <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+          <Line data={chartData} options={options} />
+        </div>
+      </main>
+      
     </div>
   );
 };

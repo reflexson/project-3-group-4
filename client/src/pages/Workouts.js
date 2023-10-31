@@ -90,16 +90,16 @@ exercisesArray.push(newexercise);
 
       // Sidebar
       <div className="col-12 flex-row">
-        <div className="w3-sidebar w3-light-grey w3-bar-block" >
+        <aside className="w3-sidebar w3-light-grey w3-bar-block" >
           <h3 className="w3-bar-item">Menu</h3>
             <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
             <Link  className="w3-bar-item  alink"  to='/workouts'>Workouts</Link>
             <Link  className="w3-bar-item w3-button"  to='/settings'>Settings</Link>
-        </div>
+        </aside>
 
       {/* Choose existing or new workout */}
 
-        <div className="dashcont flex-row justify-content-center text-center">
+        <main className="dashcont flex-row justify-content-center text-center">
           <div id='woButtons'>
             <button className="overwrite-btn mt-3" onClick={newWorkout}>Create Workout</button>
             <div className="w3-dropdown-hover">
@@ -165,7 +165,7 @@ exercisesArray.push(newexercise);
                </div>
            </div>
            </div>  
-        </div>
+        </main>
 
       </div>
     );
