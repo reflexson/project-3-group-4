@@ -28,6 +28,7 @@ const SingleWorkout = () => {
     const exercises = chosenWorkout.exercises.map((ex) => (
         {
             name: ex.exercise,
+            _id: ex._id,
             setInputs: [{reps: 0, weight: 0}]
         }
     ));
@@ -99,12 +100,13 @@ const SingleWorkout = () => {
                 }
                 setInfo[j] = calcMaxRep(reps, weight);   
             }
+            let _id = exercises[i]._id;
             //reps saved as setInfo average
             maxReps[i] = setInfo.reduce((a,b)=>a+b)/ setInfo.length;
             // console.log(`setInfo: ${setInfo}`);
         }
         // console.log(`maxReps: ${maxReps}`);
-        // console.log(date);
+        console.log(date);
     };
     //end of form functions------------------------------------------
 
