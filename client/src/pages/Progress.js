@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
+import Select from "react-select";
 
 Chart.register(...registerables);
 const Progress = () => {
-  const chartData = {
+  const weekChartData = {
     labels: ["Week1", "Week2", "Week3", "Week4", "Week5"],
+    datasets: [
+      {
+        label: "Workout Progress",
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(255, 159, 64, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+          "rgba(255, 99, 132, 0.6)",
+          "rgba(255, 29, 152, 0.6)",
+        ],
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+        data: [10, 15, 20, 25, 30],
+      },
+    ],
+  };
+  const excerciseChartData = {
+    labels: [
+      "Excercise 1",
+      "Excercise 2",
+      "Excercise 3",
+      "Excercise 4",
+      "Excercise 5",
+    ],
     datasets: [
       {
         label: "Workout Progress",
@@ -35,6 +60,27 @@ const Progress = () => {
       },
     },
   };
+  const dropdownOptions = [
+    {
+      value: "Week",
+      label: "Week",
+    },
+    {
+      value: "Excercise",
+      label: "Excercise",
+    },
+  ];
+  const [selectedOption, setSelectedOption] = useState("Week");
+  const [chartData, setChartData] = useState(weekChartData);
+  const handleChange = (selectedOptions) => {
+    setSelectedOption(selectedOptions.value);
+    if (selectedOptions.value == "Excercise") {
+      setChartData(excerciseChartData);
+    } else {
+      setChartData(weekChartData);
+    }
+    console.log(selectedOption);
+  };
   return (
     <div className="col-12 flex-row">
       <div className="w3-sidebar w3-light-grey w3-bar-block">
@@ -50,7 +96,17 @@ const Progress = () => {
         </Link>
       </div>
 
-      <div style={{ width: "75%", marginLeft: "25%", padding: "2%" }}>
+      <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+        <Select
+          options={dropdownOptions}
+          default={selectedOption}
+          onChange={handleChange}
+        />
+      </div>
+      <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+        <Bar data={chartData} options={options} />
+      </div>
+      <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
         <Line data={chartData} options={options} />
       </div>
     </div>
