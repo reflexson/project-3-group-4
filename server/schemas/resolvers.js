@@ -69,16 +69,16 @@ const resolvers = {
   }
   },
   Mutation: {
-    // createExercise: async (parent, {exercise}, context) => {
-    //   try {
-    //     const newexercise = await Exercise.create(exercise);
+    createExercise: async (parent, {exercise}, context) => {
+      try {
+        const newexercise = await Exercise.create(exercise);
        
-    //     return { newexercise };
-    //   } catch (error) {
-    //     console.error('Error creating exercise:', error);
-    //     throw new Error('Error creating exercise');
-    //   }
-    // },
+        return { newexercise };
+      } catch (error) {
+        console.error('Error creating exercise:', error);
+        throw new Error('Error creating exercise');
+      }
+    },
     createUser: async (parent, args, context) => {
       try {
         const user = await User.create(args);
@@ -123,18 +123,16 @@ const resolvers = {
       const deletedSet = await Set.findByIdAndDelete(id);
       return deletedSet;
     },
-
-    
-    // addWorkout: async (parent, {workoutData}, context) =>{
-    //   if(context.user){
-    //     const updatedUser= await User.findOneAndUpdate(
-    //       {_id:context.user._id}, 
-    //       {$push:{workouts: workoutData}},
-    //       {new: true}
-    //     );    
-    //     return updatedUser;
-    //   }
-    // }
+    addWorkout: async (parent, {workoutData}, context) =>{
+      if(context.user){
+        const updatedUser= await User.findOneAndUpdate(
+          {_id:context.user._id}, 
+          {$push:{workouts: workoutData}},
+          {new: true}
+        );    
+        return updatedUser;
+      }
+    }
   },
 };
 

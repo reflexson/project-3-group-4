@@ -8,10 +8,10 @@ const setSchema = new Schema({
         type: Date,
         required:true,
     },
-    
-    // time:
+    reps: {
+        type: Number
+    }
 });
-
 const Set = model('Set', setSchema);
 
 module.exports = Set;

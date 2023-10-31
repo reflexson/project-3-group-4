@@ -37,6 +37,7 @@ type Exercise {
 type Set {
   onerepmax: Float
   Date: String
+  reps: Int
 }
 
 input SetInput {
