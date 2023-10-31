@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
@@ -10,7 +10,13 @@ const Progress = () => {
     datasets: [
       {
         label: "Workout Progress",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(255, 159, 64, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+          "rgba(255, 99, 132, 0.6)",
+          "rgba(255, 29, 152, 0.6)",
+        ],
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
         data: [10, 15, 20, 25, 30],
@@ -57,6 +63,9 @@ const Progress = () => {
       </div>
       <div style={{ width: "30%", margin: "0 auto", padding: "2%" }}>
         <Line data={chartData} options={options} />
+      </div>
+      <div style={{ width: "20%", margin: "0 auto", padding: "2%" }}>
+        <Pie data={chartData} options={options} />
       </div>
     </div>
   );
