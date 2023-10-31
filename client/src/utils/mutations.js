@@ -94,4 +94,13 @@ mutation addWorkout($workoutData: WorkoutInput){
     
   }
 }
-`
+`;
+
+export const ADD_SET = gql`
+  mutation addSet($oneRepMax: Float!, $date: String!) {
+    addSet(oneRepMax: $oneRepMax, date: $date) {
+      oneRepMax
+      date
+    }
+  }
+`;
