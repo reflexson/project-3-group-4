@@ -154,18 +154,19 @@ const SingleWorkout = () => {
                                     onChange={onChange}/> 
                             <label>&nbsp; {weightLabel}</label>
                             &nbsp;
-                            <button onClick={(event) => {event.preventDefault(); deleteSet(ind, indS)}}>
-                                Delete Set
-                            </button>
+                            
                             <br/>
                             <br/>
                         </div>
                     ))}
-
+                    <button onClick={(event) => {event.preventDefault(); deleteSet(ind)}}>
+                                Delete Set
+                            </button>
                     <br/>
                 </div>
           ))}
             <br/>
+            
             <div>
                 <label htmlFor="birthday">Enter Date:</label>
                 &nbsp;
