@@ -16,13 +16,13 @@
 
 [dark-theme="dark"] {
   --header-color: #929aa3;
-  --button: #a954ce;
+  --button: #c267e9;
   --header-text: #292626;
   --hover-link: rgb(8, 0, 255);
-  --main-text: #e2e2e2;
+  --main-text: #f2f2f2;
   --main-background: #3e3e4c;
   --card-background: #4c2da1;
-  --card-text: #ede8fd;
+  --card-text: #f7f5ff;
 }
 
 * {
@@ -111,7 +111,9 @@ header a:hover {
   color:var(--hover-link);
 }
 
-
+.login{
+  padding: 30px;
+}
 button {
   font-size: 1rem;
   text-decoration: none;

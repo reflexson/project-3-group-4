@@ -52,7 +52,7 @@ function Signup() {
   };
 
   return (
-    <div className="container">
+    <div className="page login">
       <Link to="/login">← Go to Login</Link>
       
       <h2>Signup</h2>
@@ -124,7 +124,7 @@ function Signup() {
         )}
 
         <br />
-        <button className="btn btn-primary" type="submit">
+        <button className="overwrite-btn" type="submit">
           Submit
         </button>
       </form>
