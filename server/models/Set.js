@@ -1,18 +1,19 @@
 const { Schema, model } = require('mongoose');
 
 const setSchema = new Schema({
-    reps: {
+    oneRepMax: {
         type: Number
     },
-    weight: {
-        type: Number
+    Date: {
+        type: String,
+        required:true,
     },
-    distance: {
-        type: Number
-    },
+    
     // time:
 });
 
 const Set = model('Set', setSchema);
 
 module.exports = Set;
+
+

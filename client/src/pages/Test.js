@@ -10,7 +10,9 @@ function Test(props){
     const [testState, setTestState] = useState('');
     // gets context
     let [ settingsState, setSettingsState] = useSettingsContext();
-    
+    const location = window.location.toString();
+    const splitLocation = location.split('/');
+    console.log(splitLocation[splitLocation.length-1]);
 
     const onClick = (event) => {
         console.log(settingsState);

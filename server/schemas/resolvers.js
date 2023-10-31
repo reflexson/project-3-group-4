@@ -2,16 +2,43 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Workout, Exercise, Set } = require('../models'); 
 const { signToken } = require('../utils/auth');
 
+
 const resolvers = {
   Query: {
     user: async (_, { id }) => {
       return await User.findById(id);
     },
+
     workout: async (_, { id }) => {
       return await Workout.findById(id);
     },
+    workouts: async (parent, args, context) => {
+      const user = await User.findById(context.user._id);
+      // console.log(parent, context, id);
+     
+     
+      return user.workouts
+    },
+      workoutExercises: async (parent, args, context) => {
+      const location = window.location.toString();
+      const splitLocation = location.split('/');
+      const woId = splitLocation[splitLocation.length-1];
+      const user = await User.findById(context.user._id);
+      selectedWo = user.workouts[woId]
+      return selectedWo.exercises
+    },
   },
   Mutation: {
+    // createExercise: async (parent, {exercise}, context) => {
+    //   try {
+    //     const newexercise = await Exercise.create(exercise);
+       
+    //     return { newexercise };
+    //   } catch (error) {
+    //     console.error('Error creating exercise:', error);
+    //     throw new Error('Error creating exercise');
+    //   }
+    // },
     createUser: async (parent, args, context) => {
       try {
         const user = await User.create(args);
@@ -48,15 +75,31 @@ const resolvers = {
       const newSet = await Set.create(args);
       return newSet;
     },
+
     updateSet: async (parent, { id, reps, weight, distance }, context) => {
       const updatedSet = await Set.findByIdAndUpdate(id, { reps, weight, distance }, { new: true });
       return updatedSet;
     },
+
     deleteSet: async (parent, { id }, context) => {
       const deletedSet = await Set.findByIdAndDelete(id);
       return deletedSet;
     },
+
+    
+    addWorkout: async (parent, {workoutData}, context) =>{
+      if(context.user){
+        const updatedUser= await User.findOneAndUpdate(
+          {_id:context.user._id}, 
+          {$push:{workouts: workoutData}},
+          {new: true}
+        );    
+        return updatedUser;
+      }
+    }
   },
+
+  
 };
 
 module.exports = resolvers;

@@ -9,9 +9,27 @@ export const GET_USER = gql`
   }
 `;
 
-export const GET_WORKOUT_HISTORY = gql`
-  query GetWorkoutHistory($userId: ID!) {
-    getWorkouts(userId: $userId) {
+export const GET_WORKOUTS = gql`
+  query GetWorkouts {
+    workouts{
+      _id
+      name
+      exercises {
+        _id
+        exercise
+        sets {
+          _id
+          oneRepMax
+          date
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USER_WORKOUTS = gql`
+  query GetUserWorkouts($userId: ID!) {
+    getUserWorkouts(userId: $userId) {
       _id
       date
       exercises {
@@ -19,9 +37,27 @@ export const GET_WORKOUT_HISTORY = gql`
         exercise
         sets {
           _id
-          reps
-          weight
-          distance
+          oneRepMax
+          date
+        }
+      }
+    }
+  }
+`;
+
+
+export const GET_WO_EXERCISES = gql`
+  query GetWoExercises {
+    workouts{
+      _id
+      name
+      exercises {
+        _id
+        exercise
+        sets {
+          _id
+          oneRepMax
+          date
         }
       }
     }

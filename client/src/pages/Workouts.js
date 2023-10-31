@@ -1,21 +1,48 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import {newWorkout,  handleWoSubmit} from '../utils/wohelpers'
-// import ExTable from "../components/ExTable";
+import {newWorkout  } from '../utils/wohelpers'
+import { ADD_NEW_WORKOUT} from "../utils/mutations";
+import {GET_WORKOUTS} from "../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
 
 
-
+  
 const Workouts = () => {
+ 
+  // const location = window.location.toString();
+  //     const splitLocation = location.split('/');
+      // console.log(splitLocation[splitLocation.length-1])
   
-  
+ const [newEx, setnewEx] = useState('0');
+ const [exercises, setExercise ] = useState([])
 
+ 
 
-const [newEx, setnewEx] = useState('0');
-const [exercises, setExercise ] = useState([])
+//function to submit workouts
 
-console.log(exercises)
+ const [addNewWorkout, {error}] = useMutation(ADD_NEW_WORKOUT)
+
+ async function handleWoSubmit(){
+   const newWoName = document.getElementById('newWoName');
+   const exercisesArray = [];
+for(let i=0; i<exercises.length; i++){
+let newexercise =  {exercise:exercises[i]};
+exercisesArray.push(newexercise);
+}
+   const newWoObject = {
+    name: newWoName.value,
+    exercises: exercisesArray
+   }
+   const {data} = await addNewWorkout({
+    variables: {workoutData : {...newWoObject}}
+   })
+   window.location.reload(false);
+
+  }
+
 
 // show input for new exercise based on option selected
+
   const newExInput = () => {
     if (newEx === '0') {
       return <div  className="mt-3">
@@ -23,24 +50,48 @@ console.log(exercises)
                    <textarea className="form-control" id="newExName" rows="1"></textarea>
               </div>;;
     }
-   
+
     return null;
   };
+
+
+  //function to sumbit selected exercise to exercises array
 
   function handleExSubmit(e){
     e.preventDefault();
     var select = document.getElementById('select');
     var newExName = document.getElementById('newExName');
-
+  
     if ( select.options[select.selectedIndex].text === "New Exercise"){
         setExercise(exercises => [...exercises, newExName.value])
     }else{
-        setExercise( exercises => [...exercises, select.options[select.selectedIndex].text])
-    }
-       
+        setExercise( exercises => [...exercises, select.options[select.selectedIndex].textContent])
+    }  
 }
 
+   //Show Workouts as options and select existing workout
+
+   const { loading, data } = useQuery(GET_WORKOUTS);
+   const workouts = data?.workouts || [];
+   const WorkoutList = ({workouts}) => {
+
+      if (!workouts.length) {
+        return <div><a>No Workouts Yet</a></div>;
+      }
+      return (
+        <div>
+          {workouts &&
+            workouts.map((workout, index) => (
+              <Link key={index} className="w3-bar-item w3-button " to={`/workout/${index}`}>{workout.name}</Link>
+            ))}
+        </div>
+      );
+    }
+        
+        
+
     return (
+
       // Sidebar
       <div className="col-12 flex-row">
         <div className="w3-sidebar w3-light-grey w3-bar-block" >
@@ -58,9 +109,7 @@ console.log(exercises)
             <div className="w3-dropdown-hover">
               <button className="w3-button w3-black ms-4 mt-3">Choose Existing Workout</button>
               <div className="w3-dropdown-content w3-bar-block w3-border ms-4">
-                <a  className="w3-bar-item w3-button ">Leg Day</a>
-                <a  className="w3-bar-item w3-button ">Chest Day</a>
-                <a  className="w3-bar-item w3-button ">Core Day</a>
+                <WorkoutList workouts={workouts}/>
               </div>
             </div>
           </div>  
@@ -84,20 +133,11 @@ console.log(exercises)
               </div>
               <div className="col text-center mt-3">
                 <button className="rounded" onClick={handleExSubmit}>Submit Exercise</button>
-               </div>
-              {/* <div className="form-group mt-3">
-                <label >Weight</label>
-                <textarea className="form-control" id="weight" rows="1"></textarea>
-              </div>
-              <div className="form-group mt-3">
-                <label >Reps</label>
-                <textarea className="form-control" id="reps" rows="1"></textarea>
-              </div> */}
-              
+               </div>        
 
               {/* Workout Table populated with exercises */}
               <div className=" border border-success rounded mt-3 pb-3">
-              <textarea className='mt-3 justify-content-center'name="" id="" cols="30" rows="1" placeholder="              Enter Workout Name"></textarea>
+              <textarea className='mt-3 justify-content-center'name="" id="newWoName" cols="30" rows="1" placeholder="              Enter Workout Name"></textarea>
 
                <div className="table mt-3 text-center">
                  
@@ -122,15 +162,14 @@ console.log(exercises)
                     } 
                  })}
                     </ol>
+
                 </div>
                 <div className="col text-center mt-3">
-                <button className="rounded" onClick={handleWoSubmit}>Save Workout</button>
+                <Link className="btn bg-success rounded" id='woSubmit'onClick={handleWoSubmit}  >Save Workout</Link>
                </div>
            </div>
            </div>  
         </div>
-
-       
 
       </div>
     );
