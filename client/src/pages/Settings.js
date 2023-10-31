@@ -60,7 +60,7 @@ const Settings = () => {
     //html
     return (
       <div className="col-12 flex-row">
-        <aside className=" w3-sidebar w3-light-grey w3-bar-block" >
+        <aside className=" w3-sidebar w3-bar-block" >
             <h3 className="w3-bar-item">Menu</h3>
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
