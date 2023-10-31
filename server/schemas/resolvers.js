@@ -82,16 +82,16 @@ const resolvers = {
     },
 
     
-    // addWorkout: async (parent, {workoutData}, context) =>{
-    //   if(context.user){
-    //     const updatedUser= await User.findOneAndUpdate(
-    //       {_id:context.user._id}, 
-    //       {$push:{workouts: workoutData}},
-    //       {new: true}
-    //     );    
-    //     return updatedUser;
-    //   }
-    // }
+    addWorkout: async (parent, {workoutData}, context) =>{
+      if(context.user){
+        const updatedUser= await User.findOneAndUpdate(
+          {_id:context.user._id}, 
+          {$push:{workouts: workoutData}},
+          {new: true}
+        );    
+        return updatedUser;
+      }
+    }
   },
 };
 
