@@ -36,9 +36,8 @@ type Exercise {
 
 type Set {
   _id: ID
-  reps: Int
-  weight: Float
-  distance: Float
+  oneRepMax: Float
+  date: String
 }
 
 input SetInput {
@@ -65,13 +64,13 @@ type Query {
 type Mutation {
   createExercise(exercise:String!, set:SetInput): Workout
   createUser(firstName: String, lastName: String, username: String!, password: String!): Auth
-  addSet(reps: Int!, weight: Float, distance: Float): Set
+  addSet(oneRepMax: Float!, date: String!): Set
   updateSet(id: ID!, reps: Int, weight: Float, distance: Float): Set
   deleteSet(id: ID!): Set
   loginUser(username: String!, password: String!): Auth
   addWorkout(workoutData: WorkoutInput):User
 }
-`;;;
+`;
 
 module.exports = typeDefs;
 
