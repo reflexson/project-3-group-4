@@ -72,7 +72,11 @@ const resolvers = {
       return { token, user };
     },
     addSet: async (parent, args, context) => {
-      const newSet = await Set.create(args);
+      const updatedUser= await User.findOneAndUpdate(
+        {_id:context.user._id}, 
+        {$push:{sets:{$each:setData}}},
+        {new: true}
+      )
       return newSet;
     },
 
@@ -99,7 +103,7 @@ const resolvers = {
     }
   },
 
-  
+
 };
 
 module.exports = resolvers;
