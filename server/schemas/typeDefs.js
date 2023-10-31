@@ -11,7 +11,7 @@ type User {
 }
 
 type Workout {
-  _id: ID!
+  _id: OID!
   name:String!
   exercises: [Exercise!]!
 }
@@ -29,7 +29,7 @@ input ExerciseInput {
 }
 
 type Exercise {
-  _id: ID!
+  _id: OID!
   exercise: String!
   sets: [Set!]!
 }
@@ -52,11 +52,17 @@ type Auth {
   user: User
 }
 
+
+type OID {
+  oid: String
+}
+
 type Query {
   user(id: ID!): User
   workout(id: ID!): Workout
   workouts:[Workout]
   workoutExercises:[Exercise]
+  getUserWorkoutByID(userID: ID!, workoutID: ID!): Workout
   exerciseByName(name: String!): [Exercise]
   exerciseData(exerciseName: String!): [Set!]!
   getExerciseDataByUsernameAndExercise(username: String!, exercise: String!): [Set!]!
