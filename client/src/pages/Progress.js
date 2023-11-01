@@ -10,6 +10,9 @@ Chart.register(...registerables);
 const Progress = () => {
   const { loading, data } = useQuery(GET_SETS);
   const sets = data?.sets || [];
+
+
+  
   const [selectedOption, setSelectedOption] = useState("Week");
   // for (let i = 0; i<sets.length; i++) {
   //   let setEx = sets[i].exercise;
@@ -37,13 +40,14 @@ const Progress = () => {
     }
   ));
 
-  console.log('exProgress:', exProgress);
+//   console.log('exProgress:', exProgress);
 
   let xAxis = exProgress.map((set) => set.date);
   let yAxis = exProgress.map((set) => set.oneRepMax);
-
-  console.log(xAxis);
-  console.log(yAxis);
+  let defaultOption =exArrayUnique[exArrayUnique.length-1]
+  console.log(selectedOption)
+//   console.log(xAxis);
+//   console.log(yAxis);
  
   const weekChartData = {
     labels: xAxis,
@@ -109,7 +113,7 @@ const Progress = () => {
     } else {
       setChartData(weekChartData);
     }
-    console.log(selectedOption);
+    // console.log(selectedOption);
   };
   return (
     <div className="col-12 flex-row">
