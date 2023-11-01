@@ -130,6 +130,14 @@ exercisesArray.push(newexercise);
                    <option value="1">Bicep Curls</option>
                    <option value="1">Leg Press</option>
                    <option value="1">Upright Rows</option>
+                   <option value="1">Deadlifts</option>
+                   <option value="1">Lat Pulldowns</option>
+                   <option value="1">Dumbbell Rows</option>
+                   <option value="1">Calf Raises</option>
+                   <option value="1">Hammer Curls</option>
+                   <option value="1">Shoulder Press</option>
+                   <option value="1">Bent-Over Rows</option>
+                   <option value="1">Kettlebell Swings</option>
                  </select>
                  {newExInput()}  
               </div>
