@@ -45,7 +45,7 @@ function Login(props){
             
             <h2>Login</h2>
             {/* Form */}
-            <form onSubmit={handleFormSubmit}>
+            <form class="centerForm" onSubmit={handleFormSubmit}>
                 <div className='form-item username form-group row'>
                     <label htmlFor='username'>Username:</label>
                     <input
