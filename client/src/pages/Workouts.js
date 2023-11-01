@@ -150,8 +150,13 @@ exercisesArray.push(newexercise);
                       })
                     }
                     return ( 
-                      <div> 
-                          <li>{props.exercise}<button onClick={() => deleteByIndex(index)}className='btn btn-lin mb-1'>x</button></li>
+                      <div > 
+                          <li className="work-list">{props.exercise}
+                            <button onClick={() => deleteByIndex(index)}
+                                    className='btn btn-lin mb-1 work-list'>
+                              x
+                            </button>
+                          </li>
                           
                         </div> 
                     ); 

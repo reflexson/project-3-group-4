@@ -37,6 +37,11 @@
   min-height: 100vh;
 }
 
+.work-list{
+  background-color: var(--main-background) !important;
+  color: var(--main-text)!important;
+}
+
 html,
 body {
   min-height: 100%;
