@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <main className="col-12 flex-row justify-content-center page">
       <div className="col-5 mt-3">
-        <img src="/images/gym-pic-1.png" alt="nfg" />
+        <img src="/images/gym-pic-1.png" alt="a man is curling a weight" />
         <img />
         <div className="mt-3 home-heading">
           Transform Your Body, Transform Your Life: Welcome to the New You!
@@ -24,11 +24,11 @@ const Home = () => {
           Revolutionize your fitness journey with our cutting-edge workout app.
           Tailored workouts with results that speak for themselves.
         </div>
-        <img src="/images/gym-pic-2.png" alt="nfgss" className="w-100" />
+        <img src="/images/gym-pic-2.png" alt="a woman is tying her shoes getting ready to workout" className="w-100" />
         <img />
       </div>
       <div className="col-5 ">
-        <img src="/images/chart.png" alt="nfg" />
+        <img src="/images/chart-pic.png" alt="a chart showing test data" />
         <img />
         <div className="mt-3 home-heading">
           Your Fitness, Your Rules: Customize Your Path to Greatness
@@ -52,7 +52,7 @@ const Home = () => {
           becoming a better, healthier, and more confident version of yourself.
           Let the transformation begin!
         </div>
-        <img src="/images/gym-pic-3.png" alt="nfgdfdfss" className="w-100" />
+        <img src="/images/gym-pic-3.png" alt="a man after a workout checking his phone" className="w-100" />
         <img />
       </div>
     </main>
