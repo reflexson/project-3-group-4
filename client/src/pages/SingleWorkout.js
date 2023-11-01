@@ -133,7 +133,7 @@ const SingleWorkout = () => {
         }
         
       
-        window.location = '/progress'
+        window.location.assign('/progress')
         // console.log({setArray});
     };
     //end of form functions------------------------------------------

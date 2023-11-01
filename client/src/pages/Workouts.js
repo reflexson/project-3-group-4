@@ -38,7 +38,7 @@ exercisesArray.push(newexercise);
    const {data} = await addNewWorkout({
     variables: {workoutData : {...newWoObject}}
    })
-   window.location.reload(false);
+   window.location.assign('/workouts')
 
   }
 
