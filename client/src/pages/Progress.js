@@ -46,7 +46,7 @@ const Progress = () => {
   console.log(yAxis);
  
   const weekChartData = {
-    labels: ["Week1", "Week2", "Week3", "Week4", "Week5"],
+    labels: xAxis,
     datasets: [
       {
         label: "Workout Progress",
@@ -59,7 +59,7 @@ const Progress = () => {
         ],
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
-        data: [10, 15, 20, 25, 30],
+        data: yAxis,
       },
     ],
   };
@@ -134,10 +134,10 @@ const Progress = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="graph"style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+        {/* <div className="graph"style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
           <Bar data={chartData} options={options} />
-        </div>
-        <div className="graph"style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+        </div> */}
+        <div className="graph"style={{ width: "75%", marginLeft: "10%", padding: "2%" }}>
           <Line data={chartData} options={options} />
         </div>
       </main>
