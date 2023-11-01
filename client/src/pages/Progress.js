@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Select from "react-select";
 import {GET_SETS} from "../utils/queries";
@@ -37,7 +37,13 @@ const Progress = () => {
     }
   ));
 
-  console.log(exProgress)
+  console.log('exProgress:', exProgress);
+
+  let xAxis = exProgress.map((set) => set.date);
+  let yAxis = exProgress.map((set) => set.oneRepMax);
+
+  console.log(xAxis);
+  console.log(yAxis);
  
   const weekChartData = {
     labels: ["Week1", "Week2", "Week3", "Week4", "Week5"],
@@ -98,7 +104,7 @@ const Progress = () => {
   const [chartData, setChartData] = useState(weekChartData);
   const handleChange = (selectedOptions) => {
     setSelectedOption(selectedOptions.value);
-    if (selectedOptions.value == "Excercise") {
+    if (selectedOptions.value === "Excercise") {
       setChartData(excerciseChartData);
     } else {
       setChartData(weekChartData);
