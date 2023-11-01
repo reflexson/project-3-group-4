@@ -39,7 +39,7 @@ function Login(props){
 
     // the html
     return(
-        <div className="container">
+        <div className="page login">
             {/* Redirect to signup */}
             <Link to="/signup">← Go to Signup</Link>
             
@@ -75,7 +75,7 @@ function Login(props){
                 ) : null}
                 {/* submit button */}
                 <br/>
-                <button className='btn btn-primary' type='submit'>Submit</button>
+                <button className='overwrite-btn' type='submit'>Submit</button>
             </form>
 
         </div>
