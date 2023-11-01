@@ -4,13 +4,13 @@ import { useSettingsContext } from "../utils/GlobalState";
 import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
 import { GET_WO_EXERCISES, GET_WORKOUTS } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { calculateOneRepMax } from '../utils/oneRepMax';
+// import { calculateOneRepMax } from '../utils/oneRepMax';
 import { formatDate } from '../utils/dateUtils';
 import { ADD_SET } from "../utils/mutations";
 
 const SingleWorkout = () => {
     // gets global context
-
+    var progressButton = document.getElementById('progressButton')
   
     let [ settingsState, setSettingsState] = useSettingsContext();
 
@@ -132,9 +132,9 @@ const SingleWorkout = () => {
                })
         }
         
-       
+       progressButton.onclick.call(progressButton);
         // window.location.reload(false);
-        console.log({setArray});
+        // console.log({setArray});
     };
     //end of form functions------------------------------------------
 
@@ -143,7 +143,7 @@ const SingleWorkout = () => {
       <div className="col-12 flex-row">
         <aside className=" w3-sidebar w3-bar-block" >
             <h3 className="w3-bar-item">Menu</h3>
-                <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
+                <Link  className="w3-bar-item w3-button"  id='progressButton' to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button alink"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item w3-button "  to='/settings'>Settings</Link>
 
