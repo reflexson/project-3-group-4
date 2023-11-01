@@ -9,16 +9,16 @@ export const GET_USER = gql`
   }
 `;
 
-// export const GET_SETS =gql`
-// query GetSets {
-//   sets{
-//     _id
-//     exercise
-//     oneRepMax
-//     date
-//       }
-//   }
-// `;
+export const GET_SETS =gql`
+query GetSets {
+  sets{
+    _id
+    exercise
+    oneRepMax
+    date
+      }
+  }
+`;
 
 export const GET_WORKOUTS = gql`
   query GetWorkouts {

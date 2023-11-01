@@ -9,7 +9,7 @@ const resolvers = {
       return await User.findById(id);
     },
 
-    getSets: async (parent, args, context) => {
+    sets: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
       // console.log(parent, context, id);
       return user.sets
@@ -22,8 +22,6 @@ const resolvers = {
     workouts: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
       // console.log(parent, context, id);
-     
-     
       return user.workouts
     },
       workoutExercises: async (parent, args, context) => {
