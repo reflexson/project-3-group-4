@@ -326,6 +326,10 @@ table tr td:first-child::before
   flex-wrap: wrap;
 }
 
+.list-wrapper{
+  border-style: solid;
+  border-color: var(--main-text);
+}
 
 .weight, .reps{
   width: 20%;
