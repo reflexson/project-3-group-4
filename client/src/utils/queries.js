@@ -16,7 +16,7 @@ query GetSets {
     exercise
     oneRepMax
     date
-      }
+    }
   }
 `;
 

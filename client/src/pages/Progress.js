@@ -4,6 +4,7 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Select from "react-select";
 import {GET_SETS} from "../utils/queries";
+import {GET_SETS} from "../utils/queries";
 import { useQuery } from "@apollo/client";
 
 Chart.register(...registerables);
