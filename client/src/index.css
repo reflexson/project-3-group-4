@@ -130,7 +130,7 @@ header a:hover {
 .login h2 {
   margin: 1rem;
 }
-#loginForm {
+.centerForm {
   margin: auto;
 }
 button {

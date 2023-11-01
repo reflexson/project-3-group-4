@@ -57,7 +57,7 @@ function Signup() {
       
       <h2>Signup</h2>
 
-      <form onSubmit={handleFormSubmit} className="form">
+      <form onSubmit={handleFormSubmit} className="form centerForm">
         <div className="form-item firstName form-group row">
           <label htmlFor="firstName">First Name:</label>
           <input
