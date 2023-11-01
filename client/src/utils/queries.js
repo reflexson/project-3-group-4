@@ -16,7 +16,7 @@ query GetSets {
     exercise
     oneRepMax
     date
-    }
+      }
   }
 `;
 
@@ -28,6 +28,10 @@ export const GET_WORKOUTS = gql`
       exercises {
         _id
         exercise
+        exercise
+        
+        
+        exercise      
         
         
       }

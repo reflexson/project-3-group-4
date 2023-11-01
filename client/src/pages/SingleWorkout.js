@@ -9,98 +9,110 @@ import { formatDate } from '../utils/dateUtils';
 import { ADD_SET } from "../utils/mutations";
 
 const SingleWorkout = () => {
-    // gets global context
-    var progressButton = document.getElementById('progressButton')
-  
-    let [ settingsState, setSettingsState] = useSettingsContext();
+  var progressButton = document.getElementById('progressButton');
 
-    const [weightLabel, setweightLabel]= useState('lbs');
-    if(settingsState.units === 'metric' && weightLabel === 'lbs'){
-        setweightLabel('kg');
+  // Get settings context
+  let [ settingsState, setSettingsState] = useSettingsContext();
+
+  // Set weight label based on units
+  const [weightLabel, setWeightLabel] = useState('lbs');
+  if (settingsState.units === 'metric' && weightLabel === 'lbs'){
+    setWeightLabel('kg');
+  }
+
+  // Initialize date state with formatted date
+  const [date, setDate] = useState(formatDate(new Date())); 
+
+  // get id in url
+  const location = window.location.toString();
+  const splitLocation = location.split('/');
+  const workInd = splitLocation[splitLocation.length-1];
+
+  const { loading, data } = useQuery(GET_WORKOUTS);
+  const workouts = data?.workouts || [];
+
+  const chosenWorkout = workouts[workInd];
+  const exercises = chosenWorkout.exercises.map((ex) => (
+    {
+      name: ex.exercise,
+      _id: ex._id,
+      setInputs: [{ reps: 0, weight: 0 }]
     }
-    const [date, setDate] = useState(formatDate(new Date())); 
+  ));
 
-    // get id in url
-    const location = window.location.toString();
-    const splitLocation = location.split('/');
-    const workInd = splitLocation[splitLocation.length-1];
+  // set set state
+  let [formState, setFormState] = useState({
+    exercises
+  });
 
+  // form functions---------------------------------------------------------
+  const addNewSet = (indE) => {
+    const exercises = [...formState.exercises];
+    exercises[indE].setInputs.push({ reps: 0, weight: 0 });
+    setFormState({ exercises });
+  };
 
-    const { loading, data } = useQuery(GET_WORKOUTS);
-    const workouts = data?.workouts || [];
-
-    const chosenWorkout =workouts[workInd];
-    const exercises = chosenWorkout.exercises.map((ex) => (
-        {
-            name: ex.exercise,
-            _id: ex._id,
-            setInputs: [{reps: 0, weight: 0}]
-        }
-    ));
-    // set set state
-    let [formState, setFormState] = useState({ 
-        exercises    
+  const addNewExercise = () => {
+    const exercises = [...formState.exercises];
+    exercises.push({
+      setInputs: [{ reps: 0, weight: 0 }]
     });
+    setFormState({ exercises });
+  }
 
-    // form functions---------------------------------------------------------
-    const addNewSet = (indE) => {
-        const exercises = [...formState.exercises];
-        exercises[indE].setInputs.push({reps: 0, weight: 0});
-        setFormState({exercises});
+  const deleteSet = (indE, indS) => {
+    const exercises = [...formState.exercises];
+    exercises[indE].setInputs.splice(indS, 1);
+    setFormState({ exercises });
+  }
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    const indE = e.target.getAttribute('indexexercise');
+    const indS = e.target.getAttribute('indexset');
+
+    const exercises = [...formState.exercises];
+    exercises[indE].setInputs[indS] = {
+      // keep info to the specific set
+      ...formState.exercises[indE].setInputs[indS],
+      // set new info
+      [name]: parseFloat(value)
     };
+    setFormState({ exercises });
+  }
 
-    const addNewExercise = () =>{
-        const exercises = [...formState.exercises];
-        exercises.push({
-            setInputs: [{reps: 0, weight: 0}]
-        });
-        setFormState({exercises});
+  const onDateChange = (e) => {
+    const { name, value } = e.target;
+
+    // Check if a date is selected
+    if (value) {
+      // If a date is selected, format it using the formatDate function
+      const formattedDate = formatDate(value);
+      setDate(formattedDate);
+    } else {
+      // If no date is selected, set the date state to an empty string
+      setDate('');
     }
+  }
 
-    const deleteSet = (indE, indS) =>{
-        const exercises = [...formState.exercises];
-        exercises[indE].setInputs.splice(indS,1);
-        setFormState({exercises});
-    }
+  // new Logic for submitting sets
 
-    const onChange = (e) =>{
-        const {name, value} = e.target;
-        const indE = e.target.getAttribute('indexexercise');
-        const indS = e.target.getAttribute('indexset');
+  const [addSet, { error }] = useMutation(ADD_SET)
 
-        const exercises = [...formState.exercises];
-        exercises[indE].setInputs[indS] = {
-            //keep info to specific set
-            ...formState.exercises[indE].setInputs[indS],
-            // set new info
-            [name]: parseFloat(value)
-        };
-        setFormState({exercises});
-    }
+  // form handler
+  const handleFormSubmit = async (event) => {
+    // prevents form submitting to itself
 
-    const onDateChange = (e) => {
-        const {name, value} = e.target;
-        setDate(value);
-  
-    }
-    //new Logic for submitting sets
+    event.preventDefault();
+    // loop through exercises
 
-    const [addSet, {error}] = useMutation(ADD_SET)
+    const exercises = [...formState.exercises];
 
-    // form handler
-    const handleFormSubmit = async (event) => {
-        //prevents form sumbitting to itself
+    const setArray = []
+    for (let i = 0; i < exercises.length; i++) {
+      let setInfo = [];
 
-        event.preventDefault();
-        // loop through exercises
-
-        const exercises = [...formState.exercises];
-        
-        const setArray=[]
-        for(let i = 0; i < exercises.length; i++){
-            let setInfo = [];
-
-            //loop through an excercises sets
+      // loop through an exercise's sets
 
             for(let j = 0; j < exercises[i].setInputs.length; j++)
             {
@@ -149,78 +161,77 @@ const SingleWorkout = () => {
 
         </aside>
 
-        <main className="dashcont">
-          
-          <form className='workout-form ' onSubmit={handleFormSubmit}>
-            <h2>{chosenWorkout.name}</h2>
-            <div className="exercise-wrapper">
-          {
-            
-            formState.exercises.map((ex, ind) => (
-                
-                <div className="exercise card overwrite-card" key={ind}>
-                    <h3>{ex.name}</h3>
-                    <div className="button wrapper">
-                        <button className="overwrite-btn add input-btn" onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 
-                            Add Set
-                        </button>
-                        <button  className="overwrite-btn delete input-btn" onClick={(event) => {event.preventDefault(); deleteSet(ind)}}>
-                            Delete Set
-                        </button>
-                    </div>
+      <main className="dashcont">
 
-                    <br/>
-                    {ex.setInputs.map((set, indS) => (
-                        <div className="set" key={indS}>
-                            Set {indS + 1} &nbsp;
-                            <input type='number'
-                                className="reps"
-                                name='reps'
-                                indexset={indS}
-                                indexexercise={ind}
-                                onChange={onChange}
-                            /> 
-                            <label>&nbsp; reps</label>
-                            &nbsp; x &nbsp;
-                            <input type='number'
-                                    className="weight"
-                                    name='weight'
-                                    indexset={indS}
-                                    indexexercise={ind}
-                                    onChange={onChange}/> 
-                            <label>&nbsp; {weightLabel}</label>
-                            &nbsp;
-                            <br/>
-                            <br/>
-                        </div>
-                    ))}
-                    
-                    <br/>
+        <form className='workout-form ' onSubmit={handleFormSubmit}>
+          <h2>{chosenWorkout.name}</h2>
+          <div className="exercise-wrapper">
+            {
+              formState.exercises.map((ex, ind) => (
+
+                <div className="exercise card overwrite-card" key={ind}>
+                  <h3>{ex.name}</h3>
+                  <div className="button wrapper">
+                    <button className="overwrite-btn add input-btn" onClick={(event) => { event.preventDefault(); addNewSet(ind) }}>
+                      Add Set
+                    </button>
+                    <button className="overwrite-btn delete input-btn" onClick={(event) => { event.preventDefault(); deleteSet(ind) }}>
+                      Delete Set
+                    </button>
+                  </div>
+
+                  <br />
+                  {ex.setInputs.map((set, indS) => (
+                    <div className="set" key={indS}>
+                      Set {indS + 1} &nbsp;
+                      <input type='number'
+                        className="reps"
+                        name='reps'
+                        indexset={indS}
+                        indexexercise={ind}
+                        onChange={onChange}
+                      />
+                      <label>&nbsp; reps</label>
+                      &nbsp; x &nbsp;
+                      <input type='number'
+                        className="weight"
+                        name='weight'
+                        indexset={indS}
+                        indexexercise={ind}
+                        onChange={onChange} />
+                      <label>&nbsp; {weightLabel}</label>
+                      &nbsp;
+                      <br />
+                      <br />
+                    </div>
+                  ))}
+
+                  <br />
                 </div>
-                
-          ))}
+
+              ))}
           </div>
-            <br/>
-            
-            <div>
-                <label htmlFor="birthday">Enter Date:</label>
-                &nbsp;
-                <input type="date" 
-                        id="date" 
-                        name="date"
-                        onChange={onDateChange}
-                />
-            </div>
-            <br/>
-          
-            <button type='submit' className="overwrite-btn"> 
-                Submit
-            </button>
-          </form>
-        </main>
-      
-      </div>
-    );
+          <br />
+
+          <div>
+            <label htmlFor="birthday">Enter Date:</label>
+            &nbsp;
+            <input type="date"
+              id="date"
+              name="date"
+              onChange={onDateChange}
+            />
+          </div>
+          <br />
+
+          <button type='submit' className="overwrite-btn">
+            Submit
+          </button>
+        </form>
+      </main>
+
+    </div>
+  );
 };
 
 export default SingleWorkout;
