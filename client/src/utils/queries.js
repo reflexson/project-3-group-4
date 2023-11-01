@@ -60,3 +60,14 @@ export const GET_WO_EXERCISES = gql`
     }
   }
 `;
+
+// export const GET_SETS_BY_EXERCISE_NAME = gql`
+//   query GetSetsByExerciseName($exerciseName: String!) {
+//     getSetsByExerciseName(exerciseName: $exerciseName) {
+//       _id
+//       exercise
+//       oneRepMax
+//       date
+//     }
+//   }
+// `;
