@@ -5,12 +5,20 @@ import { Chart, registerables } from "chart.js";
 import Select from "react-select";
 import {GET_SETS} from "../utils/queries";
 import { useQuery } from "@apollo/client";
+import { useSettingsContext } from "../utils/GlobalState";
+import { convertImperialToMetric } from "../utils/unitConversion";
 
 Chart.register(...registerables);
 const Progress = () => {
   const { loading, data } = useQuery(GET_SETS);
   const sets = data?.sets || [];
   const [selectedOption, setSelectedOption] = useState("Week");
+
+  let [ settingsState, setSettingsState] = useSettingsContext();
+  const [weightLabel, setweightLabel]= useState('lbs');
+    if(settingsState.units === 'metric' && weightLabel === 'lbs'){
+        setweightLabel('kg');
+  }
   // for (let i = 0; i<sets.length; i++) {
   //   let setEx = sets[i].exercise;
   //   exArray.push({setEx});
@@ -41,6 +49,10 @@ const Progress = () => {
 
   let xAxis = exProgress.map((set) => set.date);
   let yAxis = exProgress.map((set) => set.oneRepMax);
+  console.log(yAxis);
+  if(settingsState.units === 'metric'){
+    yAxis = yAxis.map((set) => convertImperialToMetric(set));
+  }
 
   console.log(xAxis);
   console.log(yAxis);
@@ -73,7 +85,7 @@ const Progress = () => {
     ],
     datasets: [
       {
-        label: "Workout Progress",
+        label: weightLabel,
         backgroundColor: [
           "rgba(75, 192, 192, 0.6)",
           "rgba(255, 159, 64, 0.6)",
@@ -94,7 +106,7 @@ const Progress = () => {
         beginAtZero: true,
         title: {
           display: true,
-          text: "Workout Progress",
+          text: weightLabel,
         },
       },
     },
