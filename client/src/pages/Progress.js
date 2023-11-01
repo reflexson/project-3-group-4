@@ -131,7 +131,7 @@ const Progress = () => {
       </aside>
 
       <main className="dashcont">
-        <div style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
+        <div className="select" style={{ width: "35%", marginLeft: "25%", padding: "2%" }}>
           <Select
             options={dropdownOptions}
             default={selectedOption}
