@@ -52,12 +52,13 @@ const Progress = () => {
 
   let xAxis = exProgress.map((set) => set.date);
   let yAxis = exProgress.map((set) => set.oneRepMax);
-  console.log(yAxis);
+//   console.log(yAxis);
   if(settingsState.units === 'metric'){
     yAxis = yAxis.map((set) => convertImperialToMetric(set));
   }
   let defaultOption =exArrayUnique[exArrayUnique.length-1]
-  console.log(selectedOption)
+
+//   console.log(selectedOption)
 //   console.log(xAxis);
 //   console.log(yAxis);
  
@@ -118,15 +119,18 @@ const Progress = () => {
   const dropdownOptions = exObArray;
 
   const [chartData, setChartData] = useState(weekChartData);
-  const handleChange = (selectedOptions) => {
-    setSelectedOption(selectedOptions.value);
-    if (selectedOptions.value === "Excercise") {
-      setChartData(excerciseChartData);
-    } else {
+  const handleChange = async (selectedOptions) => {
+
+    // if (selectedOptions.value === "Excercise") {
+    //   setChartData(excerciseChartData);
+    // } else {
       setChartData(weekChartData);
-    }
+      setSelectedOption(selectedOptions.value);
+    // }
     // console.log(selectedOption);
   };
+
+  console.log({chartData})
   return (
     <div className="col-12 flex-row">
       <aside className="w3-sidebar  w3-bar-block">
