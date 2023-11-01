@@ -3,9 +3,18 @@ import { Link } from "react-router-dom";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Select from "react-select";
+// import {GET_SETS} from "../utils/queries";
+import { useQuery } from "@apollo/client";
 
 Chart.register(...registerables);
 const Progress = () => {
+  // const { loading, data } = useQuery(GET_SETS);
+  // const sets = data?.sets || [];
+
+  // console.log(data)
+
+
+
   const weekChartData = {
     labels: ["Week1", "Week2", "Week3", "Week4", "Week5"],
     datasets: [

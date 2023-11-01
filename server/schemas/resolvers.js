@@ -9,9 +9,16 @@ const resolvers = {
       return await User.findById(id);
     },
 
+    getSets: async (parent, args, context) => {
+      const user = await User.findById(context.user._id);
+      // console.log(parent, context, id);
+      return user.sets
+    },
+
     workout: async (_, { id }) => {
       return await Workout.findById(id);
     },
+
     workouts: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
       // console.log(parent, context, id);
@@ -75,9 +82,9 @@ const resolvers = {
       const correctPw = await user.isCorrectPassword(password);
 
       // Debug logs
-      console.log('Inputted Password:', password);
-      console.log('Stored Hashed Password:', user.password);
-      console.log('Password Match:', correctPw);
+      // console.log('Inputted Password:', password);
+      // console.log('Stored Hashed Password:', user.password);
+      // console.log('Password Match:', correctPw);
 
       if (!correctPw) {
         throw new AuthenticationError('Password mismatch');

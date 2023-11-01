@@ -56,6 +56,7 @@ const typeDefs = gql`
     workout(id: ID!): Workout
     workouts: [Workout]
     workoutExercises: [Exercise]
+    getSets:[Set]
     getSetsByExerciseName(exerciseName: String!): [Set]
   }
 

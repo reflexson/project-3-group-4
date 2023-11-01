@@ -132,8 +132,8 @@ const SingleWorkout = () => {
                })
         }
         
-       progressButton.onclick.call(progressButton);
-        // window.location.reload(false);
+      
+        window.location = '/progress'
         // console.log({setArray});
     };
     //end of form functions------------------------------------------
