@@ -4,14 +4,46 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Select from "react-select";
 import {GET_SETS} from "../utils/queries";
+import {GET_SETS} from "../utils/queries";
 import { useQuery } from "@apollo/client";
 
 Chart.register(...registerables);
 const Progress = () => {
   const { loading, data } = useQuery(GET_SETS);
   const sets = data?.sets || [];
+  const [selectedOption, setSelectedOption] = useState("Week");
+  // for (let i = 0; i<sets.length; i++) {
+  //   let setEx = sets[i].exercise;
+  //   exArray.push({setEx});
+ 
+  // }
+  // const exObArray = sets.map((ex) => (
+  //   {
+  //       value: ex.exercise,
+  //       label: ex.exercise
+  //   }
+  // ));
 
-  console.log({sets})
+
+
+  let exProgress = sets.filter(function(el){
+    return el.exercise == selectedOption
+  })
+
+  const exArray = sets.map((ex) => (ex.exercise));
+
+  var exArrayUnique = [...new Set(exArray)]
+  const exObArray = exArrayUnique.map((e) => (
+    {
+        value: e,
+        label: e
+    }
+  ));
+
+
+
+     console.log(exProgress)
+ 
 
 
 
@@ -69,17 +101,8 @@ const Progress = () => {
       },
     },
   };
-  const dropdownOptions = [
-    {
-      value: "Week",
-      label: "Week",
-    },
-    {
-      value: "Excercise",
-      label: "Excercise",
-    },
-  ];
-  const [selectedOption, setSelectedOption] = useState("Week");
+  const dropdownOptions = exObArray;
+
   const [chartData, setChartData] = useState(weekChartData);
   const handleChange = (selectedOptions) => {
     setSelectedOption(selectedOptions.value);
