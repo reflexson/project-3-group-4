@@ -20,9 +20,9 @@ const Progress = () => {
   const [chartData, setChartData] = useState(null); // Initialize chartData state
 
   let [settingsState, setSettingsState] = useSettingsContext();
-  const [weightLabel, setweightLabel] = useState("lbs");
-  if (settingsState.units === "metric" && weightLabel === "lbs") {
-    setweightLabel("kg");
+  const [weightLabel, setweightLabel] = useState("Max Rep lbs");
+  if (settingsState.units === "metric" && weightLabel === "Max Rep lbs") {
+    setweightLabel("Max Rep kg");
   }
 
   let exProgress = sets.filter(function (el) {
