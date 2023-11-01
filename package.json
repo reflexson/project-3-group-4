@@ -8,16 +8,18 @@
     "develop": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "start:prod": "cross-env NODE_ENV=production cd server && npm start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-
+    
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "cross-env": "^7.0.3"
   }
 }
