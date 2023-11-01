@@ -9,9 +9,16 @@ const resolvers = {
       return await User.findById(id);
     },
 
+    sets: async (parent, args, context) => {
+      const user = await User.findById(context.user._id);
+      // console.log(parent, context, id);
+      return user.sets
+    },
+
     workout: async (_, { id }) => {
       return await Workout.findById(id);
     },
+
     workouts: async (parent, args, context) => {
       const user = await User.findById(context.user._id);
       // console.log(parent, context, id);
@@ -27,6 +34,21 @@ const resolvers = {
       selectedWo = user.workouts[woId]
       return selectedWo.exercises
     },
+    getSetsByExerciseName: async (_, { exerciseName }, context) => {
+      // check if the user is authenticated
+          // retrieve the user's sets
+      const user = await User.findById(context.user._id);
+      // filter sets by exercise name
+      const filteredSets = user.sets.filter((set) => set.exercise === exerciseName);
+      // map the filtered sets to include only date and oneRepMax
+      const setsData = filteredSets.map((set) => ({
+        oneRepMax: set.oneRepMax,
+        date: set.date,
+      }));
+    
+      return setsData;
+    },
+    
   },
   Mutation: {
     // createExercise: async (parent, {exercise}, context) => {
@@ -60,9 +82,9 @@ const resolvers = {
       const correctPw = await user.isCorrectPassword(password);
 
       // Debug logs
-      console.log('Inputted Password:', password);
-      console.log('Stored Hashed Password:', user.password);
-      console.log('Password Match:', correctPw);
+      // console.log('Inputted Password:', password);
+      // console.log('Stored Hashed Password:', user.password);
+      // console.log('Password Match:', correctPw);
 
       if (!correctPw) {
         throw new AuthenticationError('Password mismatch');

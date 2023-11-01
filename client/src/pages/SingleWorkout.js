@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSettingsContext } from "../utils/GlobalState";
 import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
 import { GET_WO_EXERCISES, GET_WORKOUTS } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { calculateOneRepMax } from '../utils/oneRepMax';
+// import { calculateOneRepMax } from '../utils/oneRepMax';
 import { formatDate } from '../utils/dateUtils';
 import { ADD_SET } from "../utils/mutations";
 
 const SingleWorkout = () => {
     // gets global context
+    var progressButton = document.getElementById('progressButton')
+  
     let [ settingsState, setSettingsState] = useSettingsContext();
 
     const [weightLabel, setweightLabel]= useState('lbs');
@@ -114,7 +116,7 @@ const SingleWorkout = () => {
      
             setArray.push({
                 exercise: exercises[i].name,
-                onerepmax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                oneRepMax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
                 date: date
             })
 
@@ -123,15 +125,16 @@ const SingleWorkout = () => {
 
             const {data} = await addSet({
                 variables: {setData :{
-                    exercise: "poop",
-                oneRepMax: 1980,
-                date: "loops"
+                exercise: exercises[i].name,
+                oneRepMax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                date: date
                 }}
                })
         }
-
-
-        console.log({setArray});
+        
+      
+        window.location = '/progress'
+        // console.log({setArray});
     };
     //end of form functions------------------------------------------
 
@@ -140,7 +143,7 @@ const SingleWorkout = () => {
       <div className="col-12 flex-row">
         <aside className=" w3-sidebar w3-bar-block" >
             <h3 className="w3-bar-item">Menu</h3>
-                <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
+                <Link  className="w3-bar-item w3-button"  id='progressButton' to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button alink"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item w3-button "  to='/settings'>Settings</Link>
 
