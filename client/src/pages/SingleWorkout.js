@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSettingsContext } from "../utils/GlobalState";
 import { convertMetricToImperial, calcMaxRep, average } from "../utils/unitConversion";
 import { GET_WO_EXERCISES, GET_WORKOUTS } from "../utils/queries";
@@ -8,6 +8,8 @@ import { ADD_SET } from "../utils/mutations";
 
 const SingleWorkout = () => {
     // gets global context
+
+  
     let [ settingsState, setSettingsState] = useSettingsContext();
 
     const [weightLabel, setweightLabel]= useState('lbs');
@@ -127,8 +129,9 @@ const SingleWorkout = () => {
                 }}
                })
         }
-
-
+        
+       
+        // window.location.reload(false);
         console.log({setArray});
     };
     //end of form functions------------------------------------------
