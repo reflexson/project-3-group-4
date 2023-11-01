@@ -4,7 +4,6 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import Select from "react-select";
 import {GET_SETS} from "../utils/queries";
-import {GET_SETS} from "../utils/queries";
 import { useQuery } from "@apollo/client";
 
 Chart.register(...registerables);
@@ -24,10 +23,8 @@ const Progress = () => {
   //   }
   // ));
 
-
-
   let exProgress = sets.filter(function(el){
-    return el.exercise == selectedOption
+    return el.exercise === selectedOption
   })
 
   const exArray = sets.map((ex) => (ex.exercise));
@@ -40,13 +37,8 @@ const Progress = () => {
     }
   ));
 
-
-
-     console.log(exProgress)
+  console.log(exProgress)
  
-
-
-
   const weekChartData = {
     labels: ["Week1", "Week2", "Week3", "Week4", "Week5"],
     datasets: [
