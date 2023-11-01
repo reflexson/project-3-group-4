@@ -132,7 +132,7 @@ exercisesArray.push(newexercise);
                </div>        
 
               {/* Workout Table populated with exercises */}
-              <div className=" border border-success rounded mt-3 pb-3">
+              <div className="list-wrapper rounded mt-3 pb-3">
               <textarea className='mt-3 justify-content-center'name="" id="newWoName" cols="30" rows="1" placeholder="              Enter Workout Name"></textarea>
 
                <div className="table mt-3 text-center">
