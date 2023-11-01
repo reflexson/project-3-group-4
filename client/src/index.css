@@ -1,13 +1,15 @@
 :root {
-  --header-color: #232F3E;
+  --header-color: #38233e;
   --button: #F3A847;
   --header-text: #fafafa;
-  --hover-link: cyan;
+  --hover-link: rgb(215, 108, 217);
+  --selected-side: rgb(172, 95, 235);
   --main-text: #000000;
   --main-background: #f5f3ff;
   --card-background: #dfd7ff;
   --card-text: #2c2a33;
   --graph-bg: #fff;
+  --sidebar-color: rgb(227, 191, 237);
   --error: rgb(228, 46, 1);
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(4rem);
@@ -19,12 +21,14 @@
   --header-color: #929aa3;
   --button: #c267e9;
   --header-text: #292626;
-  --hover-link: rgb(8, 0, 255);
+  --hover-link: rgba(67, 10, 94, 0.736);
+  --selected-side: rgb(183, 133, 224);
   --main-text: #f2f2f2;
   --main-background: #46464c;
   --card-background: #61508f;
   --card-text: #f7f5ff;
   --graph-bg: #d5d5d5;
+  --sidebar-color: rgb(107, 72, 117);
 }
 
 * {
@@ -172,11 +176,7 @@ input:focus {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, .5);
 }
 
-.alink{
-  background-color: #009688 !important;
-  color: #000;
 
-}
 /* .alink:hover{
   background-color: #009688 !important;
 } */
@@ -564,4 +564,19 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
   .card {
     width: 100%;
   }
+}
+
+
+.alink{
+  background-color: var(--selected-side);
+  color: var(--main-text);
+
+}
+.w3-button:hover{
+  background-color: var(--hover-link) !important;
+  color: var(--main-text)!important;
+}
+.w3-sidebar{
+  background-color: var(--sidebar-color);
+  color: var(--main-text)
 }
