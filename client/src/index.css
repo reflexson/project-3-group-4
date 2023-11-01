@@ -1,25 +1,45 @@
 :root {
-  --primary: #232F3E;
-  --secondary: #F3A847;
-  --tertiary: #B12704;
-  --light: #fafafa;
-  --dark: #272f32;
+  --header-color: #232F3E;
+  --button: #F3A847;
+  --header-text: #fafafa;
+  --hover-link: cyan;
+  --main-text: #000000;
+  --main-background: #f5f3ff;
+  --card-background: #dfd7ff;
+  --card-text: #2c2a33;
+  --graph-bg: #fff;
   --error: rgb(228, 46, 1);
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(4rem);
-  --sidebar:10%;
+  --sidebar:110px;
 }
 
+
 [dark-theme="dark"] {
-  --primary: #0a0c0f;
-  --secondary: #c36aff;
-  --tertiary: #ec3203;
-  --light: #fd3c3c;
-  --dark: #0f2126;
+  --header-color: #929aa3;
+  --button: #c267e9;
+  --header-text: #292626;
+  --hover-link: rgb(8, 0, 255);
+  --main-text: #f2f2f2;
+  --main-background: #46464c;
+  --card-background: #61508f;
+  --card-text: #f7f5ff;
+  --graph-bg: #d5d5d5;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.page{
+  background-color: var(--main-background);
+  color: var(--main-text);
+  min-height: 100vh;
+}
+
+.work-list{
+  background-color: var(--main-background) !important;
+  color: var(--main-text)!important;
 }
 
 html,
@@ -34,7 +54,7 @@ body {
   font-weight: 400;
   line-height: 1.5;
   font-size: 16px;
-  color: var(--dark);
+  color: var(--main-text);
 }
 
 h1,
@@ -79,7 +99,6 @@ p {
 }
 
 a {
-  color: var(--tertiary);
   text-decoration: none !important;
   font-weight: bold;
 }
@@ -89,23 +108,29 @@ a:hover {
 }
 
 header {
-  background: var(--primary);
+  background: var(--header-color);
 }
 
 header a {
-  color: var(--light);
+  color: var(--header-text);
+}
+header a:hover {
+  color:var(--hover-link);
 }
 
+.login{
+  padding: 30px;
+}
 button {
   font-size: 1rem;
   text-decoration: none;
-  padding: 0.25rem 1rem;
-  border-radius: .5rem;
+  padding: 10px;
+  border-radius: 12px;
   border: none;
   outline: none;
   cursor: pointer;
   margin: 0 1px;
-  background-color: var(--secondary);
+  background-color: var(--button);
 }
 
 button:hover {
@@ -125,6 +150,10 @@ span[role="img"] {
   cursor: default;
 }
 
+.graph{
+  background-color: var(--graph-bg);
+}
+
 form {
   width: 40%;
 }
@@ -132,14 +161,14 @@ form {
 input {
   font-size: 1rem;
   padding: 0.25rem;
-  border: 1px solid var(--dark);
+  border: 1px solid var(--main-text);
   outline: none;
   border-radius: 3px;
   transition: box-shadow 0.2s;
 }
 
 input:focus {
-  border: 1px solid var(--secondary);
+  border: 1px solid var(--button);
   box-shadow: 0 0 .25rem rgba(0, 0, 0, .5);
 }
 
@@ -164,6 +193,20 @@ table tr::before {
   padding-top: .6em;
   text-align: right;
 } */
+
+.home-heading{
+  background-color: var(--header-color);
+  line-height: 3.5;
+  min-height: 50;
+  font-size: 1.2rem;
+  color: white;
+  padding: 0 20px;
+}
+
+.home-content{
+  padding: 20px;
+}
+
 .exButton{
   background-color: none !important;
 }
@@ -191,7 +234,10 @@ table tr td:first-child::before
 }
 .dashcont{
   width: 100%;
-  margin-left:var(--sidebar);
+  margin-left:var(--sidebar) ;
+  background-color: var(--main-background);
+  color: var(--main-text);
+  min-height: 100vh;
 }
 
 .hide{
@@ -259,14 +305,38 @@ table tr td:first-child::before
 }
 
 .card {
-  width: 25%;
   text-align: center;
+  width:300px;
+  margin: 5px;
+  background-color: var(--card-background)!important;
+  color: var(--card-text)!important;
 }
 
 .error-text {
   color: var(--error);
 }
+.workout-form{
+  width:100%;
+  margin-left: 30px;
+  
+}
 
+.exercise-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.weight, .reps{
+  width: 20%;
+}
+.overwrite-btn{
+  border-radius: 12px;
+  margin: 3px;
+}
+.input-btn{
+  padding: 5px 7px 5px 7px;
+}
 /*Toggle Switch stuff*/
 .form-switch {
   /*top left botto right*/

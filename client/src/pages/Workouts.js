@@ -94,20 +94,20 @@ exercisesArray.push(newexercise);
 
       // Sidebar
       <div className="col-12 flex-row">
-        <div className="w3-sidebar w3-light-grey w3-bar-block" >
+        <aside className="w3-sidebar w3-light-grey w3-bar-block" >
           <h3 className="w3-bar-item">Menu</h3>
             <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
             <Link  className="w3-bar-item  alink"  to='/workouts'>Workouts</Link>
             <Link  className="w3-bar-item w3-button"  to='/settings'>Settings</Link>
-        </div>
+        </aside>
 
       {/* Choose existing or new workout */}
 
-        <div className="dashcont flex-row justify-content-center text-center">
+        <main className="dashcont flex-row justify-content-center text-center">
           <div id='woButtons'>
-            <button className="w3-button w3-black mt-3" onClick={newWorkout}>Create Workout</button>
+            <button className="overwrite-btn mt-3" onClick={newWorkout}>Create Workout</button>
             <div className="w3-dropdown-hover">
-              <button className="w3-button w3-black ms-4 mt-3">Choose Existing Workout</button>
+              <button className="overwrite-btn ms-4 mt-3">Choose Existing Workout</button>
               <div className="w3-dropdown-content w3-bar-block w3-border ms-4">
                 <WorkoutList workouts={workouts}/>
               </div>
@@ -154,8 +154,13 @@ exercisesArray.push(newexercise);
                       })
                     }
                     return ( 
-                      <div> 
-                          <li>{props.exercise}<button onClick={() => deleteByIndex(index)}className='btn btn-lin mb-1'>x</button></li>
+                      <div > 
+                          <li className="work-list">{props.exercise}
+                            <button onClick={() => deleteByIndex(index)}
+                                    className='btn btn-lin mb-1 work-list'>
+                              x
+                            </button>
+                          </li>
                           
                         </div> 
                     ); 
@@ -169,7 +174,7 @@ exercisesArray.push(newexercise);
                </div>
            </div>
            </div>  
-        </div>
+        </main>
 
       </div>
     );

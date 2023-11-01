@@ -137,30 +137,39 @@ const SingleWorkout = () => {
 
     //html
     return (
-      <div className=" flex-row">
-        <aside className=" w3-sidebar w3-light-grey w3-bar-block" >
+      <div className="col-12 flex-row">
+        <aside className=" w3-sidebar w3-bar-block" >
             <h3 className="w3-bar-item">Menu</h3>
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button alink"  to='/workouts'>Workouts</Link>
                 <Link  className="w3-bar-item w3-button "  to='/settings'>Settings</Link>
 
         </aside>
-        <br/>
+
         <main className="dashcont">
-          <h2>{chosenWorkout.name}</h2>
-          <form onSubmit={handleFormSubmit}>
+          
+          <form className='workout-form ' onSubmit={handleFormSubmit}>
+            <h2>{chosenWorkout.name}</h2>
+            <div className="exercise-wrapper">
           {
+            
             formState.exercises.map((ex, ind) => (
-                <div className="exercise " key={ind}>
-                    {ex.name}
-                    <button onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 
-                        add set
-                    </button>
-                    <br/>
+                
+                <div className="exercise card overwrite-card" key={ind}>
+                    <h3>{ex.name}</h3>
+                    <div className="button wrapper">
+                        <button className="overwrite-btn add input-btn" onClick={(event) => {event.preventDefault(); addNewSet(ind)}}> 
+                            Add Set
+                        </button>
+                        <button  className="overwrite-btn delete input-btn" onClick={(event) => {event.preventDefault(); deleteSet(ind)}}>
+                            Delete Set
+                        </button>
+                    </div>
+
                     <br/>
                     {ex.setInputs.map((set, indS) => (
                         <div className="set" key={indS}>
-                            Set {indS +1 }
+                            Set {indS + 1} &nbsp;
                             <input type='number'
                                 className="reps"
                                 name='reps'
@@ -178,17 +187,16 @@ const SingleWorkout = () => {
                                     onChange={onChange}/> 
                             <label>&nbsp; {weightLabel}</label>
                             &nbsp;
-                            
                             <br/>
                             <br/>
                         </div>
                     ))}
-                    <button onClick={(event) => {event.preventDefault(); deleteSet(ind)}}>
-                                Delete Set
-                            </button>
+                    
                     <br/>
                 </div>
+                
           ))}
+          </div>
             <br/>
             
             <div>
@@ -202,7 +210,7 @@ const SingleWorkout = () => {
             </div>
             <br/>
           
-            <button type='submit'> 
+            <button type='submit' className="overwrite-btn"> 
                 Submit
             </button>
           </form>

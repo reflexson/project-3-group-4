@@ -59,8 +59,8 @@ const Settings = () => {
 
     //html
     return (
-      <div className=" flex-row">
-        <aside className=" w3-sidebar w3-light-grey w3-bar-block" >
+      <div className="col-12 flex-row">
+        <aside className=" w3-sidebar w3-bar-block" >
             <h3 className="w3-bar-item">Menu</h3>
                 <Link  className="w3-bar-item w3-button"  to='/progress'>Progress</Link>
                 <Link  className="w3-bar-item w3-button"  to='/workouts'>Workouts</Link>
@@ -68,9 +68,10 @@ const Settings = () => {
                 {/* <Link  className="w3-bar-item  alink"  to='/test'>Test</Link>
                 <Link  className="w3-bar-item  alink"  to='/workout/1'>SingleWorkout</Link> */}
         </aside>
-        <br/>
+
         <main className="dashcont">
             {/* Toggle switch for Units */}
+            <br/>
             <h4 className="ms-4">Units of Measurement</h4>
             <div className="switch form-check form-switch form-check-inline d-flex">
               <label className="switch-label text-1" htmlFor="units-switch">
