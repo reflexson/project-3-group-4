@@ -38,7 +38,7 @@ const Progress = () => {
   }));
 
 //   console.log('exProgress:', exProgress);
-
+exProgress.sort((a, b) => (a.date > b.date) ? 1 : -1)
   let xAxis = exProgress.map((set) => set.date);
   let yAxis = exProgress.map((set) => set.oneRepMax);
 //   console.log(yAxis);
