@@ -13,6 +13,9 @@ Chart.register(...registerables);
 const Progress = () => {
   const { loading, data } = useQuery(GET_SETS);
   const sets = data?.sets || [];
+
+
+  
   const [selectedOption, setSelectedOption] = useState("Week");
   const [chartData, setChartData] = useState(null); // Initialize chartData state
 
@@ -34,18 +37,20 @@ const Progress = () => {
     label: e,
   }));
 
-  console.log("exProgress:", exProgress);
-
+//   console.log('exProgress:', exProgress);
+exProgress.sort((a, b) => (a.date > b.date) ? 1 : -1)
   let xAxis = exProgress.map((set) => set.date);
   let yAxis = exProgress.map((set) => set.oneRepMax);
-  console.log(yAxis);
-  if (settingsState.units === "metric") {
+//   console.log(yAxis);
+  if(settingsState.units === 'metric'){
     yAxis = yAxis.map((set) => convertImperialToMetric(set));
   }
+  let defaultOption =exArrayUnique[exArrayUnique.length-1]
 
-  console.log(xAxis);
-  console.log(yAxis);
-
+//   console.log(selectedOption)
+//   console.log(xAxis);
+//   console.log(yAxis);
+ 
   const weekChartData = {
     labels: xAxis,
     datasets: [
