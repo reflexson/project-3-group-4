@@ -33,11 +33,7 @@ function Nav() {
               Login
             </NavLink>
           </li >
-          <li className="ms-3">
-            <NavLink  to='/progress'>
-              Dashboard
-            </NavLink>
-          </li> 
+    
         </ul>
       );
     }
