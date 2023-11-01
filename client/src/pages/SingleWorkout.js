@@ -114,48 +114,52 @@ const SingleWorkout = () => {
 
       // loop through an exercise's sets
 
-      for (let j = 0; j < exercises[i].setInputs.length; j++) {
-        let reps = exercises[i].setInputs[j].reps;
-        let weight = exercises[i].setInputs[j].weight;
-        if (settingsState.units === 'metric') {
-          weight = convertMetricToImperial(weight);
+            for(let j = 0; j < exercises[i].setInputs.length; j++)
+            {
+                let reps = exercises[i].setInputs[j].reps;
+                let weight = exercises[i].setInputs[j].weight;
+                if(settingsState.units ==='metric'){
+                    weight = convertMetricToImperial(weight);
+                }
+                setInfo[j] = calcMaxRep(reps, weight);   
+            }
+           
+            //reps saved as setInfo average
+     
+            setArray.push({
+                exercise: exercises[i].name,
+                oneRepMax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                date: date
+            })
+
+
+ 
+
+            const {data} = await addSet({
+                variables: {setData :{
+                exercise: exercises[i].name,
+                oneRepMax: setInfo.reduce((a,b)=>a+b)/ setInfo.length,
+                date: date
+                }}
+               })
         }
-        setInfo[j] = calcMaxRep(reps, weight);
-      }
+        
+      
+        window.location.assign('/progress')
+        // console.log({setArray});
+    };
+    //end of form functions------------------------------------------
 
-      // reps saved as setInfo average
+    //html
+    return (
+      <div className="col-12 flex-row">
+        <aside className=" w3-sidebar w3-bar-block" >
+            <h3 className="w3-bar-item">Menu</h3>
+                <Link  className="w3-bar-item w3-button"  id='progressButton' to='/progress'>Progress</Link>
+                <Link  className="w3-bar-item w3-button alink"  to='/workouts'>Workouts</Link>
+                <Link  className="w3-bar-item w3-button "  to='/settings'>Settings</Link>
 
-      setArray.push({
-        exercise: exercises[i].name,
-        oneRepMax: setInfo.reduce((a, b) => a + b) / setInfo.length,
-        date: date
-      })
-
-      const { data } = await addSet({
-        variables: {
-          setData: {
-            exercise: exercises[i].name,
-            oneRepMax: setInfo.reduce((a, b) => a + b) / setInfo.length,
-            date: date
-          }
-        }
-      })
-    }
-
-    window.location = '/progress'
-    // console.log({setArray});
-  };
-  // end of form functions------------------------------------------
-
-  // HTML
-  return (
-    <div className="col-12 flex-row">
-      <aside className=" w3-sidebar w3-bar-block" >
-        <h3 className="w3-bar-item">Menu</h3>
-        <Link className="w3-bar-item w3-button" id='progressButton' to='/progress'>Progress</Link>
-        <Link className="w3-bar-item w3-button alink" to='/workouts'>Workouts</Link>
-        <Link className="w3-bar-item w3-button " to='/settings'>Settings</Link>
-      </aside>
+        </aside>
 
       <main className="dashcont">
 
