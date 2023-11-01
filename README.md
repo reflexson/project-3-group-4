@@ -20,7 +20,7 @@
 
 ## Description
 
-This application can be used to rack the progress of you workouts.  It alows users to create custom workouts with exercises and sets.  The user can input reps and weights to the sets and log the workouts to the database.  The progress page shows the data from these logged workouts that you can view based on exercise. Each set outputs a calculated daily max rep value that can be charted over time.   This is usefull to view your strength progress as you train.  
+This application can be used to track the progress of you workouts.  It alows users to create custom workouts with exercises and sets.  The user can input reps and weights to the sets and log the workouts to the database.  The progress page shows the data from these logged workouts that you can view based on exercise. Each set outputs a calculated daily max rep value that can be charted over time.   This is usefull to view your strength progress as you train.  
 
 
 
