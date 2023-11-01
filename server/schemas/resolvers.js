@@ -27,6 +27,21 @@ const resolvers = {
       selectedWo = user.workouts[woId]
       return selectedWo.exercises
     },
+    getSetsByExerciseName: async (_, { exerciseName }, context) => {
+      // check if the user is authenticated
+          // retrieve the user's sets
+      const user = await User.findById(context.user._id);
+      // filter sets by exercise name
+      const filteredSets = user.sets.filter((set) => set.exercise === exerciseName);
+      // map the filtered sets to include only date and oneRepMax
+      const setsData = filteredSets.map((set) => ({
+        oneRepMax: set.oneRepMax,
+        date: set.date,
+      }));
+    
+      return setsData;
+    },
+    
   },
   Mutation: {
     // createExercise: async (parent, {exercise}, context) => {
