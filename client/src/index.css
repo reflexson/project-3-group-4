@@ -350,6 +350,9 @@ table tr td:first-child::before
 .form-check-input{
   transform: scale(1.2);
 }
+.select{
+  color:#000;
+}
 
 .switch-label{
   font-size: 1.1rem;
