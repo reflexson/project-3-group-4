@@ -142,7 +142,7 @@ exercisesArray.push(newexercise);
                  {newExInput()}  
               </div>
               <div className="col text-center mt-3">
-                <button className="rounded" onClick={handleExSubmit}>Submit Exercise</button>
+                <button className="overwrite-btn" onClick={handleExSubmit}>Submit Exercise</button>
                </div>        
 
               {/* Workout Table populated with exercises */}
@@ -180,7 +180,7 @@ exercisesArray.push(newexercise);
 
                 </div>
                 <div className="col text-center mt-3">
-                <Link className="btn bg-success rounded" id='woSubmit'onClick={handleWoSubmit}  >Save Workout</Link>
+                <button className="overwrite-btn" id='woSubmit'onClick={handleWoSubmit}  >Save Workout</button>
                </div>
            </div>
            </div>  
