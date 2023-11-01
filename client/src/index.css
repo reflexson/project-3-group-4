@@ -124,6 +124,14 @@ header a:hover {
 
 .login{
   padding: 30px;
+  justify-content: center;
+  text-align: center;
+}
+.login h2 {
+  margin: 1rem;
+}
+#loginForm {
+  margin: auto;
 }
 button {
   font-size: 1rem;
