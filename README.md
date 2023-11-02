@@ -42,7 +42,7 @@ npm run develop
 
 url for this repo is
 
-https://github.com/reflexson/project-3-group-4
+[https://github.com/reflexson/workout-tracker
 
 site is deployed via heroku at
 
